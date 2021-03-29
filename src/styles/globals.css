@@ -1,0 +1,186 @@
+/*
+* ===========================
+* Sideqst Design System 1.0.0
+* ===========================
+*
+* Copyright 2021 Sideqst
+*/
+
+/* Import Sen font */
+@import url('https://fonts.googleapis.com/css2?family=Sen&display=swap');
+
+/* Tailwind CSS */
+@import "tailwindcss/base";
+@import "tailwindcss/utilities";
+@import "tailwindcss/components";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p.bold {
+    font-weight: bold;
+}
+
+:root {
+    font-size: 16px;
+
+    /* typography sizes in px */
+    --web-xxl: 40px;
+    --web-xl: 32px;
+    --web-lg: 24px;
+    --web-md: 20px;
+    --web-sm: 18px;
+    --web-xs: 16px;
+    --web-xxs: 14px;
+    --web-tny: 12px;
+
+    /* color variables follow the naming convention of <type>-<theme>-<item>-<variant>-<state> */
+
+    /* background colors */
+    --color-light-background: #ffffff;
+    --color-light-background-alt: #f5f5f5;
+    --color-dark-background: #21262b;
+    --color-dark-background-alt: #282d34;
+
+    /* default */
+    --color-light-button-bg: #B3B9C1;
+    --color-light-button-bg-hover: #D9DCE0;
+    --color-light-button-bg-disabled: #E8E8E8;
+    --color-dark-button-bg: #404F64;
+    --color-dark-button-bg-hover: #667283;
+    --color-dark-button-bg-disabled: #E8E8E8;
+
+    /* primary */
+    --color-light-button-bg-primary: #696BC9;
+    --color-light-button-bg-primary-hover: #787ACE;
+    --color-light-button-bg-primary-disabled: #B4B5E4;
+    --color-dark-button-bg-primary: #5456A1;
+    --color-dark-button-bg-primary-hover: #5F60B5;
+    --color-dark-button-bg-primary-disabled: #B4B5E4;
+
+    /* confirm */
+    --color-light-button-bg-confirm: #59EBD6;
+    --color-light-button-bg-confirm-hover: #6AEDDA;
+    --color-light-button-bg-confirm-disabled: #ACF5EB;
+    --color-dark-button-bg-confirm: #47BCAB;
+    --color-dark-button-bg-confirm-hover: #50D4C1;
+    --color-dark-button-bg-confirm-disabled: #ACF5EB;
+
+    /* danger */
+    --color-light-button-bg-danger: #EB596E;
+    --color-light-button-bg-danger-hover: #ED6A7D;
+    --color-light-button-bg-danger-disabled: #F5ACB7;
+    --color-dark-button-bg-danger: #BC4758;
+    --color-dark-button-bg-danger-hover: #D45063;
+    --color-dark-button-bg-danger-disabled: #F5ACB7;
+    
+    /* all colors as they appear in the design system */
+    --color-night: #21262B;
+    --color-slategray: #282D34;
+    --color-nightlight: #333F50;
+    --color-grayhaze: #404F64;
+    --color-rainydaygray: #667283;
+    --color-foggygray: #8C95A2;
+    --color-mistyrain: #B3B9C1;
+    --color-graysmoke: #D9DCE0;
+    --color-wispygray: #E8E8E8;
+    --color-offwhite: #F5F5F5;
+    --color-purewhite: #FFFFFF;
+    --color-blue: #696BC9;
+    --color-darkblue0: #5F60B5;
+    --color-darkblue1: #5456A1;
+    --color-darkestblue: #353665;
+    --color-lightblue0: #787ACE;
+    --color-lightblue1: #8789D4;
+    --color-lightestblue: #B4B5E4;
+    --color-purple: #8D59EB;
+    --color-darkpurple0: #7F50D4;
+    --color-darkpurple1: #7147BC;
+    --color-darkestpurple: #472D76;
+    --color-lightpurple0: #986AED;
+    --color-lightpurple1: #A47AEF;
+    --color-lightestpurple: #C6ACF5;
+    --color-cyan: #59EBD6;
+    --color-darkcyan0: #50D4C1;
+    --color-darkcyan1: #47BCAB;
+    --color-darkestcyan: #2D766B;
+    --color-lightcyan0: #6AEDDA;
+    --color-lightcyan1: #7AEFDE;
+    --color-lightestcyan: #ACF5EB;
+    --color-red: #EB596E;
+    --color-darkred0: #D45063;
+    --color-darkred1: #BC4758;
+    --color-darkestred: #762D37;
+    --color-lightred0: #ED6A7D;
+    --color-lightred1: #EF7A8B;
+    --color-lightestred: #F5ACB7;
+}
+
+/* typography scalings */
+/* 1 rem ~ 16px */
+
+/* 40px */
+h1 {
+    font-size: 2.5rem;
+}
+
+/* 32px */
+h2 {
+    font-size: 2rem;
+}
+
+/* 24px */
+h3 {
+    font-size: 1.5rem;
+}
+
+/* 20px */
+h4 {
+    font-size: 1.25rem; 
+}
+
+/* 18px */
+h5 {
+    font-size: 1.125rem;
+}
+
+/* 16px */
+h6 {
+    font-size: 1rem;
+}
+
+/* 14px */
+p {
+    font-size: .875rem;
+}
+
+/* 12px */
+p.small {
+    font-size: .75rem;
+}
+
+body {
+    margin: 0;
+}
+
+html *:not(head *):not(script):not(style) {
+    display: flex;
+}
+
+html,
+body {
+    min-height: 100%;
+}
