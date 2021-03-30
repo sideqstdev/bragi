@@ -1,8 +1,8 @@
-import React, { DetailedHTMLProps, HTMLAttributes } from 'react'
+import React, { DetailedHTMLProps, HTMLAttributes, ReactElement } from 'react'
 import { useTheme } from '../theme/theme.provider'
 
 export interface typographyProps extends HTMLAttributes<HTMLParagraphElement> {
-    children: string | number;
+    children: string | number | any;
     isBold?: boolean;
 }
 

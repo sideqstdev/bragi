@@ -172,6 +172,12 @@ p.small {
     font-size: .75rem;
 }
 
+:-webkit-autofill,
+:-webkit-autofill:hover,
+:-webkit-autofill:focus {
+    background-color: #667283;
+}
+
 body {
     margin: 0;
 }

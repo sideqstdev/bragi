@@ -2,6 +2,7 @@ import React from 'react'
 import { useTheme } from '../theme/theme.provider'
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
+import NavbarManager from '../components/managers/NavbarManager';
 
 interface pageLayoutProps {
     name: string;
@@ -16,7 +17,7 @@ const PageLayout: React.FC<pageLayoutProps> = ({children, name, ...props}) => {
             <Head>
                 <title>{name}</title>
             </Head>
-            <Navbar loggedIn={false}/>
+            <NavbarManager/>
             {children}
         </div>
     )

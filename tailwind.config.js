@@ -30,7 +30,7 @@ module.exports = {
         background: `var(--color-purewhite)`,
         altbackground: `var(--color-offwhite)`,
         text: `var(--color-night)`,
-        disabled: `var(--color-graysmoke)`,
+        disabled: `var(--color-rainydaygray)`,
         default: {
           DEFAULT: `var(--color-mistyrain)`,
           hover: `var(--color-graysmoke)`,
@@ -39,7 +39,8 @@ module.exports = {
         primary: {
           DEFAULT: `var(--color-blue)`,
           hover: `var(--color-lightblue0)`,
-          disabled: `var(--color-lightestblue)`
+          disabled: `var(--color-lightestblue)`,
+          text: `var(--color-darkblue1)`,
         },
         confirm: {
           DEFAULT: `var(--color-cyan)`,
@@ -52,8 +53,8 @@ module.exports = {
           disabled: `var(--color-lightestred)`
         },
         box: {
-          box1: `var(--color-offwhite)`,
-          box2: `var(--color-wispygray)`,
+          box1: `#e5ebed`,
+          box2: `var(--color-purewhite)`,
           box3: `var(--color-graysmoke)`,
           box4: `var(--color-mistyrain)`
         }
@@ -71,7 +72,8 @@ module.exports = {
         primary: {
           DEFAULT: `var(--color-blue)`,
           hover: `var(--color-darkblue0)`,
-          disabled: `var(--color-lightestblue)`
+          disabled: `var(--color-lightestblue)`,
+          text: `var(--color-lightblue1)`,
         },
         confirm: {
           DEFAULT: `var(--color-darkcyan1)`,
@@ -98,7 +100,7 @@ module.exports = {
       discord: {
         DEFAULT: `#7289DA`,
         hover: `#5b6eae`,
-      }
+      },
     },
     extend: {},
   },

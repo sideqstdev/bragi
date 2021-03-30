@@ -20,7 +20,7 @@ export interface avatarProps {
 
 export const Avatar: React.FC<avatarProps> = ({src, size=`default`, className=``}: avatarProps) => {
     return(
-        <div className={`relative inline-block ${className} ${sizeClass[size]}`}>
+        <div className={`inline-block ${className} ${sizeClass[size]}`}>
             <img alt={"avatar"} className={`rounded-md w-full h-full object-cover outline-none`} src={src}/>
         </div>
     )

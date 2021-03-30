@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, InputHTMLAttributes, ReactNode, ChangeEventHandler } from 'react'
+import React, { DetailedHTMLProps, InputHTMLAttributes, ReactNode, ChangeEventHandler, ChangeEvent } from 'react'
 import { useTheme } from '../theme/theme.provider'
 import { SMParagraph } from './Typography'
 
@@ -15,7 +15,6 @@ export interface inputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLIn
     iconLeft?: ReactNode;
     iconRight?: ReactNode;
     label?: string;
-    onChange?: ChangeEventHandler
 }
 
 const Input: React.FC<inputProps> = ({stretch=false, scale="default", variant, iconRight, iconLeft, label, ...props}: inputProps) => {

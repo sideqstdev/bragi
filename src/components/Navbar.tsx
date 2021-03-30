@@ -44,7 +44,7 @@ const Navbar: React.FC<navProps> = ({loggedIn, avatar= "/mismatchedsocks.jpg", l
                     <a className={`cursor-pointer flex content-center items-center`}>
                         <Avatar src={avatar}></Avatar>
                     </a>
-                    <div className={`flex flex-row-reverse content-center  mr-6`}>
+                    <div className={`flex flex-row-reverse content-center mr-4`}>
                         <Button variant={"primary"} size={"small"} iconRight={<FaPlus/>}>Create</Button>
                         <Button variant={"icon"}><FaBell/></Button>
                         <Button onClick={themeCtx.toggleTheme} variant={"icon"}><FiSun className={`text-dark-danger-hover`}/></Button>
@@ -54,7 +54,7 @@ const Navbar: React.FC<navProps> = ({loggedIn, avatar= "/mismatchedsocks.jpg", l
         } else {
             return(
                 <>
-                    <div className={`flex flex-row-reverse content-center  mr-6`}>
+                    <div className={`flex flex-row-reverse content-center`}>
                         <Button onClick={routeLogin} variant={"primary"}>Login</Button>
                         <Button onClick={routeRegister} variant={"text"}>Register</Button>
                         <Button onClick={themeCtx.toggleTheme} variant={"icon"}><FiSun className={`text-dark-danger-hover`}/></Button>
@@ -65,16 +65,16 @@ const Navbar: React.FC<navProps> = ({loggedIn, avatar= "/mismatchedsocks.jpg", l
     }
 
     return(
-        <div className={`bg-${theme}-altbackground text-${theme}-text h-20 w-screen pr-8 pl-8 inline-grid grid-cols-10 fixed`}>
-            <div className={`flex flex-row col-span-2 sm:col-span-3 md:col-span-2 lg:col-span-3 mr-4 ml-4`}>
+        <div className={`bg-${theme}-altbackground text-${theme}-text w-screen px-3 lg:px-8 pb-3 pt-3 inline-grid grid-cols-10 fixed`}>
+            <div className={`flex items-center order-1 flex-row md:order-1 col-span-4 sm:col-span-4 lg:col-span-3 mr-4`}>
                 <LogoBlock onClick={routeHome} lightLogo={logos ? logos.lightLogo : undefined} darkLogo={logos ? logos.darkLogo : undefined}/>
             </div>
 
-            <div className={`flex items-center col-span-4 w-full sm:col-span-2 md:col-span-4 lg:col-span-4 mr-4 ml-4`}>
+            <div className={`flex items-center order-last mt-3 sm:mt-3 lg:mt-0 sm:order-last lg:order-2 col-span-10 w-full sm:col-8 lg:col-span-4`}>
                 <Input iconLeft={<FaSearch/>} placeholder={"Tournament Search"} stretch={true}></Input>
             </div>
             
-            <nav className={`flex flex-row-reverse col-span-4 content-center items-center sm:col-span-5 md:col-span-4 lg:col-span-3 mr-4 ml-4`}>
+            <nav className={`flex flex-row-reverse order-2 sm:order-3 col-span-6 content-center items-center sm:col-span-6 md:col-span-6 lg:col-span-3 ml-4`}>
                 {loggedInRender()}
             </nav>
         </div>
