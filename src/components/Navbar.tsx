@@ -7,6 +7,7 @@ import {FiSun} from 'react-icons/fi'
 import Input from './Input'
 import LogoBlock from './LogoBlock'
 import { useRouter } from 'next/router'
+import AccountDropdownManager from './managers/AccountDropdownManager'
 
 export type logoTuple = {
     darkLogo: string;
@@ -17,9 +18,11 @@ export interface navProps {
     loggedIn?: boolean
     avatar?: string;
     logos?: logoTuple;
+    toggleAccountDropdown: () => void;
+    accountDropdown: boolean;
 }
 
-const Navbar: React.FC<navProps> = ({loggedIn, avatar= "/mismatchedsocks.jpg", logos, ...props}: navProps) => {
+const Navbar: React.FC<navProps> = ({loggedIn, avatar= "/mismatchedsocks.jpg", logos, toggleAccountDropdown, accountDropdown = false, ...props}: navProps) => {
     const themeCtx = useTheme()
     const theme = themeCtx.theme
     const router = useRouter()
@@ -41,7 +44,7 @@ const Navbar: React.FC<navProps> = ({loggedIn, avatar= "/mismatchedsocks.jpg", l
         if(loggedIn){
             return(
                 <>
-                    <a className={`cursor-pointer flex content-center items-center`}>
+                    <a onClick={toggleAccountDropdown} className={`cursor-pointer flex content-center items-center`}>
                         <Avatar src={avatar}></Avatar>
                     </a>
                     <div className={`flex flex-row-reverse content-center mr-4`}>
@@ -49,6 +52,7 @@ const Navbar: React.FC<navProps> = ({loggedIn, avatar= "/mismatchedsocks.jpg", l
                         <Button variant={"icon"}><FaBell/></Button>
                         <Button onClick={themeCtx.toggleTheme} variant={"icon"}><FiSun className={`text-dark-danger-hover`}/></Button>
                     </div>
+                    <AccountDropdownManager open={accountDropdown}/>
                 </>
             )
         } else {

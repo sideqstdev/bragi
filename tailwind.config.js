@@ -76,7 +76,7 @@ module.exports = {
           text: `var(--color-lightblue1)`,
         },
         confirm: {
-          DEFAULT: `var(--color-darkcyan1)`,
+          DEFAULT: `var(--color-cyan)`,
           hover: `var(--color-darkcyan0)`,
           disabled: `var(--color-lightestcyan)`
         },

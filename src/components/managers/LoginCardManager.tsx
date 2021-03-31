@@ -5,7 +5,7 @@ import LoginCard from '../LoginCard';
 import { useRouter } from 'next/router';
 
 // will likely need to take in a token or something
-interface LoginCardManagerProps {} // empty for now
+interface loginCardManagerProps {} // empty for now
 
 const LoginCardManager: React.FC = () => {
     const router = useRouter()
