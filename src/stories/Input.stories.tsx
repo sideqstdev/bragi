@@ -58,3 +58,16 @@ LabeledInput.args = {
     placeholder: `Input labeled`,
     label: `Label`
 }
+
+export const ErrorInput = Template.bind({});
+ErrorInput.args = {
+    placeholder: `Input error`,
+    error: `error`
+}
+
+export const LabeledErrorInput = Template.bind({});
+LabeledErrorInput.args = {
+    placeholder: `Input labeled error`,
+    error: `error`,
+    label: `Label`
+}

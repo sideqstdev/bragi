@@ -71,7 +71,7 @@ const Navbar: React.FC<navProps> = ({loggedIn, avatar= "/mismatchedsocks.jpg", l
             </div>
 
             <div className={`flex items-center order-last mt-3 sm:mt-3 lg:mt-0 sm:order-last lg:order-2 col-span-10 w-full sm:col-8 lg:col-span-4`}>
-                <Input iconLeft={<FaSearch/>} placeholder={"Tournament Search"} stretch={true}></Input>
+                <Input autoComplete={`off`} iconLeft={<FaSearch/>} placeholder={`Tournament Search`} stretch={true}></Input>
             </div>
             
             <nav className={`flex flex-row-reverse order-2 sm:order-3 col-span-6 content-center items-center sm:col-span-6 md:col-span-6 lg:col-span-3 ml-4`}>

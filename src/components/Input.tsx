@@ -15,9 +15,10 @@ export interface inputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLIn
     iconLeft?: ReactNode;
     iconRight?: ReactNode;
     label?: string;
+    error?: string;
 }
 
-const Input: React.FC<inputProps> = ({stretch=false, scale="default", variant, iconRight, iconLeft, label, ...props}: inputProps) => {
+const Input: React.FC<inputProps> = ({stretch=false, scale="default", variant, iconRight, iconLeft, label, error, ...props}: inputProps) => {
     const themeCtx = useTheme()
     const theme = themeCtx.theme
 
@@ -38,10 +39,14 @@ const Input: React.FC<inputProps> = ({stretch=false, scale="default", variant, i
             break
     }
 
+    
     return(
         <div className={`${props.className ? props.className : ``} flex flex-col ${stretched}`}>
-            {label ? <SMParagraph className={`text-${theme}-text`}>{label}</SMParagraph> : null}
-            <div className={`${inputScale[scale]} ${variantObj} ${stretched} flex items-center rounded-md`}>
+            <div className={`flex flex-row justify-between`}>
+                {label ? <label className={`text-${theme}-text`}>{label}</label> : null}
+                {error ? <label className={`text-${theme}-danger text-right w-full`}>{error}</label> : null}
+            </div>
+            <div className={`${inputScale[scale]} ${error ? `ring-1 ring-dark-danger` : ``} ${variantObj} ${stretched} flex items-center rounded-md`}>
                 <span className={`flex items-center`}>
                     {iconLeft ? <span className={`mr-2 items-center text-tny text-${theme}-disabled`}>{iconLeft}</span> : null}
                 </span>
@@ -53,8 +58,6 @@ const Input: React.FC<inputProps> = ({stretch=false, scale="default", variant, i
                 </span>
             </div>
         </div>
-        
-        
     )
 }
 
