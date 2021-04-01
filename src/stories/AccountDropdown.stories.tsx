@@ -14,6 +14,7 @@ export default {
 } as Meta;
 
 let options: accountDropdownProps = {
+    open: true,
     status: `busy`,
     statusMsg: `Status`,
     items: [
@@ -27,10 +28,13 @@ let options: accountDropdownProps = {
 
 export const AccountDropdownEx: Story<accountDropdownProps> = ({...props}) => {
     return(
-        <AccountDropdown
-        {...props}
-        {...options}
-        />
+        <div>
+            <AccountDropdown
+            {...props}
+            {...options}
+            />
+        </div>
+        
     )
 }
 
