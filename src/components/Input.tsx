@@ -43,8 +43,8 @@ const Input: React.FC<inputProps> = ({stretch=false, scale="default", variant, i
     return(
         <div className={`${props.className ? props.className : ``} flex flex-col ${stretched}`}>
             <div className={`flex flex-row justify-between`}>
-                {label ? <label className={`text-${theme}-text`}>{label}</label> : null}
-                {error ? <label className={`text-${theme}-danger text-right w-full`}>{error}</label> : null}
+                {label ? <label className={`text-${theme}-text w-max`}>{label}</label> : null}
+                {error ? <label className={`text-${theme}-danger text-right w-full w-max`}>{error}</label> : null}
             </div>
             <div className={`${inputScale[scale]} ${error ? `ring-1 ring-dark-danger` : ``} ${variantObj} ${stretched} flex items-center rounded-md`}>
                 <span className={`flex items-center`}>

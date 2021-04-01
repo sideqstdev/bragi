@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useLoggedInStore } from '../../stores/storeLogin';
-import AccountDropdown from '../AccountDropdown';
+import AccountDropdown, { accountDropdownProps } from '../AccountDropdown';
 import { dropdownOptions } from '../../globals/AccountDropdownOptions';
 
-interface accountDropdownManagerProps {
+interface accountDropdownManagerProps extends Partial<accountDropdownProps> {
     open: boolean
 }
 
@@ -18,7 +18,7 @@ const AccountDropdownManager: React.FC<accountDropdownManagerProps> = ({open, ..
     }
 
     // status needs to update based on api
-    return loginStore.loggedIn ? (<AccountDropdown {...dropdownOptions} onLogout={onLogout} status={"busy"} open={open}/>):
+    return loginStore.loggedIn ? (<AccountDropdown {...dropdownOptions} onLogout={onLogout} status={"busy"} open={open} {...props}/>):
     (null)
 }
 

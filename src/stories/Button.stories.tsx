@@ -65,3 +65,10 @@ StretchedButton.args = {
     children: `Stretched`,
     stretch: true,
 }
+
+export const LoadingButton = Template.bind({});
+LoadingButton.args = {
+    variant: `primary`,
+    children: `Loading`,
+    loading: true,
+}

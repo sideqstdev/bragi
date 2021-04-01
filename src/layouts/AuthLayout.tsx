@@ -13,8 +13,7 @@ const AuthLayout: React.FC<authLayoutProps> = ({className, children}) => {
 
     return(
         <>
-            <div className={`${className ? className : ``} flex flex-col items-center mx-3 pt-36 lg:pt-24 pb-3 min-h-screen`}>
-                    <div className={`h-64`}/>
+            <div className={`${className ? className : ``} flex flex-col items-center justify-center mx-3 pt-36 lg:pt-24 pb-3 min-h-screen`}>
                     {children}
                     <div className={`mt-3 flex items-start`}>
                         <Paragraph>

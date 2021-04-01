@@ -1,6 +1,7 @@
 import React, { ReactNode, ButtonHTMLAttributes, DetailedHTMLProps, useEffect} from 'react'
 import { useTheme } from '../theme/theme.provider'
 import {typography} from '../theme/themes'
+import { Spinner } from './Spinner'
 
 export const buttonSize = {
     default: `py-2 px-5 text-base`,
@@ -16,9 +17,10 @@ export interface buttonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTML
     iconRight?: ReactNode;
     iconLeft?: ReactNode;
     stretch?: boolean;
+    loading?: boolean;
 }
 
-const Button: React.FC<buttonProps> = ({variant = "default", children, size = "default", backgroundColor, iconRight, iconLeft, stretch = false, ...props}: buttonProps) => {
+const Button: React.FC<buttonProps> = ({variant = "default", children, size = "default", backgroundColor, iconRight, iconLeft, stretch = false, loading, ...props}: buttonProps) => {
     const themeCtx = useTheme()
     const theme = themeCtx.theme
 
@@ -72,7 +74,8 @@ const Button: React.FC<buttonProps> = ({variant = "default", children, size = "d
 
     return(
         <button 
-        {...props} 
+        {...props}
+        style={{backgroundColor: backgroundColor}} 
         className={`${props.className} ${variantObj} ${buttonSize[size]} ${stretched} font-bold flex items-center justify-center rounded-md focus:outline-none`}>
             <span className={`flex items-center`}>
             {iconLeft ? <span className={`mr-2 items-center text-tny`}>{iconLeft}</span> : null}
@@ -81,6 +84,11 @@ const Button: React.FC<buttonProps> = ({variant = "default", children, size = "d
             <span className={`flex items-center`}>
             {iconRight ? <span className={`ml-2 items-center text-tny`}>{iconRight}</span> : null}
             </span>
+            {loading ? (
+                <span className={`absolute`}>
+                    <Spinner size={size === `small` ? `2` : `4`}/>
+                </span>
+            ) : null}
             
         </button>
     )

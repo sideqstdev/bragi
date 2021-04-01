@@ -16,14 +16,14 @@ export default function Home() {
     <PageLayout name={"Sideqst"}>
       <DesktopLayout
       sidebar={
-        <div>
+        <>
           <PlayerCard avatar={`/mismatchedsocks.jpg`} username={`MismatchedSocks`} gamertag={`MismatchedSocks0`} 
           tags={[`TFT`, `Auto Chess`, `LoL`]} followers={10000} following={500} isVerified={true} 
           bio={`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`}/>
-        </div>
+        </>
       }
       main={
-        <div>
+        <>
           <Card className={`mb-2`}>
             <Input placeholder={"Input"}/>
           </Card>
@@ -32,7 +32,7 @@ export default function Home() {
             <p>This is a card</p>
             <p>Hello again</p>
           </Card>
-        </div>
+        </>
       }/>  
     </PageLayout>
   )

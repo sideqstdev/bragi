@@ -44,15 +44,16 @@ const Navbar: React.FC<navProps> = ({loggedIn, avatar= "/mismatchedsocks.jpg", l
         if(loggedIn){
             return(
                 <>
-                    <a onClick={toggleAccountDropdown} className={`cursor-pointer flex content-center items-center`}>
+                    <span onClick={toggleAccountDropdown} className={`cursor-pointer flex content-center items-center`}>
                         <Avatar src={avatar}></Avatar>
-                    </a>
+                        <AccountDropdownManager open={accountDropdown}/>
+                    </span>
                     <div className={`flex flex-row-reverse content-center mr-4`}>
                         <Button variant={"primary"} size={"small"} iconRight={<FaPlus/>}>Create</Button>
                         <Button variant={"icon"}><FaBell/></Button>
                         <Button onClick={themeCtx.toggleTheme} variant={"icon"}><FiSun className={`text-dark-danger-hover`}/></Button>
                     </div>
-                    <AccountDropdownManager open={accountDropdown}/>
+                    
                 </>
             )
         } else {
