@@ -46,7 +46,9 @@ const Navbar: React.FC<navProps> = ({loggedIn, avatar= "/mismatchedsocks.jpg", l
                 <>
                     <span onClick={toggleAccountDropdown} className={`cursor-pointer flex content-center items-center`}>
                         <Avatar src={avatar}></Avatar>
-                        <AccountDropdownManager open={accountDropdown}/>
+                        <span className={`absolute top-20 right-8`}>
+                            <AccountDropdownManager open={accountDropdown}/>
+                        </span>
                     </span>
                     <div className={`flex flex-row-reverse content-center mr-4`}>
                         <Button variant={"primary"} size={"small"} iconRight={<FaPlus/>}>Create</Button>
