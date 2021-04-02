@@ -10,7 +10,7 @@ import { FaDiscord, FaTwitter } from 'react-icons/fa';
 import { useLoggedInStore } from '../stores/storeLogin';
 
 export interface loginCardProps {
-    onLogin: () => void;
+    onLogin: (user: string, pass: string) => boolean | void;
     onDiscordLogin?: () => void;
     onTwitterLogin?: () => void;
     onGoToRegister: () => void;
@@ -32,7 +32,6 @@ const LoginCard: React.FC<loginCardProps> = ({onLogin, onDiscordLogin, onTwitter
         validateOnChange: false,
         validate: ({email, password}) => {
             const errors: Record<string, string> = {};
-            console.log(email, password)
             if(email.length <= 0){
                 errors.email = `no email provided`
             }
@@ -53,17 +52,30 @@ const LoginCard: React.FC<loginCardProps> = ({onLogin, onDiscordLogin, onTwitter
                 if(!errors.email){
                     // TODO link up to auth service to confirm password against
                 }
-                
             }
             return errors;
         },
         onSubmit: async({email, password}) => {
             const val = {email, password};
-
+            let loginSuccess = onLogin(email, password);
             // TODO login logic
-            loginStore.login()
-            
-            onLogin();
+            if(email === "" && password === ""){
+                // clear errors 
+                loginForm.errors.email = ``;
+                loginForm.errors.password = ``;
+                return
+            }else{
+                if(loginSuccess === false){
+                    loginForm.errors.email = `Incorrect email`;
+                    loginForm.errors.password = `Incorrect password`;
+                    return
+                }else {
+                    // clear errors 
+                    loginForm.errors.email = ``;
+                    loginForm.errors.password = ``;
+                    return
+                }
+            }
         }
     })
 
@@ -75,7 +87,7 @@ const LoginCard: React.FC<loginCardProps> = ({onLogin, onDiscordLogin, onTwitter
                     <MDHeader>Login</MDHeader>
                     <Input onChange={loginForm.handleChange} name={`email`} autoFocus error={loginForm.errors.email} iconLeft={<FiMail/>} className={`mt-2`} label={`Email`} stretch={true} placeholder={`sideqst@sideqst.com`}/>
                     <Input onChange={loginForm.handleChange} name={`password`} error={loginForm.errors.password} iconLeft={<FiLock/>} className={`mt-2`} type={`password`} label={`Password`} stretch={true} placeholder={`password `}/>
-                    <Button type={`submit`} className={`mt-6`} variant={`primary`} stretch={true}>Login</Button>
+                    <Button loading={loginForm.isSubmitting} type={`submit`} className={`mt-6`} variant={`primary`} stretch={true}>Login</Button>
                     <Paragraph className={`mt-6`}>Don't have an account? <span onClick={onGoToRegister} className={`text-${theme}-primary-text cursor-pointer hover:text-${theme}-primary-disabled font-bold`}>Register</span></Paragraph>
                     <Paragraph className={`mt-3`}><span onClick={onForgotPassword} className={`text-${theme}-primary-text cursor-pointer hover:text-${theme}-primary-disabled font-bold`}>Forgot Password?</span></Paragraph>
                 </form>
@@ -90,7 +102,7 @@ const LoginCard: React.FC<loginCardProps> = ({onLogin, onDiscordLogin, onTwitter
                     <MDHeader>Login</MDHeader>
                     <Input onChange={loginForm.handleChange} name={`email`} autoFocus error={loginForm.errors.email} iconLeft={<FiMail/>} className={`mt-2`} label={`Email`} stretch={true} placeholder={`sideqst@sideqst.com`}/>
                     <Input onChange={loginForm.handleChange} name={`password`} error={loginForm.errors.password} iconLeft={<FiLock/>} className={`mt-2`} type={`password`} label={`Password`} stretch={true} placeholder={`password `}/>
-                    <Button type={`submit`} className={`mt-6`} variant={`primary`} stretch={true}>Login</Button>
+                    <Button loading={loginForm.isSubmitting} type={`submit`} className={`mt-6`} variant={`primary`} stretch={true}>Login</Button>
                     <Paragraph className={`mt-6`}>Don't have an account? <span onClick={onGoToRegister} className={`text-${theme}-primary-text cursor-pointer hover:text-${theme}-primary-disabled font-bold`}>Register</span></Paragraph>
                     <Paragraph className={`mt-3`}><span onClick={onForgotPassword} className={`text-${theme}-primary-text cursor-pointer hover:text-${theme}-primary-disabled font-bold`}>Forgot Password?</span></Paragraph>
                 </form>

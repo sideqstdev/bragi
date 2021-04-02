@@ -16,7 +16,7 @@ export interface accountDropdownProps extends Partial<HTMLDivElement> {
     items: dropdownItem[];
     statusMsg?: string;
     status?: userStatus;
-    open: boolean;
+    open?: boolean;
     onLogout: () => void;
 }
 
@@ -72,7 +72,9 @@ const AccountDropdown: React.FC<accountDropdownProps> = ({items, statusMsg = "On
                 <Paragraph isBold>Logout</Paragraph>
             </a>
         </div>
-    ) : null
+    ) : (
+        null
+    )
 
 }
 

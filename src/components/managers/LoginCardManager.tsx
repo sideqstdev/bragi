@@ -11,11 +11,18 @@ const LoginCardManager: React.FC = () => {
     const router = useRouter()
     const loginStore = useLoggedInStore();
 
-    const onLogin = () => {
+    const onLogin = (email: string, password: string) => {
         // TODO login logic
-        loginStore.login()
-        router.push(`/`)
-        return
+        // placeholder
+        if(email === `milo@sideqst.com` && password === `asdf1234`){ // SUCCESS
+            loginStore.login();
+            return true
+        }else if(email && password){ // FAILURE
+            return false
+        }
+        else{
+            // do nothing
+        }
     }
 
     const routeRegister = () => {

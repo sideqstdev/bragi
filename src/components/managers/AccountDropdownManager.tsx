@@ -18,8 +18,13 @@ const AccountDropdownManager: React.FC<accountDropdownManagerProps> = ({open, ..
     }
 
     // status needs to update based on api
-    return loginStore.loggedIn ? (<AccountDropdown {...dropdownOptions} onLogout={onLogout} status={"busy"} open={open} {...props}/>):
-    (null)
+    return loginStore.loggedIn ? (
+        <span className={`absolute top-20 right-8`}>
+            <AccountDropdown {...dropdownOptions} onLogout={onLogout} status={"busy"} open={open} {...props}/>
+        </span>
+    ) : (
+        null
+    )
 }
 
 export default AccountDropdownManager
