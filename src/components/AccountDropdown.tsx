@@ -58,7 +58,7 @@ const AccountDropdown: React.FC<accountDropdownProps> = ({items, statusMsg = "On
     }
 
     return open ? (
-        <div className={`${props.className} bg-${theme}-default flex flex-col rounded-md max-w-xs  w-40 z-20`}>
+        <div className={`${props.className} bg-${theme}-default flex flex-col rounded-md max-w-xs  w-40 z-20 shadow-lg`}>
             <div className={` pt-3`}>
                 <div className={`flex flex-row border-b-2 px-3 border-${theme}-disabled pb-2`}>
                     <span className={`flex items-center`}>

@@ -127,6 +127,13 @@ p.bold {
     --color-lightred0: #ED6A7D;
     --color-lightred1: #EF7A8B;
     --color-lightestred: #F5ACB7;
+    --color-yellow: #C9C769;
+    --color-yellow-dark0: #B5B35F;
+    --color-yellow-dark1: #A19F54;
+    --color-yellow-light0: #CECD78;
+    --color-yellow-light1: #D4D287;
+    --color-yellow-lightestyellow: #E4E3B4;
+    --color-yellow-darkestyellow: #656435;
 }
 
 /* typography scalings */

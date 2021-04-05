@@ -24,8 +24,8 @@ const testUser: playerCardProps = {
 export const Main: Story<playerCardProps> = ({...props}) => {
     return(
         <PlayerCard
-            {...props}
             {...testUser}
+            {...props}
         />
     )
 }

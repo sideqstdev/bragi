@@ -92,15 +92,15 @@ const RegisterCard: React.FC<registerCardProps> = ({onRegister, onDiscordRegiste
     })
 
     return(
-        <Card className={`flex flex-col w-full mx- md:w-3/4 md:flex-row lg:w-2/4 xl:w-2/6`}>
+        <Card className={`flex flex-col w-full mx- md:w-3/4 md:flex-row lg:w-2/4 xl:w-2/6 px-3 py-3`}>
             {otherLoginMethods ? (
                 <>
-                <form onSubmit={registerForm.handleSubmit} className={`w-full border-b-2 pb-6 border-dark-box-box4 md:pr-3 md:border-b-0 md:border-r-2 md:border-dark-box-box4 md:w-2/3`}>
+                <form autoComplete={"off"} onSubmit={registerForm.handleSubmit} className={`w-full border-b-2 pb-6 border-dark-box-box4 md:pr-3 md:border-b-0 md:border-r-2 md:border-dark-box-box4 md:w-2/3`}>
                     <MDHeader>Create Account</MDHeader>
-                    <Input onChange={registerForm.handleChange} name={`email`} autoFocus error={registerForm.errors.email} iconLeft={<FiMail/>} className={`mt-2`} label={`Email`} stretch={true} placeholder={`sideqst@sideqst.com`}/>
-                    <Input onChange={registerForm.handleChange} name={`username`} error={registerForm.errors.username} iconLeft={<FiUser/>} className={`mt-2`} label={`Username`} stretch={true} placeholder={`must be at least 3 characters`}/>
-                    <Input onChange={registerForm.handleChange} name={`password`} error={registerForm.errors.password} iconLeft={<FiLock/>} type={`password`} className={`mt-2`} label={`Password`} stretch={true} placeholder={`must be at least 8 characters`}/>
-                    <Input onChange={registerForm.handleChange} name={`confirmPassword`} error={registerForm.errors.confirmPassword} iconLeft={<FiLock/>} type={`password`} className={`mt-2`} label={`Confirm Password`} stretch={true} placeholder={`repeat password`}/>
+                    <Input autoComplete={"off"} onChange={registerForm.handleChange} name={`email`} autoFocus error={registerForm.errors.email} iconLeft={<FiMail/>} className={`mt-2`} label={`Email`} stretch={true} placeholder={`sideqst@sideqst.com`}/>
+                    <Input autoComplete={"off"} onChange={registerForm.handleChange} name={`username`} error={registerForm.errors.username} iconLeft={<FiUser/>} className={`mt-2`} label={`Username`} stretch={true} placeholder={`must be at least 3 characters`}/>
+                    <Input autoComplete={"new-password"} onChange={registerForm.handleChange} name={`password`} error={registerForm.errors.password} iconLeft={<FiLock/>} type={`password`} className={`mt-2`} label={`Password`} stretch={true} placeholder={`must be at least 8 characters`}/>
+                    <Input autoComplete={"new-password"} onChange={registerForm.handleChange} name={`confirmPassword`} error={registerForm.errors.confirmPassword} iconLeft={<FiLock/>} type={`password`} className={`mt-2`} label={`Confirm Password`} stretch={true} placeholder={`repeat password`}/>
                     <Button type={`submit`} className={`mt-6`} variant={`primary`} stretch={true}>Register</Button>
                     <Paragraph className={`mt-6`}>Already have an account? <span onClick={onGoToLogin} className={`text-${theme}-primary-text cursor-pointer hover:text-${theme}-primary-disabled font-bold`}>Login</span></Paragraph>
                 </form>
@@ -113,10 +113,10 @@ const RegisterCard: React.FC<registerCardProps> = ({onRegister, onDiscordRegiste
             ) : (
                 <form onSubmit={registerForm.handleSubmit} className={`w-full pb-6`}>
                     <MDHeader>Create Account</MDHeader>
-                    <Input onChange={registerForm.handleChange} name={`email`} autoFocus error={registerForm.errors.email} iconLeft={<FiMail/>} className={`mt-2`} label={`Email`} stretch={true} placeholder={`sideqst@sideqst.com`}/>
-                    <Input onChange={registerForm.handleChange} name={`username`} autoFocus error={registerForm.errors.username} iconLeft={<FiUser/>} type={`password`} className={`mt-2`} label={`Username`} stretch={true} placeholder={`must be at least 3 characters`}/>
-                    <Input onChange={registerForm.handleChange} name={`password`} autoFocus error={registerForm.errors.password} iconLeft={<FiLock/>} type={`password`} className={`mt-2`} label={`Password`} stretch={true} placeholder={`must be at least 8 characters`}/>
-                    <Input onChange={registerForm.handleChange} name={`confirmPassword`} autoFocus error={registerForm.errors.confirmPassword} iconLeft={<FiLock/>} className={`mt-2`} label={`Confirm Password`} stretch={true} placeholder={`repeat password`}/>
+                    <Input autoComplete={`off`} onChange={registerForm.handleChange} name={`email`} autoFocus error={registerForm.errors.email} iconLeft={<FiMail/>} className={`mt-2`} label={`Email`} stretch={true} placeholder={`sideqst@sideqst.com`}/>
+                    <Input autoComplete={`off`} onChange={registerForm.handleChange} name={`username`} autoFocus error={registerForm.errors.username} iconLeft={<FiUser/>} type={`password`} className={`mt-2`} label={`Username`} stretch={true} placeholder={`must be at least 3 characters`}/>
+                    <Input autoComplete={`off`} onChange={registerForm.handleChange} name={`password`} autoFocus error={registerForm.errors.password} iconLeft={<FiLock/>} type={`password`} className={`mt-2`} label={`Password`} stretch={true} placeholder={`must be at least 8 characters`}/>
+                    <Input autoComplete={`off`} onChange={registerForm.handleChange} name={`confirmPassword`} autoFocus error={registerForm.errors.confirmPassword} iconLeft={<FiLock/>} className={`mt-2`} label={`Confirm Password`} stretch={true} placeholder={`repeat password`}/>
                     <Button type={`submit`} className={`mt-6`} variant={`primary`} stretch={true}>Register</Button>
                     <Paragraph className={`mt-6`}>Already have an account? <span onClick={onGoToLogin} className={`text-${theme}-primary-text cursor-pointer hover:text-${theme}-primary-disabled font-bold`}>Login</span></Paragraph>
                 </form>

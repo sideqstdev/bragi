@@ -55,6 +55,9 @@ const LoginCard: React.FC<loginCardProps> = ({onLogin, onDiscordLogin, onTwitter
             }
             return errors;
         },
+        onReset: () => {
+            loginForm.errors = {};
+        },
         onSubmit: async({email, password}) => {
             const val = {email, password};
             let loginSuccess = onLogin(email, password);
@@ -80,7 +83,7 @@ const LoginCard: React.FC<loginCardProps> = ({onLogin, onDiscordLogin, onTwitter
     })
 
     return(
-        <Card className={`flex flex-col w-full mx- md:w-3/4 md:flex-row lg:w-2/4 xl:w-2/6`}>
+        <Card className={`flex flex-col w-full mx- md:w-3/4 md:flex-row lg:w-2/4 xl:w-2/6 px-3 py-3`}>
             {otherLoginMethods ? (
                 <>
                 <form onSubmit={loginForm.handleSubmit} className={`w-full border-b-2 pb-6 border-dark-box-box4 md:pr-3 md:border-b-0 md:border-r-2 md:border-dark-box-box4 md:w-2/3`}>

@@ -12,7 +12,7 @@ const Tag: React.FC<tagProps> = ({children, glow, iconLeft, iconRight}) => {
     const theme = themeCtx.theme;
 
     return(
-        <div className={`flex flex-grow-0 flex-none flex-row w-auto cursor-pointer bg-${theme}-default hover:bg-${theme}-default-hover font-bold text-${theme}-text text-xxs round rounded-sm justify-center items-center px-2 ${glow ? `border` : ``}`}
+        <div className={`flex flex-grow-0 flex-none flex-row w-auto bg-${theme}-default hover:bg-${theme}-default-hover font-bold text-${theme}-text text-xxs round rounded-sm justify-center items-center px-2 ${glow ? `border` : ``}`}
         style={{
             height: "22px",
             boxShadow: glow ? `0px 0px 7px var(--color-lightred1` : ``,

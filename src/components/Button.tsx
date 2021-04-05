@@ -20,14 +20,14 @@ export interface buttonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTML
     loading?: boolean;
 }
 
-const Button: React.FC<buttonProps> = ({variant = "default", children, size = "default", backgroundColor, iconRight, iconLeft, stretch = false, loading, ...props}: buttonProps) => {
+const Button: React.FC<buttonProps> = ({variant = "default", children, size = "default", backgroundColor, iconRight, iconLeft, stretch = false, loading, disabled, ...props}: buttonProps) => {
     const themeCtx = useTheme()
     const theme = themeCtx.theme
 
     const variantClass = {
         default: `text-${theme}-text bg-${theme}-default hover:bg-${theme}-default-hover`,
         primary: `text-dark-text bg-${theme}-primary hover:bg-${theme}-primary-hover`,
-        confirm: `text-${theme}-text bg-${theme}-confirm hover:bg-${theme}-confirm-hover`,
+        confirm: `text-dark-background bg-${theme}-confirm hover:bg-${theme}-confirm-hover`,
         danger: `text-dark-text bg-${theme}-danger hover:bg-${theme}-danger-hover`,
         text: `text-${theme}-text bg-transparent hover:text-${theme}-disabled`,
         icon: `text-${theme}-text bg-transparent hover:text-${theme}-disabled text-xs`
@@ -75,14 +75,17 @@ const Button: React.FC<buttonProps> = ({variant = "default", children, size = "d
     return(
         <button 
         {...props}
+        disabled={disabled || loading}
         style={{backgroundColor: backgroundColor}} 
         className={`${props.className} ${variantObj} ${buttonSize[size]} ${stretched} font-bold flex items-center justify-center rounded-md focus:outline-none`}>
-            <span className={`flex items-center`}>
-            {iconLeft ? <span className={`mr-2 items-center text-tny`}>{iconLeft}</span> : null}
-            </span>
-            {children}
-            <span className={`flex items-center`}>
-            {iconRight ? <span className={`ml-2 items-center text-tny`}>{iconRight}</span> : null}
+            <span className={loading ? `opacity-0` : `flex items-center`}>
+                <span className={`flex items-center`}>
+                {iconLeft ? <span className={`mr-2 items-center text-tny`}>{iconLeft}</span> : null}
+                </span>
+                {children}
+                <span className={`flex items-center`}>
+                {iconRight ? <span className={`ml-2 items-center text-tny`}>{iconRight}</span> : null}
+                </span>
             </span>
             {loading ? (
                 <span className={`absolute`}>

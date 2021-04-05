@@ -11,7 +11,7 @@ const Card: React.FC<cardProps> = ({children, style, ...props}) => {
 
     return(
         // prop classNames should override existing
-        <div style={style as CSSProperties} className={`${props.className} p-3 bg-${theme}-box-box1 text-${theme}-text rounded-md `}>
+        <div style={style as CSSProperties} className={`bg-${theme}-box-box1 text-${theme}-text rounded-md ${props.className}`}>
             {children}
         </div>
     )

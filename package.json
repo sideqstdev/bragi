@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource/sen": "^4.2.2",
     "@tailwindcss/line-clamp": "^0.2.0",
+    "date-fns": "^2.19.0",
     "formik": "^2.2.6",
     "next": "10.0.9",
     "numeral": "^2.0.6",

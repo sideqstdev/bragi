@@ -97,6 +97,9 @@ module.exports = {
         hover: `var(--color-darkpurple1)`,
         disabled: `var(--color-lightestpurple)`
       },
+      warn: {
+        DEFAULT: `var(--color-yellow)`
+      },
       discord: {
         DEFAULT: `#7289DA`,
         hover: `#5b6eae`,

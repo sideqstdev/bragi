@@ -25,7 +25,7 @@ const PlayerCard: React.FC<playerCardProps> = ({
     const theme = themeCtx.theme;
 
     return(
-        <Card>
+        <Card className={`px-3 py-3`}>
             <div className={`flex flex-row`}>
                 <Avatar size={`xxl`} src={avatar}/>
                 <div className={`flex flex-1 overflow-x-hidden flex-col ml-3`}>
