@@ -11,7 +11,7 @@ export default {
 } as Meta;
 
 const testUser: playerCardProps = {
-    avatar: avatar,
+    avatar: `avatar`,
     username: `Mismatched Socks`,
     gamertag: `MismatchedSocks0`,
     bio: `TFT player @Beastcoast . Rank 1&2 for multiple sets. My goal is to try to help the community improve.`,

@@ -12,12 +12,6 @@ const NavbarManager: React.FC = () => {
         setDropdown(!showDropdown)
     }
 
-    const onLogout = () => {
-        setDropdown(false)
-        loginStore.logout()
-        router.push("/")
-    }
-
     return(
         <Navbar loggedIn={loginStore.loggedIn} toggleAccountDropdown={toggleDropdown} accountDropdown={showDropdown}/>
     )

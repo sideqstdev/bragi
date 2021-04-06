@@ -3,7 +3,6 @@ import React, {ComponentProps} from 'react'
 import {Story, Meta} from '@storybook/react'
 
 import LobbyCard, { lobbyCardProps, regions, ranks } from '../components/LobbyCard'
-import avatar from '../../public/mismatchedsocks.jpg'
 import lobby from '../../public/lobbycover.jpg'
 
 export default {
@@ -13,8 +12,8 @@ export default {
 
 const testLobby: lobbyCardProps = {
     user: {
-        avatar: avatar,
-        username: `Milo`,
+        avatar: `https://ddragon.leagueoflegends.com/cdn/11.2.1/img/profileicon/3861.png`,
+        username: `Drunkenskarl`,
         gamertag: `Drunkenskarl`,
         verified: true,
     },

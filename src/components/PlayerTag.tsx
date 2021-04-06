@@ -18,7 +18,7 @@ const PlayerTag: React.FC<playerTagProps> = ({avatar, username, verified=false, 
     return(
         <div className={`flex flex-row`}>
             <Avatar src={avatar} size={"default"}/>
-            <div className={`flex flex-col ml-2`}>
+            <div className={`flex flex-col ml-2 text-left`}>
                 <Paragraph className={`flex flex-row text-${theme}-text`} isBold={true}>{username} {verified ? 
                 (<span className={`ml-1 flex items-center`}>
                     <FaCheckCircle className={`text-accent text-xxs`}/>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { SMParagraph } from './Typography'
 
 export const sizeClass = {
     xxs: `h-6 w-6`,
@@ -18,9 +19,9 @@ export interface avatarProps {
 
 
 
-export const Avatar: React.FC<avatarProps> = ({src, size=`default`, className=``}: avatarProps) => {
+export const Avatar: React.FC<avatarProps> = ({src, size=`default`, className=``, level}: avatarProps) => {
     return(
-        <div className={`inline-block ${className} ${sizeClass[size]}`}>
+        <div className={`relative inline-block ${className} ${sizeClass[size]}`}>
             <img alt={"avatar"} className={`rounded-md w-full h-full object-cover outline-none`} src={src}/>
         </div>
     )
