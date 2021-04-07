@@ -149,7 +149,7 @@ const LobbyCard: React.FC<lobbyCardProps> = ({title, description, featured=false
                         </span>
                         <span className={`flex flex-row items-center mt-2`}>
                             <FaTrophy className={`mr-1`}/>
-                            <Paragraph>{rank}+</Paragraph>
+                            <Paragraph>{rank}</Paragraph>
                         </span>
                         <span className={`flex flex-row items-center mt-2`}>
                             <FaGlobeAmericas className={`mr-1`}/>

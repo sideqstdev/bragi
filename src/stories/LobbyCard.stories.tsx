@@ -8,6 +8,20 @@ import lobby from '../../public/lobbycover.jpg'
 export default {
     title: `LobbyCard`,
     component: LobbyCard,
+    argTypes: {
+        rank: {
+            control: {
+                type: 'radio',
+                options: ranks
+            }
+        },
+        region: {
+            control: {
+                type: `radio`,
+                options: regions
+            }
+        }
+    }
 } as Meta;
 
 const testLobby: lobbyCardProps = {
