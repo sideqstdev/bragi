@@ -13,11 +13,13 @@ const PageLayout: React.FC<pageLayoutProps> = ({children, name, ...props}) => {
     const theme = themeCtx.theme;
 
     return (
-        <div className={`flex flex-col bg-${theme}-background w-full min-h-screen h-full overflow-x-auto`}>
+        <div className={`bg-${theme}-background min-w-full min-h-screen w-full `}>
             <Head>
                 <title>{name}</title>
             </Head>
-            <NavbarManager/>
+            <div className={`sticky flex w-full flex-none top-0 z-40 lg:z-50`}>
+                <NavbarManager/>
+            </div>
             {children}
         </div>
     )

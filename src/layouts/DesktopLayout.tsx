@@ -13,11 +13,11 @@ const DesktopLayout: React.FC<desktopLayoutProps> = ({className, sidebar, main})
 
     return(
         <>
-            <div className={`${className ? className : ``} flex pt-36 lg:pt-24 flex-row mx-3 lg:mx-8 pb-3 min-h-screen`}>
-                <div className={`flex-none max-w-sm md:max-w-sm mr-6`}>
+            <div className={`flex mt-4`}>
+                <div className={`flex-none pl-6 h-full sticky top-36 lg:top-24 max-w-sm md:max-w-sm flex-col`}>
                     {sidebar}
                 </div>
-                <div className={`flex-1`}>
+                <div className={`flex-auto h-full w-full px-6 relative`}>
                     {main}
                 </div>
             </div>
