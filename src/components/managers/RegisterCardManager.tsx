@@ -27,7 +27,7 @@ const RegisterCardManager: React.FC = () => {
             router.push(`/login`)
             return
         }catch(err){
-            console.error(err)
+            return err.toString()
         }
         
     }

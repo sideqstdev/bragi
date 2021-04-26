@@ -17,7 +17,7 @@ type registerFields = {
 }
 
 export interface registerCardProps {
-    onRegister: (email: string, user: string, pass: string) => void;
+    onRegister: (email: string, user: string, pass: string) => Promise<string>;
     onDiscordRegister?: () => void;
     onTwitterRegister?: () => void;
     onGoToLogin: () => void;
@@ -82,7 +82,14 @@ const RegisterCard: React.FC<registerCardProps> = ({onRegister, onDiscordRegiste
             return errors;
         },
         onSubmit: async({email, username, password}) => {
-            onRegister(email, username, password);
+            let error = await onRegister(email, username, password);
+            if(error.includes(`already exists with the given email`)){
+                registerForm.errors.email = `email already in use`
+                return
+            }
+            if(error.includes(`already exists with the given gamerTag`)){
+                registerForm.errors.username = `name already in use`
+            }
         }
     })
 
