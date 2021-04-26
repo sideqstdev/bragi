@@ -70,7 +70,7 @@ const Navbar: React.FC<navProps> = ({loggedIn, avatar= "/mismatchedsocks.jpg", l
     }
 
     return(
-        <div className={`bg-${theme}-altbackground text-${theme}-text w-screen px-3 lg:px-8 pb-3 pt-3 inline-grid grid-cols-10`}>
+        <div className={`bg-${theme}-altbackground text-${theme}-text w-screen px-6 lg:px-6 pb-3 pt-3 inline-grid grid-cols-10`}>
             <div className={`flex items-center order-1 flex-row md:order-1 col-span-4 sm:col-span-4 lg:col-span-3 mr-4`}>
                 <LogoBlock onClick={routeHome} lightLogo={logos ? logos.lightLogo : undefined} darkLogo={logos ? logos.darkLogo : undefined}/>
             </div>

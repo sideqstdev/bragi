@@ -11,8 +11,11 @@ const LoginCardManager: React.FC = () => {
     const router = useRouter()
     const loginStore = useLoggedInStore();
 
+    
+
     const onLogin = (email: string, password: string) => {
         // TODO login logic
+
         // placeholder
         if(email === `milo@sideqst.com` && password === `asdf1234`){ // SUCCESS
             loginStore.login();

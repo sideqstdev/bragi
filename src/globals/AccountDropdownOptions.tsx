@@ -9,5 +9,5 @@ export const dropdownOptions: accountDropdownProps = {
         {icon: <BsFillGearFill/>, name: `Settings`, link: `/settings`},
         {icon: <FaBug/>, name: `Report a bug`, link: `/profile`},
     ],
-    onLogout: () => {console.log("Logged out")}
+    onLogout: () => {console.log("Logged out")} //placeholder
 }

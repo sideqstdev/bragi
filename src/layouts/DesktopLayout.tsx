@@ -22,7 +22,6 @@ const DesktopLayout: React.FC<desktopLayoutProps> = ({className, sidebar, main})
                 </div>
             </div>
         </>
-        
     )
 }
 

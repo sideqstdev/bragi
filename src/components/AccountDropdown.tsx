@@ -3,6 +3,7 @@ import { useTheme } from '../theme/theme.provider'
 import { Paragraph } from './Typography'
 import { useRouter } from 'next/router'
 import { FaCircle } from 'react-icons/fa'
+import PlayerStatus, {status} from './PlayerStatus'
 
 type dropdownItem = {
     icon: ReactNode;
@@ -10,17 +11,17 @@ type dropdownItem = {
     link: string;
 }
 
-type userStatus = `online` | `busy` | `ingame` | `invisible` | `offline`
+
 
 export interface accountDropdownProps extends Partial<HTMLDivElement> {
     items: dropdownItem[];
     statusMsg?: string;
-    status?: userStatus;
+    status?: status;
     open?: boolean;
     onLogout: () => void;
 }
 
-const AccountDropdown: React.FC<accountDropdownProps> = ({items, statusMsg = "Online", status = "online", onLogout, open = false, ...props}) => {
+const AccountDropdown: React.FC<accountDropdownProps> = ({items, statusMsg, status = "online", onLogout, open = false, ...props}) => {
     const router = useRouter();
     const themeCtx = useTheme();
     const theme = themeCtx.theme;
@@ -35,7 +36,7 @@ const AccountDropdown: React.FC<accountDropdownProps> = ({items, statusMsg = "On
                 return `text-${theme}-danger`
             case "online":
                 return `text-${theme}-confirm`
-            case "ingame":
+            case "in-game":
                 return `text-accent`
             case "invisible":
                 return `text-${theme}-box-box3`
@@ -60,11 +61,8 @@ const AccountDropdown: React.FC<accountDropdownProps> = ({items, statusMsg = "On
     return open ? (
         <div className={`${props.className} bg-${theme}-default flex flex-col rounded-md max-w-xs  w-40 z-20 shadow-lg`}>
             <div className={` pt-3`}>
-                <div className={`flex flex-row border-b-2 px-3 border-${theme}-disabled pb-2`}>
-                    <span className={`flex items-center`}>
-                        <span className={`text-tny items-center ${statusBubbleColor()} mr-2`}><FaCircle/></span>
-                        <Paragraph className={statusBubbleColor()}>{statusMsg}</Paragraph>
-                    </span>
+                <div className={`flex border-b-2 px-3 border-${theme}-disabled pb-2`}>
+                    <PlayerStatus status={status} statusMsg={statusMsg}/>
                 </div>
                 {renderItems()}
             </div>

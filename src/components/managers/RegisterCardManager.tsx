@@ -2,18 +2,34 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { useLoggedInStore } from '../../stores/storeLogin';
 import RegisterCard from '../RegisterCard';
+import { useMutation } from '@apollo/client';
+import { registerMutation } from '../../lib/gql/register.gql';
 
 interface registerCardManagerProps {}
 
 const RegisterCardManager: React.FC = () => {
     const router = useRouter();
     const loginStore = useLoggedInStore();
+    const [register] = useMutation(registerMutation);
 
-    const onRegister = () => {
+    const onRegister = async(email: string, username: string, password: string) => {
         //TODO register logic
-        loginStore.login()
-        router.push(`/login`)
-        return
+        try{
+            const response = await register({
+                variables: {
+                    input: {
+                        email: email,
+                        gamerTag: username,
+                        password: password,
+                    }
+                }
+            })
+            router.push(`/login`)
+            return
+        }catch(err){
+            console.error(err)
+        }
+        
     }
 
     const routeLogin = () => {

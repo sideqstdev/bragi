@@ -138,7 +138,7 @@ const LobbyCard: React.FC<lobbyCardProps> = ({title, description, featured=false
                 </div>
                 </div>
                 <div className={`flex flex-col w-full bg-${theme}-box-box2 rounded-b-md xl:rounded-b-none xl:rounded-br-md ${banner ? `` : `xl:rounded-tr-md`} py-2 px-2 xl:w-1/4`}>
-                    <span className={`w-full pb-2 border-b border-${theme}-disabled`}>
+                    <span className={`w-full pb-2 border-b-2 border-${theme}-disabled`}>
                         <PlayerTag verified={user.verified} username={user.username} gamertag={user.gamertag} avatar={user.avatar}/>
                     </span>
                     <div className={`flex flex-col w-full`}>

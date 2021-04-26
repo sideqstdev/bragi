@@ -17,7 +17,7 @@ type registerFields = {
 }
 
 export interface registerCardProps {
-    onRegister: () => void;
+    onRegister: (email: string, user: string, pass: string) => void;
     onDiscordRegister?: () => void;
     onTwitterRegister?: () => void;
     onGoToLogin: () => void;
@@ -82,12 +82,7 @@ const RegisterCard: React.FC<registerCardProps> = ({onRegister, onDiscordRegiste
             return errors;
         },
         onSubmit: async({email, username, password}) => {
-            const val = {email, username, password};
-
-            //TODO register logic
-            loginStore.login()
-
-            onRegister()
+            onRegister(email, username, password);
         }
     })
 

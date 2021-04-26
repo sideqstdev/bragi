@@ -53,8 +53,8 @@ module.exports = {
           disabled: `var(--color-lightestred)`
         },
         box: {
-          box1: `#e5ebed`,
-          box2: `var(--color-purewhite)`,
+          box1: `var(--color-graysmoke)`,
+          box2: `#e5ebed`,
           box3: `var(--color-graysmoke)`,
           box4: `var(--color-mistyrain)`
         }

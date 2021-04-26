@@ -8,15 +8,19 @@ import DesktopLayout from '../src/layouts/DesktopLayout'
 import PlayerCard from '../src/components/PlayerCard'
 import PageLayout from '../src/layouts/PageLayout'
 import LobbyCard, { ranks, regions } from '../src/components/LobbyCard'
-import { MDHeader } from '../src/components/Typography'
+import { MDHeader, LGHeader } from '../src/components/Typography'
 import LinkButtonGroup from '../src/components/LinkButtonGroup'
 import MainManager from '../src/components/managers/MainManager'
+import { useLoggedInStore } from '../src/stores/storeLogin'
 
 export default function Home() {
-  const themeCtx = useTheme()
-  const theme = themeCtx.theme
-  return (
-    <PageLayout name={"Sideqst"}>
+  const themeCtx = useTheme();
+  const theme = themeCtx.theme;
+  const loginStore = useLoggedInStore();
+
+  return loginStore.loggedIn ? 
+  (
+    <PageLayout name={"Sideqst App"}>
       <DesktopLayout
       sidebar={
         <>
@@ -31,5 +35,14 @@ export default function Home() {
         </>
       }/>  
     </PageLayout>
+  ) 
+  : 
+  (
+    <PageLayout name={`Sideqst | TFT`}>
+      <div>
+        <LGHeader>Welcome to Sideqst</LGHeader>
+      </div>
+    </PageLayout>
   )
+  
 }

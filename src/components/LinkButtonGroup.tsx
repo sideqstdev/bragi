@@ -21,7 +21,7 @@ const LinkButtonGroup: React.FC<linkButtonGroupProps> = ({links, selected=0, sel
     const renderLinks = () => {
         return links.map((link, index) => {
             return (
-                <span onClick={() => selectionCallback({...link, index: index})} className={`mr-8 pr-2 cursor-pointer text-left hover:text-${theme}-danger-hover ${selected === index ? `border-b-2 border-dark-danger` : ``}`}>
+                <span key={`${link}-${index}`} onClick={() => selectionCallback({...link, index: index})} className={`mr-8 pr-2 cursor-pointer text-left hover:text-${theme}-danger-hover ${selected === index ? `border-b-2 border-dark-danger` : ``}`}>
                     <MDHeader>{link.title}</MDHeader>
                 </span>
             )

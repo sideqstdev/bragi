@@ -3,6 +3,8 @@ import { useTheme } from '../../theme/theme.provider';
 import LinkButtonGroup, { pageLink } from '../LinkButtonGroup';
 import LobbyCard, { regions, ranks } from '../LobbyCard';
 import {useMainTabStore} from '../../stores/storeMainTab'
+import PostCard from '../PostCard';
+import { Paragraph } from '../Typography';
 
 const MainManager: React.FC = () => {
     const themeCtx = useTheme();
@@ -11,6 +13,43 @@ const MainManager: React.FC = () => {
 
     const selectionCallback = (selection: pageLink) => {
         tab.setTab(selection.index)
+    }
+
+    const tabRender = () => {
+        if(tab.tab === 0){
+            return(
+                <div className={`mb-6 mt-4`}>
+                    <div className={`pb-4`}>
+                    <LobbyCard title={"Weekly TFT Roundup"} featured date={new Date()}
+                    description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. `} 
+                    status={"open"} maxPlayers={16} currPlayers={8} prize={100} prizeUnit={"USD"} region={regions.NA} rank={ranks.any}
+                    user={{username: "MismatchedSocks", gamertag: `MismatchedSocks0`, avatar: `/mismatchedsocks.jpg`, verified: true}}
+                    onClick={() => console.log("clicked")} tags={[`Weekly`, `Teamfight Tactics`, `Sideqst`]}/>
+                    </div>
+                    <div className={`pb-4`}>
+                    <LobbyCard title={"common.gg PBE Tournament"} date={new Date()}
+                    description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. `} 
+                    status={"open"} maxPlayers={32} currPlayers={32} prize={500} prizeUnit={"USD"} region={regions.NA} rank={ranks.any}
+                    user={{username: "common.gg", gamertag: `commongg`, avatar: `/common.jpg`, verified: true}}
+                    onClick={() => console.log("clicked")} tags={[`Weekly`, `Teamfight Tactics`, `Sideqst`]}
+                    banner={`/common_banner.jpeg`}/>
+                    </div>
+                </div>
+            )
+        }
+        if(tab.tab === 1){
+            return(
+                <div className={`mb-6 mt-4`}>
+                    <PostCard user={{username: "Milo", gamertag: `milo`, avatar: `/mismatchedsocks.jpg`}} postDate={new Date()} liked={true}
+                    content={`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`}/>
+                </div>
+            )
+        }
+        else{
+            return(
+                <Paragraph>Nothing here... 😢</Paragraph>
+            )
+        }
     }
 
     return(
@@ -23,15 +62,8 @@ const MainManager: React.FC = () => {
                 selected={tab.tab}
                 selectionCallback={selectionCallback}
             />
-            <div className={`mb-6 mt-4`}>
-                <div className={`pb-4`}>
-                <LobbyCard title={"Weekly TFT Roundup"} featured date={new Date()}
-                description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. `} 
-                status={"open"} maxPlayers={16} currPlayers={8} prize={100} prizeUnit={"USD"} region={regions.NA} rank={ranks.any}
-                user={{username: "MismatchedSocks", gamertag: `MismatchedSocks0`, avatar: `/mismatchedsocks.jpg`, verified: true}}
-                onClick={() => console.log("clicked")} tags={[`Weekly`, `Teamfight Tactics`, `Sideqst`]}/>
-                </div>
-            </div>
+            {tabRender()}
+            
         </>
     )
 }
