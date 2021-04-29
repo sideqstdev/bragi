@@ -93,7 +93,7 @@ module.exports = {
         }
       },
       accent: {
-        DEFAULT: `var(--color-lightpurple1)`,
+        DEFAULT: `var(--color-purple)`,
         hover: `var(--color-darkpurple1)`,
         disabled: `var(--color-lightestpurple)`
       },

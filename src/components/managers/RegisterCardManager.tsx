@@ -3,19 +3,22 @@ import { useRouter } from 'next/router'
 import { useLoggedInStore } from '../../stores/storeLogin';
 import RegisterCard from '../RegisterCard';
 import { useMutation } from '@apollo/client';
-import { registerMutation } from '../../lib/gql/register.gql';
+import { registerMutation } from '../../lib/gql/mutations/register.gql';
+import { useRegisterMutation } from '../../lib/generated';
+import { useErrorToasts } from '../../lib/hooks/useErrorToast';
 
 interface registerCardManagerProps {}
 
 const RegisterCardManager: React.FC = () => {
     const router = useRouter();
     const loginStore = useLoggedInStore();
-    const [register] = useMutation(registerMutation);
+    const [registerMutation, {data, loading, error}] = useRegisterMutation();
+    const {addErrorToast} = useErrorToasts();
 
     const onRegister = async(email: string, username: string, password: string) => {
         //TODO register logic
         try{
-            const response = await register({
+            const response = await registerMutation({
                 variables: {
                     input: {
                         email: email,
@@ -23,6 +26,12 @@ const RegisterCardManager: React.FC = () => {
                         password: password,
                     }
                 }
+            })
+            console.log(response.data.register)
+            addErrorToast({
+                message: `Successfully registered ${response.data.register.email}`,
+                duration: 7000,
+                variant: `info`,
             })
             router.push(`/login`)
             return
@@ -39,6 +48,11 @@ const RegisterCardManager: React.FC = () => {
 
     const onTwitterRegister = () => {
         console.log("Registering with twitter")
+        addErrorToast({
+            message: `Going to twitter...`,
+            duration: 5000,
+            variant: "info",
+        })
         //TODO setup twitter oauth
     }
 

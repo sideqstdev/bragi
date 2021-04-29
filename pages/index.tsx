@@ -12,6 +12,8 @@ import { MDHeader, LGHeader } from '../src/components/Typography'
 import LinkButtonGroup from '../src/components/LinkButtonGroup'
 import MainManager from '../src/components/managers/MainManager'
 import { useLoggedInStore } from '../src/stores/storeLogin'
+import ErrorToast from '../src/components/ErrorToast'
+import ErrorToastManager from '../src/components/managers/ErrorToastManager'
 
 export default function Home() {
   const themeCtx = useTheme();

@@ -83,12 +83,16 @@ const RegisterCard: React.FC<registerCardProps> = ({onRegister, onDiscordRegiste
         },
         onSubmit: async({email, username, password}) => {
             let error = await onRegister(email, username, password);
+            if(!error){
+                return
+            }
             if(error.includes(`already exists with the given email`)){
                 registerForm.errors.email = `email already in use`
                 return
             }
             if(error.includes(`already exists with the given gamerTag`)){
                 registerForm.errors.username = `name already in use`
+                return
             }
         }
     })
