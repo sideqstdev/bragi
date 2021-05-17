@@ -1,9 +1,7 @@
 import React from 'react';
-import { useCookies } from 'react-cookie';
+import cookieCutter from 'cookie-cutter'
 
 const AuthManager: React.FC = () => {
-    const [cookies] = useCookies(['sqstac'])
-    console.log(cookies);
     return(
         null
     )
