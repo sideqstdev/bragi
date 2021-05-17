@@ -100,13 +100,13 @@ const LobbyCard: React.FC<lobbyCardProps> = ({title, description, featured=false
                 
             ) : null}
             <div className={`flex flex-col md:flex-col xl:flex-row`}>
-                <div className={`flex flex-col w-full pr-4 pb-4 xl:w-3/4 cursor-pointer text-left`}>
+                <div className={`flex flex-col w-full pb-4 xl:w-3/4 cursor-pointer text-left`}>
                 {featured && !banner ? (
-                    <div className={`mb-2 flex flex-row items-center justify-between`}>
-                        <div className={`bg-${theme}-danger rounded-tl-md rounded-br-md w-64 px-4 py-1 text-left items-center`}>
+                    <div className={`mb-2 lg:flex flex-row items-center justify-between`}>
+                        <div className={`bg-${theme}-danger rounded-tl-md rounded-t-md lg:rounded-tr-none lg:rounded-br-md w-full lg:w-64 px-4 py-1 text-left items-center`}>
                             <SMHeader>Featured</SMHeader>
                         </div>
-                        <div className={`flex flex-row items-center w-full justify-end`}>
+                        <div className={`flex flex-row items-center pt-4 pr-4 lg:pt-0 lg:pr-4 w-full justify-end`}>
                             <span>
                                 <StatusButton status={status}/>
                             </span>

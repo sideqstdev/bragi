@@ -14,6 +14,7 @@ import MainManager from '../src/components/managers/MainManager'
 import { useLoggedInStore } from '../src/stores/storeLogin'
 import ErrorToast from '../src/components/ErrorToast'
 import ErrorToastManager from '../src/components/managers/ErrorToastManager'
+import LandingPageTagline from '../src/components/LandingPageTagline'
 
 export default function Home() {
   const themeCtx = useTheme();
@@ -41,9 +42,7 @@ export default function Home() {
   : 
   (
     <PageLayout name={`Sideqst | TFT`}>
-      <div>
-        <LGHeader>Welcome to Sideqst</LGHeader>
-      </div>
+      <LandingPageTagline/>
     </PageLayout>
   )
   
