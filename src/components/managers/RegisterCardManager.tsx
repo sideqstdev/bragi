@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/client';
 import { registerMutation } from '../../lib/gql/mutations/register.gql';
 import { useRegisterMutation } from '../../lib/generated';
 import { useErrorToasts } from '../../lib/hooks/useErrorToast';
+import { devMode } from '../../lib/constants'
 
 interface registerCardManagerProps {}
 
@@ -27,7 +28,6 @@ const RegisterCardManager: React.FC = () => {
                     }
                 }
             })
-            console.log(response.data.register)
             addErrorToast({
                 message: `Successfully registered ${response.data.register.email}`,
                 duration: 7000,
@@ -36,6 +36,15 @@ const RegisterCardManager: React.FC = () => {
             router.push(`/login`)
             return
         }catch(err){
+            devMode ? (
+                addErrorToast({
+                    message: `Error whilst registering: ${err.toString()}`,
+                    duration: 14000,
+                    variant: `warning`,
+                })
+            ) : (
+                null
+            )
             return err.toString()
         }
         
@@ -68,7 +77,8 @@ const RegisterCardManager: React.FC = () => {
         )
     }else {
         return(
-            <RegisterCard onRegister={onRegister} onGoToLogin={routeLogin} onTwitterRegister={onTwitterRegister} onDiscordRegister={onDiscordRegister}/>
+            <RegisterCard onRegister={onRegister} onGoToLogin={routeLogin} onTwitterRegister={onTwitterRegister} onDiscordRegister={onDiscordRegister}
+            loading={loading}/>
         )
     }
 }

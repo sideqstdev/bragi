@@ -3,6 +3,9 @@ import { useTheme } from '../../theme/theme.provider';
 import { useLoggedInStore } from '../../stores/storeLogin';
 import LoginCard from '../LoginCard';
 import { useRouter } from 'next/router';
+import { useLoginMutation } from '../../lib/generated';
+import { useErrorToasts } from '../../lib/hooks/useErrorToast';
+import { devMode } from '../../lib/constants';
 
 // will likely need to take in a token or something
 interface loginCardManagerProps {} // empty for now
@@ -10,21 +13,38 @@ interface loginCardManagerProps {} // empty for now
 const LoginCardManager: React.FC = () => {
     const router = useRouter()
     const loginStore = useLoggedInStore();
+    const [loginMutation, {data, loading, error}] = useLoginMutation();
+    const {addErrorToast} = useErrorToasts();
 
-    
-
-    const onLogin = (email: string, password: string) => {
+    const onLogin = async(email: string, password: string) => {
         // TODO login logic
-
-        // placeholder
-        if(email === `milo@sideqst.com` && password === `asdf1234`){ // SUCCESS
+        try{
+            const response = await loginMutation({
+                variables: {
+                    input: {
+                        email: email,
+                        password: password
+                    }
+                }
+            })
+            console.log(response)
+            addErrorToast({
+                message: `Successfully logged in as ${response.data.login.gamerTag}`,
+                duration: 5000,
+                variant: `info`,
+            })
             loginStore.login();
-            return true
-        }else if(email && password){ // FAILURE
-            return false
+            return
         }
-        else{
-            // do nothing
+        catch(err){
+            devMode ? (
+                addErrorToast({
+                    message: `Error whilst logging in: ${err.toString()}`
+                })
+            ) : (
+                null
+            )
+            return err;
         }
     }
 

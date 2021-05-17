@@ -1,6 +1,12 @@
-import {ApolloClient, InMemoryCache} from '@apollo/client'
+import {ApolloClient, InMemoryCache, createHttpLink} from '@apollo/client'
+import { devMode } from './constants'
+
+const apolloLink = createHttpLink({
+    uri: devMode ? `http://localhost:8080` : ``,
+    credentials: `include`
+})
 
 export const apolloClient = new ApolloClient({
-    uri: `http://localhost:8080`,
+    link: apolloLink,
     cache: new InMemoryCache(),
 })

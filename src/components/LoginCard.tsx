@@ -10,7 +10,7 @@ import { FaDiscord, FaTwitter } from 'react-icons/fa';
 import { useLoggedInStore } from '../stores/storeLogin';
 
 export interface loginCardProps {
-    onLogin: (user: string, pass: string) => boolean | void;
+    onLogin: (user: string, pass: string) => Promise<string> | Promise<null>;
     onDiscordLogin?: () => void;
     onTwitterLogin?: () => void;
     onGoToRegister: () => void;
@@ -59,16 +59,14 @@ const LoginCard: React.FC<loginCardProps> = ({onLogin, onDiscordLogin, onTwitter
             loginForm.errors = {};
         },
         onSubmit: async({email, password}) => {
-            const val = {email, password};
-            let loginSuccess = onLogin(email, password);
-            // TODO login logic
+            let loginSuccess = await onLogin(email, password);
             if(email === "" && password === ""){
                 // clear errors 
                 loginForm.errors.email = ``;
                 loginForm.errors.password = ``;
                 return
             }else{
-                if(loginSuccess === false){
+                if(loginSuccess){
                     loginForm.errors.email = `Incorrect email`;
                     loginForm.errors.password = `Incorrect password`;
                     return
@@ -88,8 +86,8 @@ const LoginCard: React.FC<loginCardProps> = ({onLogin, onDiscordLogin, onTwitter
                 <>
                 <form onSubmit={loginForm.handleSubmit} className={`w-full border-b-2 pb-6 border-dark-box-box4 md:pr-3 md:border-b-0 md:border-r-2 md:border-dark-box-box4 md:w-2/3`}>
                     <MDHeader>Login</MDHeader>
-                    <Input onChange={loginForm.handleChange} name={`email`} autoFocus error={loginForm.errors.email} iconLeft={<FiMail/>} className={`mt-2`} label={`Email`} stretch={true} placeholder={`sideqst@sideqst.com`}/>
-                    <Input onChange={loginForm.handleChange} name={`password`} error={loginForm.errors.password} iconLeft={<FiLock/>} className={`mt-2`} type={`password`} label={`Password`} stretch={true} placeholder={`password `}/>
+                    <Input autoComplete={`email`} id={`email`} onChange={loginForm.handleChange} name={`email`} error={loginForm.errors.email} iconLeft={<FiMail/>} className={`mt-2`} type={"email"} label={`Email`} stretch={true} placeholder={`sideqst@sideqst.com`}/>
+                    <Input autoComplete={`current-password`} id={`current-password`} onChange={loginForm.handleChange} name={`password`} error={loginForm.errors.password} iconLeft={<FiLock/>} className={`mt-2`} type={`password`} label={`Password`} stretch={true} placeholder={`password `}/>
                     <Button loading={loginForm.isSubmitting} type={`submit`} className={`mt-6`} variant={`primary`} stretch={true}>Login</Button>
                     <Paragraph className={`mt-6`}>Don't have an account? <span onClick={onGoToRegister} className={`text-${theme}-primary-text cursor-pointer hover:text-${theme}-primary-disabled font-bold`}>Register</span></Paragraph>
                     <Paragraph className={`mt-3`}><span onClick={onForgotPassword} className={`text-${theme}-primary-text cursor-pointer hover:text-${theme}-primary-disabled font-bold`}>Forgot Password?</span></Paragraph>
@@ -103,8 +101,8 @@ const LoginCard: React.FC<loginCardProps> = ({onLogin, onDiscordLogin, onTwitter
             ) : (
                 <form onSubmit={loginForm.handleSubmit} className={`w-full pb-6`}>
                     <MDHeader>Login</MDHeader>
-                    <Input onChange={loginForm.handleChange} name={`email`} autoFocus error={loginForm.errors.email} iconLeft={<FiMail/>} className={`mt-2`} label={`Email`} stretch={true} placeholder={`sideqst@sideqst.com`}/>
-                    <Input onChange={loginForm.handleChange} name={`password`} error={loginForm.errors.password} iconLeft={<FiLock/>} className={`mt-2`} type={`password`} label={`Password`} stretch={true} placeholder={`password `}/>
+                    <Input autoComplete={`email`} id={`email`} onChange={loginForm.handleChange} name={`email`} autoFocus error={loginForm.errors.email} iconLeft={<FiMail/>} className={`mt-2`} label={`Email`} stretch={true} placeholder={`sideqst@sideqst.com`}/>
+                    <Input autoComplete={`current-password`} id={`current-password`} onChange={loginForm.handleChange} name={`password`} error={loginForm.errors.password} iconLeft={<FiLock/>} className={`mt-2`} type={`password`} label={`Password`} stretch={true} placeholder={`password `}/>
                     <Button loading={loginForm.isSubmitting} type={`submit`} className={`mt-6`} variant={`primary`} stretch={true}>Login</Button>
                     <Paragraph className={`mt-6`}>Don't have an account? <span onClick={onGoToRegister} className={`text-${theme}-primary-text cursor-pointer hover:text-${theme}-primary-disabled font-bold`}>Register</span></Paragraph>
                     <Paragraph className={`mt-3`}><span onClick={onForgotPassword} className={`text-${theme}-primary-text cursor-pointer hover:text-${theme}-primary-disabled font-bold`}>Forgot Password?</span></Paragraph>

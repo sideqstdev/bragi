@@ -5,7 +5,7 @@ import { Avatar } from './Avatar';
 import { MDHeader, SMParagraph, Paragraph } from './Typography';
 import { FaCheck, FaCheckCircle } from 'react-icons/fa';
 import Tag from './Tag';
-import { simplifyNumber } from '../util/number-formatting';
+import { simplifyNumber } from '../lib/util/number-formatting';
 
 export interface playerCardProps {
     avatar: string;

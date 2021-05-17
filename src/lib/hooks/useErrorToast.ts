@@ -3,7 +3,6 @@ import { useErrorToastsStore } from '../../stores/storeErrorToasts';
 
 export const createErrorToast = (toast: Omit<errorToast, "id">) => {
     useErrorToastsStore.getState().addToast(toast);
-    console.log(toast)
 }
 
 export const removeErrorToast = (id: string) => {
