@@ -1,5 +1,5 @@
 import React from 'react';
-import {isToday, format} from 'date-fns'
+import {formatDate } from '../lib/util/time-utils'
 import { useTheme } from '../theme/theme.provider';
 import Card from './containers/Card';
 import { MDHeader, Paragraph, SMHeader, XSHeader, SMParagraph } from './Typography';
@@ -65,15 +65,24 @@ export interface lobbyCardProps {
     onClick: () => void;
 }
 
-const LobbyCard: React.FC<lobbyCardProps> = ({title, description, featured=false, date=new Date(), tags, prize, prizeUnit="none", region="NA", maxPlayers, currPlayers, status, rank, banner, user, onClick, ...props}) => {
+const LobbyCard: React.FC<lobbyCardProps> = ({
+    title, 
+    description, 
+    featured=false, 
+    date=new Date(), 
+    tags, prize, 
+    prizeUnit="none", 
+    region="NA", 
+    maxPlayers, 
+    currPlayers, 
+    status, 
+    rank, 
+    banner, 
+    user, 
+    onClick, 
+    ...props}) => {
     const themeCtx = useTheme();
     const theme = themeCtx.theme;
-
-    const formatDate = (date: Date): string => {
-        let formattedDate = format(date, `dd/MM/yyyy`)
-        let formattedTime = format(date, `h:mm a`);
-        return formattedDate + ` ` + formattedTime;
-    }
 
     const formatPrize = (prize: number): string => {
         if(prizeUnit === "USD"){

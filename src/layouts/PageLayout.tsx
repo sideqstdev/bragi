@@ -13,7 +13,7 @@ const PageLayout: React.FC<pageLayoutProps> = ({children, name, ...props}) => {
     const theme = themeCtx.theme;
 
     return (
-        <div className={`bg-${theme}-background min-h-screen w-full `}>
+        <div className={`bg-${theme}-background min-h-screen`}>
             <Head>
                 <title>{name}</title>
             </Head>
