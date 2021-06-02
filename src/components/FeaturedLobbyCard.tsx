@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaPlus } from 'react-icons/fa';
 import { formatDate } from '../lib/util/time-utils';
 import { useTheme } from '../theme/theme.provider';
 import Button from './Button';
@@ -25,7 +26,7 @@ const FeaturedLobbyCard: React.FC<featuredLobbyCardProps> = ({onClick, banner, d
                 <div className={`w-full relative`}>
                     <img src={banner} className={`w-full h-64 object-cover rounded-t-md`}/>
                     <div className={`absolute right-2 bottom-3`}>
-                        <Button variant={`confirm`} size={`large`}>Join</Button>
+                        <Button iconLeft={<FaPlus/>} variant={`primary`} size={`large`}>Join Lobby</Button>
                     </div>
                 </div>
             ) : null}

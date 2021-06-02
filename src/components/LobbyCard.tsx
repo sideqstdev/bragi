@@ -96,7 +96,7 @@ const LobbyCard: React.FC<lobbyCardProps> = ({
     return(
         <button onClick={onClick}
         className={`hover:border flex flex-col w-full`}>
-        <Card className={`flex flex-col`}>
+        <Card className={`flex flex-col w-full`}>
             {banner ? (
                 <div className={`w-full relative`}>
                     <img src={banner} className={`w-full h-64 object-cover rounded-t-md`}/>
