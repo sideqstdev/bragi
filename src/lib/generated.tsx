@@ -109,6 +109,14 @@ export type LoginMutation = (
   ) }
 );
 
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'logout'>
+);
+
 export type RegisterMutationVariables = Exact<{
   input: Register_Input;
 }>;
@@ -119,6 +127,21 @@ export type RegisterMutation = (
   & { register: (
     { __typename?: 'user' }
     & Pick<User, 'id' | 'email' | 'gamerTag'>
+  ) }
+);
+
+export type CurrUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CurrUserQuery = (
+  { __typename?: 'Query' }
+  & { currUser: (
+    { __typename?: 'user' }
+    & Pick<User, 'id' | 'name' | 'gamerTag'>
+    & { profile?: Maybe<(
+      { __typename?: 'profile' }
+      & Pick<Profile, 'id' | 'bio' | 'tags' | 'lolName' | 'avatarUrl'>
+    )> }
   ) }
 );
 
@@ -162,6 +185,36 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const LogoutDocument = gql`
+    mutation logout {
+  logout
+}
+    `;
+export type LogoutMutationFn = Apollo.MutationFunction<LogoutMutation, LogoutMutationVariables>;
+
+/**
+ * __useLogoutMutation__
+ *
+ * To run a mutation, you first call `useLogoutMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLogoutMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [logoutMutation, { data, loading, error }] = useLogoutMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLogoutMutation(baseOptions?: Apollo.MutationHookOptions<LogoutMutation, LogoutMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument, options);
+      }
+export type LogoutMutationHookResult = ReturnType<typeof useLogoutMutation>;
+export type LogoutMutationResult = Apollo.MutationResult<LogoutMutation>;
+export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
 export const RegisterDocument = gql`
     mutation register($input: register_input!) {
   register(input: $input) {
@@ -197,3 +250,46 @@ export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<Reg
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export const CurrUserDocument = gql`
+    query currUser {
+  currUser {
+    id
+    name
+    gamerTag
+    profile {
+      id
+      bio
+      tags
+      lolName
+      avatarUrl
+    }
+  }
+}
+    `;
+
+/**
+ * __useCurrUserQuery__
+ *
+ * To run a query within a React component, call `useCurrUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCurrUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCurrUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCurrUserQuery(baseOptions?: Apollo.QueryHookOptions<CurrUserQuery, CurrUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CurrUserQuery, CurrUserQueryVariables>(CurrUserDocument, options);
+      }
+export function useCurrUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CurrUserQuery, CurrUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CurrUserQuery, CurrUserQueryVariables>(CurrUserDocument, options);
+        }
+export type CurrUserQueryHookResult = ReturnType<typeof useCurrUserQuery>;
+export type CurrUserLazyQueryHookResult = ReturnType<typeof useCurrUserLazyQuery>;
+export type CurrUserQueryResult = Apollo.QueryResult<CurrUserQuery, CurrUserQueryVariables>;

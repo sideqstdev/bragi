@@ -17,6 +17,7 @@ import ErrorToastManager from '../src/components/managers/ErrorToastManager'
 import LandingPageTagline from '../src/components/LandingPageTagline'
 import LandingLayout from '../src/layouts/LandingLayout'
 import FeaturedLobbyCard from '../src/components/FeaturedLobbyCard'
+import PlayerCardManager from '../src/components/managers/PlayerCardManager'
 
 export default function Home() {
   const themeCtx = useTheme();
@@ -29,9 +30,7 @@ export default function Home() {
       <DesktopLayout
       sidebar={
         <>
-          <PlayerCard avatar={`/mismatchedsocks.jpg`} username={`MismatchedSocks`} gamertag={`MismatchedSocks0`} 
-          tags={[`TFT`, `Auto Chess`, `LoL`]} followers={10000} following={500} isVerified={true} 
-          bio={`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`}/>
+          <PlayerCardManager/>
         </>
       }
       main={
@@ -46,7 +45,7 @@ export default function Home() {
     <PageLayout name={`Sideqst | TFT`}>
       <LandingLayout
       welcome={
-        <LandingPageTagline/>
+        <LandingPageTagline onGetStarted={() => {}}/>
       }
       featured={
         <>
