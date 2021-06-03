@@ -20,8 +20,9 @@ export type Scalars = {
 export type Mutation = {
   __typename?: 'Mutation';
   register: User;
-  login: User;
+  login: Login_Response;
   logout: Scalars['Boolean'];
+  refreshToken: Refresh_Token_Response;
 };
 
 
@@ -51,12 +52,19 @@ export type Login_Input = {
   password: Scalars['String'];
 };
 
+export type Login_Response = {
+  __typename?: 'login_response';
+  token: Scalars['String'];
+  success: Scalars['Boolean'];
+  user?: Maybe<User>;
+};
+
 export type Profile = {
   __typename?: 'profile';
   id: Scalars['ID'];
   bio: Scalars['String'];
   tags: Array<Scalars['String']>;
-  lolName: Scalars['String'];
+  lolName?: Maybe<Scalars['String']>;
   avatarUrl?: Maybe<Scalars['String']>;
   user: User;
   level: Scalars['Int'];
@@ -64,6 +72,12 @@ export type Profile = {
   wins: Scalars['Int'];
   entered: Scalars['Int'];
   hosted: Scalars['Int'];
+};
+
+export type Refresh_Token_Response = {
+  __typename?: 'refresh_token_response';
+  ok: Scalars['Boolean'];
+  token: Scalars['String'];
 };
 
 export type Register_Input = {
@@ -100,11 +114,11 @@ export type LoginMutationVariables = Exact<{
 export type LoginMutation = (
   { __typename?: 'Mutation' }
   & { login: (
-    { __typename?: 'user' }
-    & Pick<User, 'id' | 'name' | 'gamerTag'>
-    & { profile?: Maybe<(
-      { __typename?: 'profile' }
-      & Pick<Profile, 'bio' | 'tags'>
+    { __typename?: 'login_response' }
+    & Pick<Login_Response, 'token' | 'success'>
+    & { user?: Maybe<(
+      { __typename?: 'user' }
+      & Pick<User, 'gamerTag'>
     )> }
   ) }
 );
@@ -149,12 +163,10 @@ export type CurrUserQuery = (
 export const LoginDocument = gql`
     mutation login($input: login_input!) {
   login(input: $input) {
-    id
-    name
-    gamerTag
-    profile {
-      bio
-      tags
+    token
+    success
+    user {
+      gamerTag
     }
   }
 }

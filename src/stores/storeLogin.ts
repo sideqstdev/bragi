@@ -27,21 +27,6 @@ export const isLoggedInWithData = (data: Partial<User> | any | null, error?: any
     return loggedIn;
 }
 
-const isLoggedIn = (): boolean => {
-    if(!isServer){
-        try{
-            if(localStorage.getItem(`sqstac`) && localStorage.getItem(`sqstrf`)){
-                return true as boolean;
-            }
-            return false as boolean;
-        }
-        catch {
-            return false as boolean;
-        }
-    }
-    return false as boolean;
-}
-
 export const useLoggedInStore = create(
     combine(
         {

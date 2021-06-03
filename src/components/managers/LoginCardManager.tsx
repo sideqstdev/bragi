@@ -29,7 +29,7 @@ const LoginCardManager: React.FC = () => {
             })
             console.log(response)
             addErrorToast({
-                message: `Successfully logged in as ${response.data.login.gamerTag}`,
+                message: `Successfully logged in as ${response.data.login.user.gamerTag}`,
                 duration: 5000,
                 variant: `info`,
             })
