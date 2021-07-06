@@ -1,6 +1,9 @@
 export type errorToast = {
     id: string;
     duration?: number;
-    message: string;
-    variant?: "danger" | "info" | "warning" | "notice";
+    title: string;
+    message?: string;
+    variant?: `danger` | `info` | `warning` | `notice`;
+    type?: `temporary` | `static`;
+    customColor?: string;
 }

@@ -9,12 +9,12 @@ const ErrorToastManager: React.FC = () => {
     const toastStore = useErrorToastsStore();
 
     return (
-        <div className={`flex w-full justify-center flex-col fixed top-36 lg:top-20`}
+        <div className={`flex justify-end flex-col fixed bottom-6 right-6`}
         style={{zIndex: 2001}}>
             {toastStore.toasts.map((toast) => (
-                <div key={toast.id}>
-                    <ErrorToast message={toast.message} duration={toast.duration} variant={toast.variant} 
-                    onClose={() => toastStore.removeToast(toast.id)} type={`temporary`}/>
+                <div key={toast.id} className={`mt-2`}>
+                    <ErrorToast title={toast.title} type={toast.type} message={toast.message} duration={toast.duration} variant={toast.variant} customColor={toast.customColor}
+                    onClose={() => toastStore.removeToast(toast.id)}/>
                 </div>
             ))}
         </div>

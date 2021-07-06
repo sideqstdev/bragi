@@ -18,11 +18,24 @@ import LandingPageTagline from '../src/components/LandingPageTagline'
 import LandingLayout from '../src/layouts/LandingLayout'
 import FeaturedLobbyCard from '../src/components/FeaturedLobbyCard'
 import PlayerCardManager from '../src/components/managers/PlayerCardManager'
+import { useEffect } from 'react'
+import { useErrorToasts } from '../src/lib/hooks/useErrorToast'
 
 export default function Home() {
   const themeCtx = useTheme();
   const theme = themeCtx.theme;
   const loginStore = useLoggedInStore();
+  const {addErrorToast} = useErrorToasts()
+
+  useEffect(() => {
+    addErrorToast({
+      title: `Welcome to Sideqst`,
+      message: `Our site is currently in alpha but your feedback is greatly appreciated.`,
+      variant: `notice`,
+      type: `static`,
+      customColor: `#DB2777`
+    })
+  }, [])
 
   return loginStore.loggedIn ? 
   (

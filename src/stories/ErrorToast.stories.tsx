@@ -14,28 +14,32 @@ const Template: Story<ComponentProps<typeof ErrorToast>> = (args: errorToastProp
 
 export const WarnErrorToast = Template.bind({})
 WarnErrorToast.args = {
-    message: `Warning Message`,
+    title: `Warning`,
+    message: `A message`,
     duration: 7000,
     variant: `warning`
 }
 
 export const InfoErrorToast = Template.bind({})
 InfoErrorToast.args = {
-    message: `Info Message`,
+    title: `Info`,
+    message: `A message`,
     duration: 7000,
     variant: `info`
 }
 
 export const DangerErrorToast = Template.bind({})
 DangerErrorToast.args = {
-    message: `Danger Message`,
+    title: `Danger`,
+    message: `A message`,
     duration: 7000,
     variant: `danger`,
 }
 
 export const NoticeErrorToast = Template.bind({})
 NoticeErrorToast.args = {
-    message: `Notice Message`,
+    title: `Notice`,
+    message: `A message`,
     duration: 7000,
     variant: `notice`
 }

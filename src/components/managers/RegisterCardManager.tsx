@@ -29,6 +29,7 @@ const RegisterCardManager: React.FC = () => {
                 }
             })
             addErrorToast({
+                title: `Registration`,
                 message: `Successfully registered ${response.data.register.email}`,
                 duration: 7000,
                 variant: `info`,
@@ -38,9 +39,11 @@ const RegisterCardManager: React.FC = () => {
         }catch(err){
             devMode ? (
                 addErrorToast({
+                    title: `Registration`,
                     message: `Error whilst registering: ${err.toString()}`,
                     duration: 14000,
                     variant: `warning`,
+                    type: `temporary`,
                 })
             ) : (
                 null
@@ -58,7 +61,8 @@ const RegisterCardManager: React.FC = () => {
     const onTwitterRegister = () => {
         console.log("Registering with twitter")
         addErrorToast({
-            message: `Going to twitter...`,
+            title: `Twitter`,
+            
             duration: 5000,
             variant: "info",
         })
@@ -67,6 +71,12 @@ const RegisterCardManager: React.FC = () => {
 
     const onDiscordRegister = () => {
         //TODO setup discord oauth
+        addErrorToast({
+            title: `Discord`,
+            message: `Registering with Discord`,
+            duration: 5000,
+            variant: `notice`,
+        })
     }
 
     // if logged in deny access to register page
