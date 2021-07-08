@@ -6,10 +6,18 @@ import PlayerCard from '../PlayerCard';
 interface playerCardManagerProps {}
 
 const PlayerCardManager: React.FC = () => {
-    const {user} = useLoggedInStore()
-    
+    const {user, setUser} = useLoggedInStore()
+
+    const {data, loading, error,} = useCurrUserQuery({
+        onCompleted: (data) => {
+            setUser(data?.currUser)
+            console.log(user)
+            console.log(data)
+    }})
+    console.log(data)
+
     return(
-        <PlayerCard avatar={user?.profile?.avatarUrl || `/mismatchedsocks.jpg`} username={user?.name || user.gamerTag} gamertag={user.gamerTag} 
+        <PlayerCard loading={loading} avatar={user?.profile?.avatarUrl || `/mismatchedsocks.jpg`} username={user?.name || user.gamerTag} gamertag={user.gamerTag} 
           tags={[`TFT`, `Auto Chess`, `LoL`]} followers={10000} following={500} isVerified={true} 
           bio={`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`}/>
     )

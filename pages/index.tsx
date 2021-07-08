@@ -33,7 +33,6 @@ export default function Home() {
       message: `Our site is currently in alpha but your feedback is greatly appreciated.`,
       variant: `notice`,
       type: `static`,
-      customColor: `#DB2777`
     })
   }, [])
 

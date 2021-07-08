@@ -21,6 +21,16 @@ const getTokens = () => {
     }
 }
 
+export const setStorageTokens = (act: string, rft: string) => {
+    if(!isServer){
+        try{
+            localStorage.setItem(`sqstac`, act)
+            localStorage.setItem(`sqstrf`, rft)
+        }
+        catch {};
+    }
+}
+
 export const isLoggedInWithData = (data: Partial<User> | any | null, error?: any) => {
     const loggedIn = error ? false : data ? true : false;
     loggedIn ? console.log("Logged in") : console.log("Logged out");

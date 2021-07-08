@@ -6,6 +6,7 @@ import { MDHeader, SMParagraph, Paragraph } from './Typography';
 import { FaCheck, FaCheckCircle } from 'react-icons/fa';
 import Tag from './Tag';
 import { simplifyNumber } from '../lib/util/number-formatting';
+import { Spinner } from './Spinner';
 
 export interface playerCardProps {
     avatar: string;
@@ -16,13 +17,22 @@ export interface playerCardProps {
     followers: number;
     following: number;
     isVerified: boolean;
+    loading?: boolean;
 }
 
 const PlayerCard: React.FC<playerCardProps> = ({
-    avatar, username, gamertag, bio, tags, followers, following, isVerified
+    avatar, username, gamertag, bio, tags, followers, following, isVerified, loading = true
 }) => {
     const themeCtx = useTheme();
     const theme = themeCtx.theme;
+
+    if(loading){
+        return(
+            <Card className={`px-3 py-3 h-32 flex items-center justify-center`}>
+                <Spinner size={`6`}/>
+            </Card>
+        )
+    }
 
     return(
         <Card className={`px-3 py-3`}>

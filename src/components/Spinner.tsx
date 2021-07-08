@@ -2,8 +2,9 @@ import React from "react";
 
 // I'm not doing string interpolation so tailwind can purge the css
 const sizes = {
-  "2": "h-2 w-2",
-  "4": "h-4 w-4",
+  "2": `h-2 w-2`,
+  "4": `h-4 w-4`,
+  "6": `h-6 w-6`
 };
 
 export const Spinner: React.FC<{ size?: keyof typeof sizes }> = ({

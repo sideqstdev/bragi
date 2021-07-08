@@ -55,6 +55,7 @@ export type Login_Input = {
 export type Login_Response = {
   __typename?: 'login_response';
   token: Scalars['String'];
+  refreshToken?: Maybe<Scalars['String']>;
   success: Scalars['Boolean'];
   user?: Maybe<User>;
 };
@@ -115,7 +116,7 @@ export type LoginMutation = (
   { __typename?: 'Mutation' }
   & { login: (
     { __typename?: 'login_response' }
-    & Pick<Login_Response, 'token' | 'success'>
+    & Pick<Login_Response, 'refreshToken' | 'token' | 'success'>
     & { user?: Maybe<(
       { __typename?: 'user' }
       & Pick<User, 'gamerTag'>
@@ -163,6 +164,7 @@ export type CurrUserQuery = (
 export const LoginDocument = gql`
     mutation login($input: login_input!) {
   login(input: $input) {
+    refreshToken
     token
     success
     user {

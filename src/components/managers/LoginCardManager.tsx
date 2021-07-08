@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTheme } from '../../theme/theme.provider';
-import { useLoggedInStore } from '../../stores/storeLogin';
+import { useLoggedInStore, setStorageTokens } from '../../stores/storeLogin';
 import LoginCard from '../LoginCard';
 import { useRouter } from 'next/router';
 import { useLoginMutation } from '../../lib/generated';
@@ -29,20 +29,30 @@ const LoginCardManager: React.FC = () => {
             })
             console.log(response)
             addErrorToast({
+                title: `Login`,
                 message: `Successfully logged in as ${response.data.login.user.gamerTag}`,
                 duration: 5000,
                 variant: `info`,
             })
+            loginStore.setTokens({act: response.data.login.token, rft: response.data.login.refreshToken})
+            setStorageTokens(response.data.login.token, response.data.login.refreshToken)
             loginStore.login();
             return
         }
         catch(err){
             devMode ? (
                 addErrorToast({
-                    message: `Error whilst logging in: ${err.toString()}`
+                    title: `Login Error`,
+                    message: `${err.toString()}`,
+                    type: `static`,
+                    variant: `danger`
                 })
             ) : (
-                null
+                addErrorToast({
+                    title: `Login Error`,
+                    variant: `danger`,
+                    duration: 5000,
+                })
             )
             return err;
         }
