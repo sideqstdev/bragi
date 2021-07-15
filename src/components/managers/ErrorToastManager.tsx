@@ -9,7 +9,7 @@ const ErrorToastManager: React.FC = () => {
     const toastStore = useErrorToastsStore();
 
     return (
-        <div className={`flex justify-end flex-col fixed bottom-6 right-6`}
+        <div className={`flex w-full sm:w-max justify-end flex-col fixed bottom-6 sm:right-6`}
         style={{zIndex: 2001}}>
             {toastStore.toasts.map((toast) => (
                 <div key={toast.id} className={`mt-2`}>

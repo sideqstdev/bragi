@@ -52,18 +52,18 @@ const ErrorToast: React.FC<errorToastProps> = ({duration = 7000, customColor,  m
     //naive way to do it needs a global store likely
 
     return(
-        <div className={`flex flex-wrap justify-between items-center ${variants[variant]} bg-opacity-75 relative min-w-full transition-transform duration-300 rounded-md px-5 py-2`} style={{backgroundColor: customColor}}>
+        <div className={`flex justify-between items-center ${variants[variant]} bg-opacity-75 relative min-w-full transition-transform duration-300 rounded-md px-5 py-2`} style={{backgroundColor: customColor}}>
             <div className={`flex flex-row items-center`}>
                 <span className={`mr-3`}>
                     {variantIcons[variant]}
                 </span>
-                <div className={`pr-5 flex flex-col max-w-xs`}>
+                <div className={`lg:pr-5 flex flex-col max-w-xs`}>
                     <XSHeader className={variants[variant]} style={{backgroundColor: customColor}} isBold={true}>{title}</XSHeader>
                     <Paragraph className={variants[variant]} style={{backgroundColor: customColor}}>{message}</Paragraph>
                 </div>
             </div>
             <div className={`flex justify-end`}>
-                <a onClick={onClose} className={`cursor-pointer ml-3 hover:text-${theme}-disabled`}>
+                <a onClick={onClose} className={`cursor-pointer hover:text-${theme}-disabled`}>
                     <FaTimes className={`text-md`}/>
                 </a>
             </div>

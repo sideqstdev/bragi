@@ -1,26 +1,36 @@
-import React from 'react';
-import { useCurrUserQuery } from '../../lib/generated';
-import { useLoggedInStore } from '../../stores/storeLogin';
-import PlayerCard from '../PlayerCard';
+import React from "react";
+import { useCurrUserQuery } from "../../lib/generated";
+import { useLoggedInStore } from "../../stores/storeLogin";
+import PlayerCard from "../PlayerCard";
 
 interface playerCardManagerProps {}
 
 const PlayerCardManager: React.FC = () => {
-    const {user, setUser} = useLoggedInStore()
+  const { user, setUser } = useLoggedInStore();
 
-    const {data, loading, error,} = useCurrUserQuery({
-        onCompleted: (data) => {
-            setUser(data?.currUser)
-            console.log(user)
-            console.log(data)
-    }})
-    console.log(data)
+  const { data, loading, error } = useCurrUserQuery({
+    onCompleted: (data) => {
+      setUser(data?.currUser);
+    },
+    onError: (err) => {
+      // console.error(err)
+    },
+    fetchPolicy: `cache-and-network`,
+  });
 
-    return(
-        <PlayerCard loading={loading} avatar={user?.profile?.avatarUrl || `/mismatchedsocks.jpg`} username={user?.name || user.gamerTag} gamertag={user.gamerTag} 
-          tags={[`TFT`, `Auto Chess`, `LoL`]} followers={10000} following={500} isVerified={true} 
-          bio={`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`}/>
-    )
-}
+  return data.currUser && !error ? (
+    <PlayerCard
+      loading={loading}
+      avatar={data.currUser.profile?.avatarUrl || `/mismatchedsocks.jpg`}
+      username={data.currUser?.name || data.currUser?.gamerTag}
+      gamertag={user.gamerTag}
+      tags={[`TFT`, `Auto Chess`, `LoL`]}
+      followers={10000}
+      following={500}
+      isVerified={true}
+      bio={data.currUser.profile.bio || `No bio yet...`}
+    />
+  ) : null;
+};
 
 export default PlayerCardManager;
