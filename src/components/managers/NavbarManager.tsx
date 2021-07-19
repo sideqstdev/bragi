@@ -18,6 +18,7 @@ const NavbarManager: React.FC = () => {
       loggedIn={loginStore.loggedIn}
       toggleAccountDropdown={toggleDropdown}
       accountDropdown={showDropdown}
+      avatar={loginStore.user?.profile?.avatarUrl}
     />
   );
 };

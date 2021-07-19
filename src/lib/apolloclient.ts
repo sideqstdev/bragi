@@ -1,24 +1,41 @@
-import {ApolloClient, InMemoryCache, createHttpLink} from '@apollo/client'
-import { devMode } from './constants'
-import {setContext} from '@apollo/client/link/context'
-import { isServer } from './util/is-server'
+import {
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink,
+  NormalizedCacheObject,
+} from "@apollo/client";
+import { devMode } from "./constants";
+import { useMemo } from "react";
 
-const apolloLink = () => {
-    let token;
-    if(!isServer){
-        token = localStorage.getItem(`sqstac`) as string || ``;
-    }
-    return createHttpLink({
-        uri: devMode ? `http://localhost:8080` : ``,
-        credentials: `include`,
-        headers: {
-            "Authorization": token ? `Bearer ${token}` : `No Token`
-        }
-    })
-}
+const apolloLink = (token: string) => {
+  return createHttpLink({
+    uri: devMode ? `http://localhost:8080` : ``,
+    credentials: `include`,
+    headers: {
+      Authorization: token ? `Bearer ${token}` : `No Token`,
+    },
+  });
+};
 
-export const apolloClient = new ApolloClient({
-    ssrMode: typeof window === `undefined`,
-    link: apolloLink(),
+export const apolloClient = (token: string) => {
+  return new ApolloClient({
+    ssrMode: false,
+    link: apolloLink(token),
     cache: new InMemoryCache(),
-})
+  });
+};
+
+export const useApollo = (
+  apolloClient: ApolloClient<NormalizedCacheObject>,
+  token: string
+) => {
+  const client = useMemo(() => {
+    return {
+      apolloClient,
+      token,
+    };
+  }, [token]);
+  return {
+    client,
+  };
+};

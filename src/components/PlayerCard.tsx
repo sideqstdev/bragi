@@ -3,7 +3,7 @@ import { useTheme } from "../theme/theme.provider";
 import Card from "./containers/Card";
 import { Avatar } from "./Avatar";
 import { MDHeader, SMParagraph, Paragraph } from "./Typography";
-import { FaCheck, FaCheckCircle } from "react-icons/fa";
+import { AiFillCheckCircle } from "react-icons/ai";
 import Tag from "./Tag";
 import { simplifyNumber } from "../lib/util/number-formatting";
 import { Spinner } from "./Spinner";
@@ -51,8 +51,8 @@ const PlayerCard: React.FC<playerCardProps> = ({
           <div className={`flex flex-row items-center`}>
             <MDHeader className={`truncate`}>{username}</MDHeader>
             {isVerified ? (
-              <span className={`ml-1`}>
-                <FaCheckCircle className={`text-accent`} />
+              <span className={`ml-1 `}>
+                <AiFillCheckCircle className={`text-accent text-md`} />
               </span>
             ) : null}
           </div>
