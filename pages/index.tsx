@@ -23,6 +23,7 @@ export default function Home() {
         sidebar={
           <>
             <PlayerCardManager />
+            <br />
             <PlayerList players={players} friends={players} />
           </>
         }
