@@ -64,10 +64,11 @@ export type Profile = {
   __typename?: 'profile';
   id: Scalars['ID'];
   bio: Scalars['String'];
+  status?: Maybe<Scalars['String']>;
   tags: Array<Scalars['String']>;
   lolName?: Maybe<Scalars['String']>;
   avatarUrl?: Maybe<Scalars['String']>;
-  user: User;
+  user?: Maybe<User>;
   level: Scalars['Int'];
   points: Scalars['Int'];
   wins: Scalars['Int'];
@@ -95,6 +96,7 @@ export type User = {
   lastLogin?: Maybe<Scalars['DateTime']>;
   version?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
+  verified?: Maybe<Scalars['Boolean']>;
   gamerTag: Scalars['String'];
   email: Scalars['String'];
   suspended?: Maybe<Scalars['Boolean']>;
@@ -163,7 +165,7 @@ export type CurrUserQuery = (
   { __typename?: 'Query' }
   & { currUser: (
     { __typename?: 'user' }
-    & Pick<User, 'id' | 'name' | 'gamerTag'>
+    & Pick<User, 'id' | 'name' | 'gamerTag' | 'verified'>
     & { profile?: Maybe<(
       { __typename?: 'profile' }
       & Pick<Profile, 'id' | 'bio' | 'tags' | 'lolName' | 'avatarUrl'>
@@ -314,6 +316,7 @@ export const CurrUserDocument = gql`
     id
     name
     gamerTag
+    verified
     profile {
       id
       bio

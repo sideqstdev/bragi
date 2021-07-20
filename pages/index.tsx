@@ -1,24 +1,16 @@
-import Head from "next/head";
-import Button from "../src/components/Button";
 import { useTheme } from "../src/theme/theme.provider";
-import Navbar from "../src/components/Navbar";
-import Input from "../src/components/Input";
-import Card from "../src/components/containers/Card";
 import DesktopLayout from "../src/layouts/DesktopLayout";
-import PlayerCard from "../src/components/PlayerCard";
 import PageLayout from "../src/layouts/PageLayout";
-import LobbyCard, { ranks, regions } from "../src/components/LobbyCard";
 import { MDHeader, LGHeader } from "../src/components/Typography";
-import LinkButtonGroup from "../src/components/LinkButtonGroup";
 import MainManager from "../src/components/managers/MainManager";
 import { useLoggedInStore } from "../src/stores/storeLogin";
-import ErrorToast from "../src/components/ErrorToast";
-import ErrorToastManager from "../src/components/managers/ErrorToastManager";
 import LandingPageTagline from "../src/components/LandingPageTagline";
 import LandingLayout from "../src/layouts/LandingLayout";
 import FeaturedLobbyCard from "../src/components/FeaturedLobbyCard";
 import PlayerCardManager from "../src/components/managers/PlayerCardManager";
 import FirstVisit from "../src/components/browser/FirstVisit";
+import PlayerList from "../src/components/PlayerList";
+import { players } from "../src/lib/placeholder/users";
 
 export default function Home() {
   const themeCtx = useTheme();
@@ -31,6 +23,7 @@ export default function Home() {
         sidebar={
           <>
             <PlayerCardManager />
+            <PlayerList players={players} friends={players} />
           </>
         }
         main={

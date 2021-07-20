@@ -41,7 +41,7 @@ const PlayerCardManager: React.FC = () => {
       }
       followers={10000}
       following={500}
-      isVerified={true}
+      isVerified={data?.currUser?.verified}
       bio={data?.currUser?.profile?.bio || `No bio yet...`}
     />
   );

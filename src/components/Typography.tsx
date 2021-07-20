@@ -21,10 +21,10 @@ export const XXLHeader: React.FC<typographyProps> = ({
 
   return (
     <h1
+      {...props}
       className={`${props.className ? `` : `text-${theme}-text`} ${
         props.className
       }`}
-      {...props}
     >
       {children}
     </h1>
@@ -41,10 +41,10 @@ export const XLHeader: React.FC<typographyProps> = ({
 
   return (
     <h2
+      {...props}
       className={`${props.className ? `` : `text-${theme}-text`} ${
         props.className
       }`}
-      {...props}
     >
       {children}
     </h2>
@@ -61,10 +61,10 @@ export const LGHeader: React.FC<typographyProps> = ({
 
   return (
     <h3
+      {...props}
       className={`${props.className ? `` : `text-${theme}-text`} ${
         props.className
       }`}
-      {...props}
     >
       {children}
     </h3>
@@ -81,10 +81,10 @@ export const MDHeader: React.FC<typographyProps> = ({
 
   return (
     <h4
+      {...props}
       className={`${props.className ? `` : `text-${theme}-text`} ${
         props.className
       }`}
-      {...props}
     >
       {children}
     </h4>
@@ -101,10 +101,10 @@ export const SMHeader: React.FC<typographyProps> = ({
 
   return (
     <h5
+      {...props}
       className={`${props.className ? `` : `text-${theme}-text`} ${
         props.className
       }`}
-      {...props}
     >
       {children}
     </h5>
@@ -121,10 +121,10 @@ export const XSHeader: React.FC<typographyProps> = ({
 
   return (
     <h6
+      {...props}
       className={`${props.className ? `` : `text-${theme}-text`} ${
         props.className
       }`}
-      {...props}
     >
       {children}
     </h6>
@@ -143,10 +143,10 @@ export const Paragraph: React.FC<typographyProps> = ({
 
   return (
     <p
+      {...props}
       className={`${props.className ? `` : `text-${theme}-text`} ${
         props.className
       } ${bold}`}
-      {...props}
     >
       {children}
     </p>
@@ -165,10 +165,8 @@ export const SMParagraph: React.FC<typographyProps> = ({
 
   return (
     <p
-      className={`${props.className ? `` : `text-${theme}-text`} ${
-        props.className
-      } small ${bold}`}
       {...props}
+      className={`text-${theme}-text ${props.className} small ${bold}`}
     >
       {children}
     </p>
