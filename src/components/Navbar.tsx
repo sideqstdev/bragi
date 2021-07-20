@@ -1,90 +1,183 @@
-import React from 'react'
-import { useTheme } from '../theme/theme.provider'
-import Button from './Button'
-import { Avatar } from './Avatar'
-import {FaPlus, FaBell, FaSun, FaSearch} from 'react-icons/fa'
-import {FiSun} from 'react-icons/fi'
-import Input from './Input'
-import LogoBlock from './LogoBlock'
-import { useRouter } from 'next/router'
-import AccountDropdownManager from './managers/AccountDropdownManager'
+import React from "react";
+import { useTheme } from "../theme/theme.provider";
+import Button from "./Button";
+import { Avatar } from "./Avatar";
+import { FaPlus, FaBell, FaSun, FaSearch } from "react-icons/fa";
+import { FiSun } from "react-icons/fi";
+import Input from "./Input";
+import LogoBlock from "./LogoBlock";
+import { useRouter } from "next/router";
+import AccountDropdownManager from "./managers/AccountDropdownManager";
+import Dropdown from "./Dropdown";
+import { useLoggedInStore } from "../stores/storeLogin";
+import { FaUser, FaTrophy, FaBug, FaDoorOpen } from "react-icons/fa";
+import { BsFilePost, BsFillGearFill } from "react-icons/bs";
+import { MdVideogameAsset } from "react-icons/md";
 
 export type logoTuple = {
-    darkLogo: string;
-    lightLogo: string
-}
+  darkLogo: string;
+  lightLogo: string;
+};
 
 export interface navProps {
-    loggedIn?: boolean
-    avatar?: string;
-    logos?: logoTuple;
-    toggleAccountDropdown: () => void;
-    accountDropdown: boolean;
+  loggedIn?: boolean;
+  avatar?: string;
+  logos?: logoTuple;
+  onLogout: () => void;
 }
 
-const Navbar: React.FC<navProps> = ({loggedIn, avatar= "/mismatchedsocks.jpg", logos, toggleAccountDropdown, accountDropdown = false, ...props}: navProps) => {
-    const themeCtx = useTheme()
-    const theme = themeCtx.theme
-    const router = useRouter()
+const Navbar: React.FC<navProps> = ({
+  loggedIn,
+  avatar = "/mismatchedsocks.jpg",
+  logos,
+  onLogout,
+  ...props
+}: navProps) => {
+  const themeCtx = useTheme();
+  const theme = themeCtx.theme;
+  const router = useRouter();
+  const { logout } = useLoggedInStore();
 
-    const routeHome = () => {
-        router.push(`/`)
+  const routeHome = () => {
+    router.push(`/`);
+  };
+
+  const routeLogin = () => {
+    router.push(`/login`);
+  };
+
+  const routeLogout = () => {
+    logout();
+    router.push(`/`);
+  };
+
+  const routeRegister = () => {
+    router.push(`/register`);
+  };
+
+  // checks the logged in prop and renders the appropriate r-block
+  const loggedInRender = () => {
+    if (loggedIn) {
+      return (
+        <>
+          <span className={`cursor-pointer flex content-center items-center`}>
+            <Dropdown
+              items={[
+                {
+                  icon: <FaUser />,
+                  name: `Profile`,
+                  onClick: () => router.push(`/profile`),
+                },
+                {
+                  icon: <FaTrophy />,
+                  name: `My Lobbies`,
+                  onClick: () => router.push(`/profile/lobbies`),
+                },
+                {
+                  icon: <BsFillGearFill />,
+                  name: `Settings`,
+                  onClick: () => router.push(`/settings`),
+                },
+                {
+                  icon: <FaBug />,
+                  name: `Report a bug`,
+                  onClick: () => router.push(`/bugReport`),
+                },
+                {
+                  icon: <FaDoorOpen />,
+                  name: `Logout`,
+                  isAction: true,
+                  onClick: onLogout,
+                },
+              ]}
+              anchor={<Avatar src={avatar}></Avatar>}
+            />
+          </span>
+          <div className={`flex flex-row-reverse content-center mr-4`}>
+            <Dropdown
+              items={[
+                {
+                  icon: <BsFilePost />,
+                  name: `Create Post`,
+                  onClick: () => console.log(`Create Post`),
+                },
+                {
+                  icon: <MdVideogameAsset />,
+                  name: `Create Lobby`,
+                  onClick: () => console.log(`Create Lobby`),
+                },
+              ]}
+              anchor={
+                <Button
+                  variant={"primary"}
+                  size={"small"}
+                  iconRight={<FaPlus />}
+                >
+                  Create
+                </Button>
+              }
+            />
+
+            <Button variant={"icon"}>
+              <FaBell />
+            </Button>
+            <Button onClick={themeCtx.toggleTheme} variant={"icon"}>
+              <FiSun className={`text-dark-danger-hover`} />
+            </Button>
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div className={`flex flex-row-reverse content-center`}>
+            <Button onClick={routeLogin} variant={"primary"}>
+              Login
+            </Button>
+            <Button onClick={routeRegister} variant={"text"}>
+              Register
+            </Button>
+            <Button onClick={themeCtx.toggleTheme} variant={"icon"}>
+              <FiSun className={`text-dark-danger-hover`} />
+            </Button>
+          </div>
+        </>
+      );
     }
+  };
 
-    const routeLogin = () => {
-        router.push(`/login`)
-    }
+  return (
+    <div
+      className={`bg-${theme}-altbackground text-${theme}-text w-screen px-6 lg:px-6 pb-3 pt-3 inline-grid grid-cols-10`}
+    >
+      <div
+        className={`flex items-center order-1 flex-row md:order-1 col-span-4 sm:col-span-4 lg:col-span-3 mr-4`}
+      >
+        <LogoBlock
+          onClick={routeHome}
+          lightLogo={logos ? logos.lightLogo : undefined}
+          darkLogo={logos ? logos.darkLogo : undefined}
+        />
+      </div>
 
-    const routeRegister = () => {
-        router.push(`/register`)
-    }
+      <div
+        className={`flex items-center order-last mt-3 sm:mt-3 lg:mt-0 sm:order-last lg:order-2 col-span-10 w-full sm:col-8 lg:col-span-4`}
+      >
+        <Input
+          autoComplete={`off`}
+          iconLeft={<FaSearch />}
+          placeholder={`Tournament Search`}
+          stretch={true}
+        ></Input>
+      </div>
 
-    // checks the logged in prop and renders the appropriate r-block
-    const loggedInRender = () => {
-        if(loggedIn){
-            return(
-                <>
-                    <span onClick={toggleAccountDropdown} className={`cursor-pointer flex content-center items-center`}>
-                        <Avatar src={avatar}></Avatar>
-                        <AccountDropdownManager open={accountDropdown}/>
-                    </span>
-                    <div className={`flex flex-row-reverse content-center mr-4`}>
-                        <Button variant={"primary"} size={"small"} iconRight={<FaPlus/>}>Create</Button>
-                        <Button variant={"icon"}><FaBell/></Button>
-                        <Button onClick={themeCtx.toggleTheme} variant={"icon"}><FiSun className={`text-dark-danger-hover`}/></Button>
-                    </div>
-                    
-                </>
-            )
-        } else {
-            return(
-                <>
-                    <div className={`flex flex-row-reverse content-center`}>
-                        <Button onClick={routeLogin} variant={"primary"}>Login</Button>
-                        <Button onClick={routeRegister} variant={"text"}>Register</Button>
-                        <Button onClick={themeCtx.toggleTheme} variant={"icon"}><FiSun className={`text-dark-danger-hover`}/></Button>
-                    </div>
-                </>
-            )
-        }
-    }
+      <nav
+        className={`flex flex-row-reverse order-2 sm:order-3 col-span-6 content-center items-center sm:col-span-6 md:col-span-6 lg:col-span-3 ml-4`}
+      >
+        {loggedInRender()}
+      </nav>
+    </div>
+  );
+};
 
-    return(
-        <div className={`bg-${theme}-altbackground text-${theme}-text w-screen px-6 lg:px-6 pb-3 pt-3 inline-grid grid-cols-10`}>
-            <div className={`flex items-center order-1 flex-row md:order-1 col-span-4 sm:col-span-4 lg:col-span-3 mr-4`}>
-                <LogoBlock onClick={routeHome} lightLogo={logos ? logos.lightLogo : undefined} darkLogo={logos ? logos.darkLogo : undefined}/>
-            </div>
-
-            <div className={`flex items-center order-last mt-3 sm:mt-3 lg:mt-0 sm:order-last lg:order-2 col-span-10 w-full sm:col-8 lg:col-span-4`}>
-                <Input autoComplete={`off`} iconLeft={<FaSearch/>} placeholder={`Tournament Search`} stretch={true}></Input>
-            </div>
-            
-            <nav className={`flex flex-row-reverse order-2 sm:order-3 col-span-6 content-center items-center sm:col-span-6 md:col-span-6 lg:col-span-3 ml-4`}>
-                {loggedInRender()}
-            </nav>
-        </div>
-    )
-        
-    }
-
-export default Navbar
+export default Navbar;

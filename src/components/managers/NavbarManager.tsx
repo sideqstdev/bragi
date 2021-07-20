@@ -2,23 +2,34 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useLoggedInStore } from "../../stores/storeLogin";
 import Navbar from "../Navbar";
+import { useLogoutMutation } from "../../lib/generated";
+import { useErrorToasts } from "../../lib/hooks/useErrorToast";
 
 const NavbarManager: React.FC = () => {
   const router = useRouter();
-  const loginStore = useLoggedInStore();
-  const [showDropdown, setDropdown] = useState(false);
+  const { logout, loggedIn, user } = useLoggedInStore();
+  const [logoutMutation, { data, loading, error }] = useLogoutMutation();
+  const { addErrorToast } = useErrorToasts();
 
-  const toggleDropdown = () => {
-    console.log(showDropdown);
-    setDropdown(!showDropdown);
+  const onLogout = async () => {
+    const response = await logoutMutation();
+    if (response.data.logout) {
+      addErrorToast({
+        title: `Logout`,
+        message: `Successfully logged out`,
+        duration: 5000,
+        variant: `info`,
+      });
+      logout();
+      router.push(`/`);
+    }
   };
 
   return (
     <Navbar
-      loggedIn={loginStore.loggedIn}
-      toggleAccountDropdown={toggleDropdown}
-      accountDropdown={showDropdown}
-      avatar={loginStore.user?.profile?.avatarUrl}
+      onLogout={onLogout}
+      loggedIn={loggedIn}
+      avatar={user?.profile?.avatarUrl}
     />
   );
 };

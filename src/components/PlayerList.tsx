@@ -4,10 +4,12 @@ import { User } from "../lib/generated";
 import { useTheme } from "../theme/theme.provider";
 import Button from "./Button";
 import Card from "./containers/Card";
+import Emoji from "./Emoji";
 import Input from "./Input";
 import ListHeader from "./ListHeader";
 import PlayerStatus from "./PlayerStatus";
 import PlayerTag from "./PlayerTag";
+import { Spinner } from "./Spinner";
 import { MDHeader, SMParagraph } from "./Typography";
 
 export interface playerListProps {
@@ -15,7 +17,7 @@ export interface playerListProps {
   players?: User[];
   friendsLoading?: boolean;
   playersLoading?: boolean;
-  addFriend?: () => void;
+  addFriend?: (gamerTag: string) => void;
   showMoreFriends?: () => User[];
 }
 
@@ -37,52 +39,89 @@ const PlayerList: React.FC<playerListProps> = ({
         placeholder={`Search for players`}
         stretch={true}
       />
-      <ListHeader title={`Friends`} length={10} />
-      <div>
-        {friends.map((friend, i) => {
-          return (
-            <div key={i} className={`my-2`}>
-              <PlayerTag
-                username={friend.name}
-                gamertag={friend.gamerTag}
-                avatar={friend.profile.avatarUrl}
-                rightContent={<PlayerStatus status={friend.profile.status} />}
-              />
+      <ListHeader title={`Friends`} length={friends?.length || 0} />
+      {friendsLoading ? (
+        <div className={`p-4`}>
+          <Spinner size={`4`} />
+        </div>
+      ) : (
+        <div>
+          {friends.length < 1 ? (
+            <div
+              className={`p-4 flex justify-center bg-dark-box-box2 rounded-md`}
+            >
+              <SMParagraph>
+                No friends yet <Emoji label={`sadface`} symbol={`😢`} /> ...
+              </SMParagraph>
             </div>
-          );
-        })}
-        <a onClick={showMoreFriends}>
-          <SMParagraph
-            className={`hover:text-${theme}-default-hover cursor-pointer`}
-          >
-            Show More...
-          </SMParagraph>
-        </a>
-      </div>
-      <ListHeader title={`Players`} length={100} />
-      <div>
-        {players.map((player, i) => {
-          return (
-            <div key={i} className={`my-2`}>
-              <PlayerTag
-                username={player.name}
-                gamertag={player.gamerTag}
-                avatar={player.profile.avatarUrl}
-                verified={player.verified}
-                rightContent={
-                  <Button
-                    variant={`primary`}
-                    size={`small`}
-                    onClick={addFriend}
-                  >
-                    Add Friend
-                  </Button>
-                }
-              />
+          ) : (
+            friends.map((friend, i) => {
+              return (
+                <div key={i} className={`my-2`}>
+                  <PlayerTag
+                    username={friend.name}
+                    gamertag={friend.gamerTag}
+                    avatar={friend.profile.avatarUrl}
+                    rightContent={
+                      <PlayerStatus status={friend.profile.status} />
+                    }
+                  />
+                </div>
+              );
+            })
+          )}
+          {friends.length >= 10 && (
+            <a onClick={showMoreFriends}>
+              <SMParagraph
+                className={`hover:text-${theme}-default-hover cursor-pointer`}
+              >
+                Show More...
+              </SMParagraph>
+            </a>
+          )}
+        </div>
+      )}
+
+      <ListHeader title={`Players`} length={players?.length || 0} />
+      {playersLoading ? (
+        <div className={`p-4`}>
+          <Spinner size={`4`} />
+        </div>
+      ) : (
+        <div>
+          {players.length < 1 ? (
+            <div
+              className={`p-4 flex justify-center bg-dark-box-box2 rounded-md`}
+            >
+              <SMParagraph>
+                No players yet <Emoji label={`sadface`} symbol={`😢`} /> ...
+              </SMParagraph>
             </div>
-          );
-        })}
-      </div>
+          ) : (
+            players.map((player, i) => {
+              return (
+                <div key={i} className={`my-2`}>
+                  <PlayerTag
+                    username={player.name}
+                    gamertag={player.gamerTag}
+                    avatar={player.profile.avatarUrl}
+                    verified={player.verified}
+                    rightContent={
+                      <Button
+                        variant={`primary`}
+                        size={`small`}
+                        onClick={addFriend}
+                      >
+                        Add Friend
+                      </Button>
+                    }
+                  />
+                </div>
+              );
+            })
+          )}
+        </div>
+      )}
     </Card>
   );
 };
