@@ -23,26 +23,8 @@ const CreatePostCardManager: React.FC<createPostCardManagerProps> = ({
         isOpen={dialogOpen}
         onRequestClose={closeDialog}
         shouldCloseOnOverlayClick={true}
-        style={{
-          overlay: {
-            background: `rgb(33, 38, 43, 0.5)`,
-            padding: 0,
-            zIndex: 100,
-          },
-          content: {
-            top: `35%`,
-            left: `50%`,
-            right: `auto`,
-            bottom: `auto`,
-            marginRight: "-50%",
-            width: "60%",
-            transform: "translate(-40%, -10%)",
-            padding: 0,
-            margin: 0,
-            border: 0,
-            backgroundColor: `transparent`,
-          },
-        }}
+        className={`create-post-content`}
+        overlayClassName={`create-post-overlay`}
       >
         <CreatePostCard onCancel={closeDialog} onCreate={onCreate} />
       </Modal>
