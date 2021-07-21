@@ -24,7 +24,11 @@ const CreatePostCardManager: React.FC<createPostCardManagerProps> = ({
         onRequestClose={closeDialog}
         shouldCloseOnOverlayClick={true}
         style={{
-          overlay: { background: `rgb(33, 38, 43, 0.5)`, padding: 0 },
+          overlay: {
+            background: `rgb(33, 38, 43, 0.5)`,
+            padding: 0,
+            zIndex: 100,
+          },
           content: {
             top: `35%`,
             left: `50%`,
