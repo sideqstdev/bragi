@@ -55,7 +55,10 @@ const Dropdown: React.FC<dropdownProps> = ({ items, anchor }) => {
       return (
         <a
           key={`${index} ${item.name}`}
-          onClick={item.onClick}
+          onClick={() => {
+            item.onClick();
+            onClose();
+          }}
           className={`w-full flex flex-row items-center px-3 py-2 cursor-pointer hover:bg-${theme}-box-box1 
           ${index === 0 && `rounded-t-md`} 
           ${index === items.length - 1 && `rounded-b-md`} 
@@ -78,7 +81,7 @@ const Dropdown: React.FC<dropdownProps> = ({ items, anchor }) => {
     onDisappear: onClose,
     overflowContainer: false,
     placement: `bottom-end`,
-    triggerOffset: 10,
+    triggerOffset: 15,
     containerOffset: 100,
   });
 
@@ -86,7 +89,11 @@ const Dropdown: React.FC<dropdownProps> = ({ items, anchor }) => {
 
   return (
     <>
-      <span {...triggerProps} onClick={() => setOpen(!open)}>
+      <span
+        {...triggerProps}
+        className={`flex align-middle`}
+        onClick={() => setOpen(!open)}
+      >
         {anchor}
       </span>
       {open &&

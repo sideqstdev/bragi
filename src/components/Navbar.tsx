@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "../theme/theme.provider";
 import Button from "./Button";
 import { Avatar } from "./Avatar";
@@ -13,6 +13,7 @@ import { useLoggedInStore } from "../stores/storeLogin";
 import { FaUser, FaTrophy, FaBug, FaDoorOpen } from "react-icons/fa";
 import { BsFilePost, BsFillGearFill } from "react-icons/bs";
 import { MdVideogameAsset } from "react-icons/md";
+import CreatePostCardManager from "./managers/CreatePostCardManager";
 
 export type logoTuple = {
   darkLogo: string;
@@ -37,6 +38,15 @@ const Navbar: React.FC<navProps> = ({
   const theme = themeCtx.theme;
   const router = useRouter();
   const { logout } = useLoggedInStore();
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const openDialog = () => {
+    setDialogOpen(true);
+  };
+
+  const closeDialog = () => {
+    setDialogOpen(false);
+  };
 
   const routeHome = () => {
     router.push(`/`);
@@ -99,7 +109,7 @@ const Navbar: React.FC<navProps> = ({
                 {
                   icon: <BsFilePost />,
                   name: `Create Post`,
-                  onClick: () => console.log(`Create Post`),
+                  onClick: () => openDialog(),
                 },
                 {
                   icon: <MdVideogameAsset />,
@@ -117,10 +127,21 @@ const Navbar: React.FC<navProps> = ({
                 </Button>
               }
             />
+            <Dropdown
+              items={[
+                {
+                  icon: <FaSun />,
+                  name: `A Notification`,
+                  onClick: () => console.log(`Notification`),
+                },
+              ]}
+              anchor={
+                <Button variant={"icon"}>
+                  <FaBell />
+                </Button>
+              }
+            />
 
-            <Button variant={"icon"}>
-              <FaBell />
-            </Button>
             <Button onClick={themeCtx.toggleTheme} variant={"icon"}>
               <FiSun className={`text-dark-danger-hover`} />
             </Button>
@@ -176,6 +197,10 @@ const Navbar: React.FC<navProps> = ({
       >
         {loggedInRender()}
       </nav>
+      <CreatePostCardManager
+        closeDialog={closeDialog}
+        dialogOpen={dialogOpen}
+      />
     </div>
   );
 };
