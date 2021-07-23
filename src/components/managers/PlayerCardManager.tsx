@@ -8,9 +8,9 @@ import { Spinner } from "../Spinner";
 interface playerCardManagerProps {}
 
 const PlayerCardManager: React.FC = () => {
-  const { user, setUser } = useLoggedInStore();
+  const { user, setUser, accessToken } = useLoggedInStore();
 
-  const { data, loading, error, startPolling, stopPolling } = useCurrUserQuery({
+  const { data, loading, error } = useCurrUserQuery({
     onCompleted: (data) => {
       setUser(data?.currUser);
     },
@@ -33,7 +33,7 @@ const PlayerCardManager: React.FC = () => {
       loading={loading}
       avatar={data?.currUser?.profile?.avatarUrl || `/mismatchedsocks.jpg`}
       username={data?.currUser?.name || data?.currUser?.gamerTag}
-      gamertag={user?.gamerTag}
+      gamertag={data?.currUser?.gamerTag}
       tags={
         data?.currUser.profile?.tags
           ? data?.currUser?.profile?.tags

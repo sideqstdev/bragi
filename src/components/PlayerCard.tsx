@@ -7,7 +7,6 @@ import { AiFillCheckCircle } from "react-icons/ai";
 import Tag from "./Tag";
 import { simplifyNumber } from "../lib/util/number-formatting";
 import { Spinner } from "./Spinner";
-import { useCurrUserQuery } from "../lib/generated";
 
 export interface playerCardProps {
   avatar: string;

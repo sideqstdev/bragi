@@ -6,7 +6,7 @@ import React, {
   ChangeEvent,
 } from "react";
 import { useTheme } from "../theme/theme.provider";
-import { SMParagraph } from "./Typography";
+import { SMParagraph, XSHeader } from "./Typography";
 
 export const inputScale = {
   default: `py-2 px-5 text-base`,
@@ -66,12 +66,12 @@ const Input: React.FC<inputProps> = ({
     >
       <div className={`flex flex-row justify-between`}>
         {label ? (
-          <label className={`text-${theme}-text w-max`}>{label}</label>
+          <XSHeader className={`text-${theme}-text w-max`}>{label}</XSHeader>
         ) : null}
         {error ? (
-          <label className={`text-${theme}-danger text-right w-full w-max`}>
+          <XSHeader className={`text-${theme}-danger text-right w-full`}>
             {error}
-          </label>
+          </XSHeader>
         ) : null}
       </div>
       <div

@@ -235,6 +235,10 @@ html *:not(head *):not(script):not(style) {
   }
 }
 
+input[type="file"] {
+  display: none;
+}
+
 html,
 body {
   min-height: 100%;

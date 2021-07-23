@@ -12,6 +12,8 @@ const CreatePostCardManager: React.FC<createPostCardManagerProps> = ({
   closeDialog,
   dialogOpen,
 }) => {
+  Modal.setAppElement(`body`);
+
   const onCreate = async (title, body) => {
     console.log(title, body);
     return true;

@@ -64,8 +64,13 @@ const PostCard: React.FC<postCardProps> = ({
       <div className={`flex flex-col px-4 py-4`}>
         <SMHeader className={`mb-1`}>{title}</SMHeader>
         <Paragraph>{content}</Paragraph>
-        <div className={`w-full mt-2 relative rounded-md`}>
-          <img className={`rounded-md`} src={image} />
+        <div
+          className={`flex bg-dark-box-box2 w-full h-auto mt-2 relative justify-center rounded-md`}
+        >
+          <img
+            className={`w-full rounded-md object-cover max-h-112`}
+            src={image}
+          />
         </div>
       </div>
     </Card>

@@ -48,7 +48,7 @@ const PlayerList: React.FC<playerListProps> = ({
         <div>
           {friends.length < 1 ? (
             <div
-              className={`p-4 flex justify-center bg-dark-box-box2 rounded-md`}
+              className={`p-4 flex justify-center bg-${theme}-box-box2 rounded-md`}
             >
               <SMParagraph>
                 No friends yet <Emoji label={`sadface`} symbol={`😢`} /> ...
@@ -91,7 +91,7 @@ const PlayerList: React.FC<playerListProps> = ({
         <div>
           {players.length < 1 ? (
             <div
-              className={`p-4 flex justify-center bg-dark-box-box2 rounded-md`}
+              className={`p-4 flex justify-center bg-${theme}-box-box2 rounded-md`}
             >
               <SMParagraph>
                 No players yet <Emoji label={`sadface`} symbol={`😢`} /> ...

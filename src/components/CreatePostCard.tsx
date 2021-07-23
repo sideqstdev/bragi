@@ -1,13 +1,16 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import { BsFilePost } from "react-icons/bs";
-import { FaPlus, FaTimes } from "react-icons/fa";
+import { FaCross, FaPlus, FaTimes } from "react-icons/fa";
+import UploadImageS3 from "../lib/util/UploadImageS3";
 import { useTheme } from "../theme/theme.provider";
 import Button from "./Button";
 import Card from "./containers/Card";
 import Input from "./Input";
 import InputArea from "./InputArea";
-import { MDHeader } from "./Typography";
+import { MDHeader, Paragraph, SMHeader, XSHeader } from "./Typography";
+import { v4 as uuidv4 } from "uuid";
 
 export interface createPostCardInterface {
   onCreate: (title, body) => Promise<boolean> | Promise<null>;
@@ -20,24 +23,30 @@ const CreatePostCard: React.FC<createPostCardInterface> = ({
 }) => {
   const themeCtx = useTheme();
   const theme = themeCtx.theme;
+  const [clearImage, setClearImage] = useState(false);
+
+  const postId = uuidv4();
 
   const createPostForm = useFormik({
     initialValues: {
       title: ``,
       body: ``,
+      imageUrl: null,
     },
     validateOnChange: false,
-    validate: ({ title, body }) => {
+    validate: ({ title, body, imageUrl }) => {
       const errors: Record<string, string> = {};
       if (title.length <= 0) {
         errors.title = `no title provided`;
       } else if (title.length < 5) {
         errors.title = `title must be at least 5 characters`;
+      } else if (title.length >= 100) {
+        errors.title = `title must be 100 characters or less`;
       } else {
         // TODO link up post create?
       }
 
-      if (body.length <= 0) {
+      if (body.length <= 0 && !imageUrl) {
         errors.body = `no body provided`;
       } else {
         // TODO link up post create?
@@ -67,17 +76,42 @@ const CreatePostCard: React.FC<createPostCardInterface> = ({
       }
     },
   });
+
+  const handleImageAdd = (imageUrl) => {
+    createPostForm.setValues({ ...createPostForm.values, imageUrl: imageUrl });
+  };
+
+  const handleImageClear = () => {
+    if (createPostForm.values.imageUrl) {
+      setClearImage(true);
+      createPostForm.setValues({ ...createPostForm.values, imageUrl: null });
+    }
+  };
+
+  useEffect(() => {
+    setClearImage(false);
+  }, [clearImage]);
+
   return (
     <Card className={`flex flex-col w-full md:flex-row px-3 py-3 shadow-2xl`}>
       <form onSubmit={createPostForm.handleSubmit} className={`w-full`}>
         <div className={`flex flex-row justify-between items-center`}>
           <MDHeader>Create Post</MDHeader>
-          <span
-            className={`cursor-pointer hover:text-${theme}-default-hover`}
-            onClick={onCancel}
-          >
-            <FaTimes size={20} />
-          </span>
+          <div className={`flex flex-row`}>
+            <UploadImageS3
+              onImageAdd={handleImageAdd}
+              clearImage={clearImage}
+              createPostId={postId}
+            />
+            <Button
+              type={`button`}
+              variant={`icon`}
+              className={`cursor-pointer items-center hover:text-${theme}-default-hover`}
+              onClick={onCancel}
+            >
+              <FaTimes size={20} />
+            </Button>
+          </div>
         </div>
 
         <Input
@@ -101,8 +135,36 @@ const CreatePostCard: React.FC<createPostCardInterface> = ({
           stretch={true}
           placeholder={`Post Body`}
         />
+        {createPostForm.values.imageUrl && (
+          <div className={`w-full mt-2 relative rounded-md`}>
+            <XSHeader>Preview</XSHeader>
+            <div className={`w-full relative`}>
+              <img
+                className={`rounded-md h-36`}
+                src={createPostForm.values.imageUrl}
+              />
+
+              <div className={`absolute left-0 top-2`}>
+                <Button
+                  type={`button`}
+                  onClick={handleImageClear}
+                  size={`small`}
+                  variant={`icon`}
+                >
+                  <FaTimes />
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className={`flex flex-row justify-end mt-4`}>
-          <Button onClick={onCancel} variant={`text`} className={`mr-2`}>
+          <Button
+            type={`button`}
+            onClick={onCancel}
+            variant={`text`}
+            className={`mr-2`}
+          >
             Cancel
           </Button>
           <Button

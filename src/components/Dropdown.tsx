@@ -85,8 +85,6 @@ const Dropdown: React.FC<dropdownProps> = ({ items, anchor }) => {
     containerOffset: 100,
   });
 
-  console.log(layerProps.style);
-
   return (
     <>
       <span

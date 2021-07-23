@@ -22,7 +22,6 @@ export type Mutation = {
   register: User;
   login: Login_Response;
   logout: Scalars['Boolean'];
-  refreshToken: Refresh_Token_Response;
 };
 
 
@@ -37,6 +36,7 @@ export type MutationLoginArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  refreshToken: Refresh_Token_Response;
   user: User;
   currUser: User;
   status: Scalars['String'];
@@ -134,17 +134,6 @@ export type LogoutMutation = (
   & Pick<Mutation, 'logout'>
 );
 
-export type RefreshTokenMutationVariables = Exact<{ [key: string]: never; }>;
-
-
-export type RefreshTokenMutation = (
-  { __typename?: 'Mutation' }
-  & { refreshToken: (
-    { __typename?: 'refresh_token_response' }
-    & Pick<Refresh_Token_Response, 'success' | 'token'>
-  ) }
-);
-
 export type RegisterMutationVariables = Exact<{
   input: Register_Input;
 }>;
@@ -170,6 +159,17 @@ export type CurrUserQuery = (
       { __typename?: 'profile' }
       & Pick<Profile, 'id' | 'bio' | 'tags' | 'lolName' | 'avatarUrl'>
     )> }
+  ) }
+);
+
+export type RefreshTokenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RefreshTokenQuery = (
+  { __typename?: 'Query' }
+  & { refreshToken: (
+    { __typename?: 'refresh_token_response' }
+    & Pick<Refresh_Token_Response, 'success' | 'token'>
   ) }
 );
 
@@ -242,39 +242,6 @@ export function useLogoutMutation(baseOptions?: Apollo.MutationHookOptions<Logou
 export type LogoutMutationHookResult = ReturnType<typeof useLogoutMutation>;
 export type LogoutMutationResult = Apollo.MutationResult<LogoutMutation>;
 export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
-export const RefreshTokenDocument = gql`
-    mutation refreshToken {
-  refreshToken {
-    success
-    token
-  }
-}
-    `;
-export type RefreshTokenMutationFn = Apollo.MutationFunction<RefreshTokenMutation, RefreshTokenMutationVariables>;
-
-/**
- * __useRefreshTokenMutation__
- *
- * To run a mutation, you first call `useRefreshTokenMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useRefreshTokenMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [refreshTokenMutation, { data, loading, error }] = useRefreshTokenMutation({
- *   variables: {
- *   },
- * });
- */
-export function useRefreshTokenMutation(baseOptions?: Apollo.MutationHookOptions<RefreshTokenMutation, RefreshTokenMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<RefreshTokenMutation, RefreshTokenMutationVariables>(RefreshTokenDocument, options);
-      }
-export type RefreshTokenMutationHookResult = ReturnType<typeof useRefreshTokenMutation>;
-export type RefreshTokenMutationResult = Apollo.MutationResult<RefreshTokenMutation>;
-export type RefreshTokenMutationOptions = Apollo.BaseMutationOptions<RefreshTokenMutation, RefreshTokenMutationVariables>;
 export const RegisterDocument = gql`
     mutation register($input: register_input!) {
   register(input: $input) {
@@ -354,3 +321,38 @@ export function useCurrUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<C
 export type CurrUserQueryHookResult = ReturnType<typeof useCurrUserQuery>;
 export type CurrUserLazyQueryHookResult = ReturnType<typeof useCurrUserLazyQuery>;
 export type CurrUserQueryResult = Apollo.QueryResult<CurrUserQuery, CurrUserQueryVariables>;
+export const RefreshTokenDocument = gql`
+    query refreshToken {
+  refreshToken {
+    success
+    token
+  }
+}
+    `;
+
+/**
+ * __useRefreshTokenQuery__
+ *
+ * To run a query within a React component, call `useRefreshTokenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRefreshTokenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRefreshTokenQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useRefreshTokenQuery(baseOptions?: Apollo.QueryHookOptions<RefreshTokenQuery, RefreshTokenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<RefreshTokenQuery, RefreshTokenQueryVariables>(RefreshTokenDocument, options);
+      }
+export function useRefreshTokenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RefreshTokenQuery, RefreshTokenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<RefreshTokenQuery, RefreshTokenQueryVariables>(RefreshTokenDocument, options);
+        }
+export type RefreshTokenQueryHookResult = ReturnType<typeof useRefreshTokenQuery>;
+export type RefreshTokenLazyQueryHookResult = ReturnType<typeof useRefreshTokenLazyQuery>;
+export type RefreshTokenQueryResult = Apollo.QueryResult<RefreshTokenQuery, RefreshTokenQueryVariables>;

@@ -2,6 +2,9 @@ module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    maxHeight: {
+      '112': `28rem`
+    },
     fontFamily: {
       sans: [
         "Sen",
