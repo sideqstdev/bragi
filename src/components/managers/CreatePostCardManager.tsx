@@ -14,8 +14,8 @@ const CreatePostCardManager: React.FC<createPostCardManagerProps> = ({
 }) => {
   Modal.setAppElement(`body`);
 
-  const onCreate = async (title, body) => {
-    console.log(title, body);
+  const onCreate = async (title: string, body?: string, imageUrl?: string) => {
+    console.log(title, body, imageUrl);
     return true;
   };
 

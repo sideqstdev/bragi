@@ -42,6 +42,7 @@ const UploadImageS3: React.FC<uploadImageS3Interface> = ({
     accept: `.jpg,.gif,.png`,
   });
   const hasFiles: boolean = plainFiles.length > 0;
+  const [s3FileName, setS3FileName] = useState(`${createPostId}.jpg`);
 
   useEffect(() => {
     if (clearImage) {
@@ -58,6 +59,7 @@ const UploadImageS3: React.FC<uploadImageS3Interface> = ({
   const [progress, setProgress] = useState(0);
 
   const uploadFile = (file) => {
+    setS3FileName(`${createPostId}.jpg`);
     const params = {
       ACL: "public-read",
       Body: file,
@@ -71,6 +73,19 @@ const UploadImageS3: React.FC<uploadImageS3Interface> = ({
     });
   };
 
+  const deleteFile = () => {
+    const params = {
+      Bucket: POSTS_S3_BUCKET,
+      Key: s3FileName,
+    };
+
+    s3Bucket.deleteObject(params, (err, data) => {
+      if (data) {
+        setS3FileName(null);
+      }
+    });
+  };
+
   return (
     <div className={`flex flex-row items-center`}>
       {hasFiles && (
@@ -78,6 +93,7 @@ const UploadImageS3: React.FC<uploadImageS3Interface> = ({
           onClick={() => {
             clear();
             onImageAdd(null);
+            deleteFile();
           }}
           className={`mr-1 cursor-pointer`}
         >

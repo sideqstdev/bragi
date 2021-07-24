@@ -11,9 +11,14 @@ import Input from "./Input";
 import InputArea from "./InputArea";
 import { MDHeader, Paragraph, SMHeader, XSHeader } from "./Typography";
 import { v4 as uuidv4 } from "uuid";
+import { deleteFileByUrl } from "../lib/util/awsS3/deleteFile";
 
 export interface createPostCardInterface {
-  onCreate: (title, body) => Promise<boolean> | Promise<null>;
+  onCreate: (
+    title: string,
+    body?: string,
+    imageUrl?: string
+  ) => Promise<boolean> | Promise<null>;
   onCancel: () => void;
 }
 
@@ -57,20 +62,21 @@ const CreatePostCard: React.FC<createPostCardInterface> = ({
     onReset: () => {
       createPostForm.errors = {};
     },
-    onSubmit: async ({ title, body }) => {
-      let createPostSuccess = await onCreate(title, body);
-      if (title === `` && body === ``) {
+    onSubmit: async ({ title, body, imageUrl }) => {
+      let createPostSuccess = await onCreate(title, body, imageUrl);
+      if (title === `` && body === `` && imageUrl === null) {
         // clear errors
         createPostForm.errors = {};
         return;
       } else {
         if (createPostSuccess) {
-          createPostForm.errors.title = `Invalid title`;
-          createPostForm.errors.body = `Invalid body`;
+          createPostForm.errors = {};
           return;
         } else {
           // clear errors
-          createPostForm.errors = {};
+
+          createPostForm.errors.title = `Invalid title`;
+          createPostForm.errors.body = `Invalid body`;
           return;
         }
       }
@@ -83,9 +89,17 @@ const CreatePostCard: React.FC<createPostCardInterface> = ({
 
   const handleImageClear = () => {
     if (createPostForm.values.imageUrl) {
+      deleteFileByUrl(createPostForm.values.imageUrl);
       setClearImage(true);
       createPostForm.setValues({ ...createPostForm.values, imageUrl: null });
     }
+  };
+
+  const handleCancel = () => {
+    if (createPostForm.values.imageUrl) {
+      deleteFileByUrl(createPostForm.values.imageUrl);
+    }
+    onCancel();
   };
 
   useEffect(() => {
@@ -161,7 +175,7 @@ const CreatePostCard: React.FC<createPostCardInterface> = ({
         <div className={`flex flex-row justify-end mt-4`}>
           <Button
             type={`button`}
-            onClick={onCancel}
+            onClick={handleCancel}
             variant={`text`}
             className={`mr-2`}
           >
