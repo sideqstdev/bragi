@@ -121,7 +121,7 @@ const CreatePostCard: React.FC<createPostCardInterface> = ({
               type={`button`}
               variant={`icon`}
               className={`cursor-pointer items-center hover:text-${theme}-default-hover`}
-              onClick={onCancel}
+              onClick={handleCancel}
             >
               <FaTimes size={20} />
             </Button>
