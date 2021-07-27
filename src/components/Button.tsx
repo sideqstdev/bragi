@@ -56,7 +56,7 @@ const Button: React.FC<buttonProps> = ({
     confirm: `text-dark-background bg-${theme}-confirm hover:bg-${theme}-confirm-hover`,
     danger: `text-dark-text bg-${theme}-danger hover:bg-${theme}-danger-hover`,
     text: `text-${theme}-text bg-transparent hover:text-${theme}-disabled`,
-    icon: `text-${theme}-text bg-transparent hover:text-${theme}-disabled text-xs`,
+    icon: `text-${theme}-text bg-transparent hover:text-${theme}-disabled`,
   };
 
   // styling objects

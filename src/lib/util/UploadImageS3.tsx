@@ -59,13 +59,14 @@ const UploadImageS3: React.FC<uploadImageS3Interface> = ({
   const [progress, setProgress] = useState(0);
 
   const uploadFile = (file) => {
+    console.log(file);
     setS3FileName(`${createPostId}.jpg`);
     const params = {
       ACL: "public-read",
       Body: file,
       Bucket: POSTS_S3_BUCKET,
-      Key: `${createPostId}.jpg`,
-      ContentType: `image/jpeg`,
+      Key: `${createPostId}`,
+      ContentType: file.type ? file.type : `image/jpeg`,
     };
 
     s3Bucket.upload(params, (err, data) => {
