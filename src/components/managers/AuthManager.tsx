@@ -1,10 +1,6 @@
 import React from "react";
 import cookieCutter from "cookie-cutter";
-import {
-  useCurrUserQuery,
-  useLogoutMutation,
-  useRefreshTokenQuery,
-} from "../../lib/generated";
+import { useLogoutMutation, useRefreshTokenQuery } from "../../lib/generated";
 import { useLoggedInStore } from "../../stores/storeLogin";
 import { useRouter } from "next/router";
 import { devMode } from "../../lib/constants";
