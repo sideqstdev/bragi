@@ -1,13 +1,13 @@
-import React, { ChangeEventHandler } from "react";
+import React from "react";
 import { useTheme } from "../theme/theme.provider";
 import Card from "./containers/Card";
-import { Form, Formik, useFormik } from "formik";
+import { useFormik } from "formik";
 import { MDHeader, Paragraph } from "./Typography";
 import Input from "./Input";
-import { FiMail, FiLock } from "react-icons/fi";
 import Button from "./Button";
-import { FaDiscord, FaTwitter } from "react-icons/fa";
 import { useLoggedInStore } from "../stores/storeLogin";
+import { IoLogoDiscord, IoLogoTwitter } from "react-icons/io5";
+import { BiLock, BiUser } from "react-icons/bi";
 
 export interface loginCardProps {
   onLogin: (user: string, pass: string) => Promise<string> | Promise<null>;
@@ -101,7 +101,7 @@ const LoginCard: React.FC<loginCardProps> = ({
               onChange={loginForm.handleChange}
               name={`email`}
               error={loginForm.errors.email}
-              iconLeft={<FiMail />}
+              iconLeft={<BiUser />}
               className={`mt-2`}
               type={"email"}
               label={`Email`}
@@ -114,7 +114,7 @@ const LoginCard: React.FC<loginCardProps> = ({
               onChange={loginForm.handleChange}
               name={`password`}
               error={loginForm.errors.password}
-              iconLeft={<FiLock />}
+              iconLeft={<BiLock />}
               className={`mt-2`}
               type={`password`}
               label={`Password`}
@@ -153,7 +153,7 @@ const LoginCard: React.FC<loginCardProps> = ({
             <Button
               onClick={onDiscordLogin}
               className={`bg-discord hover:bg-discord-hover`}
-              iconLeft={<FaDiscord />}
+              iconLeft={<IoLogoDiscord />}
               stretch={true}
               variant={`default`}
             >
@@ -162,7 +162,7 @@ const LoginCard: React.FC<loginCardProps> = ({
             <Button
               onClick={onTwitterLogin}
               className={`mt-3`}
-              iconLeft={<FaTwitter />}
+              iconLeft={<IoLogoTwitter />}
               stretch={true}
               variant={`default`}
             >
@@ -180,7 +180,7 @@ const LoginCard: React.FC<loginCardProps> = ({
             name={`email`}
             autoFocus
             error={loginForm.errors.email}
-            iconLeft={<FiMail />}
+            iconLeft={<BiUser />}
             className={`mt-2`}
             label={`Email`}
             stretch={true}
@@ -192,7 +192,7 @@ const LoginCard: React.FC<loginCardProps> = ({
             onChange={loginForm.handleChange}
             name={`password`}
             error={loginForm.errors.password}
-            iconLeft={<FiLock />}
+            iconLeft={<BiLock />}
             className={`mt-2`}
             type={`password`}
             label={`Password`}

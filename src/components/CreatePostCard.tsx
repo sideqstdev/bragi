@@ -1,15 +1,14 @@
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { BsFilePost } from "react-icons/bs";
-import { FaCross, FaPlus, FaTimes } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
 import UploadImageS3 from "../lib/util/UploadImageS3";
 import { useTheme } from "../theme/theme.provider";
 import Button from "./Button";
 import Card from "./containers/Card";
 import Input from "./Input";
 import InputArea from "./InputArea";
-import { MDHeader, Paragraph, SMHeader, XSHeader } from "./Typography";
+import { MDHeader, XSHeader } from "./Typography";
 import { v4 as uuidv4 } from "uuid";
 import { deleteFileByUrl } from "../lib/util/awsS3/deleteFile";
 
@@ -123,7 +122,7 @@ const CreatePostCard: React.FC<createPostCardInterface> = ({
               className={`cursor-pointer items-center hover:text-${theme}-default-hover`}
               onClick={handleCancel}
             >
-              <FaTimes size={20} />
+              <IoMdClose size={20} />
             </Button>
           </div>
         </div>
@@ -165,7 +164,7 @@ const CreatePostCard: React.FC<createPostCardInterface> = ({
                   size={`small`}
                   variant={`icon`}
                 >
-                  <FaTimes />
+                  <IoMdClose />
                 </Button>
               </div>
             </div>

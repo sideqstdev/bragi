@@ -1,5 +1,5 @@
 import React from "react";
-import { FaSearch } from "react-icons/fa";
+import { BiSearch } from "react-icons/bi";
 import { User } from "../lib/generated";
 import { useTheme } from "../theme/theme.provider";
 import Button from "./Button";
@@ -35,7 +35,7 @@ const PlayerList: React.FC<playerListProps> = ({
     <Card className={`p-3`}>
       <MDHeader className={`mb-2`}>Players</MDHeader>
       <Input
-        iconLeft={<FaSearch />}
+        iconLeft={<BiSearch />}
         placeholder={`Search for players`}
         stretch={true}
       />

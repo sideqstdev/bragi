@@ -12,7 +12,6 @@ import FirstVisit from "../src/components/browser/FirstVisit";
 import PlayerList from "../src/components/PlayerList";
 import { players } from "../src/lib/placeholder/users";
 import Dropdown from "../src/components/Dropdown";
-import { FaPlus } from "react-icons/fa";
 import Button from "../src/components/Button";
 
 export default function Home() {
@@ -27,7 +26,7 @@ export default function Home() {
           <>
             <PlayerCardManager />
             <br />
-            <PlayerList players={players} friends={[]} />
+            <PlayerList players={players} friends={players} />
           </>
         }
         main={

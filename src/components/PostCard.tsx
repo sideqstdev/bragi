@@ -3,8 +3,8 @@ import { useTheme } from "../theme/theme.provider";
 import Card from "./containers/Card";
 import PlayerTag from "./PlayerTag";
 import Button from "./Button";
-import { FaHeart, FaEllipsisH } from "react-icons/fa";
-import { SMParagraph, Paragraph, SMHeader } from "./Typography";
+import { Paragraph, SMHeader } from "./Typography";
+import { BiDotsHorizontalRounded, BiHeart } from "react-icons/bi";
 
 export type postUser = {
   avatar: string;
@@ -50,10 +50,10 @@ const PostCard: React.FC<postCardProps> = ({
         />
         <div className={`flex flex-row items-center`}>
           <Button variant={`icon`}>
-            <FaEllipsisH />
+            <BiDotsHorizontalRounded />
           </Button>
           <Button variant={`icon`}>
-            <FaHeart
+            <BiHeart
               className={`${
                 liked ? `text-${theme}-danger hover:text-${theme}-text` : ``
               }`}

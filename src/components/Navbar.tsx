@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useTheme } from "../theme/theme.provider";
 import Button from "./Button";
 import { Avatar } from "./Avatar";
-import { FaPlus, FaBell, FaSun, FaSearch } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
 import Input from "./Input";
 import LogoBlock from "./LogoBlock";
@@ -10,10 +9,20 @@ import { useRouter } from "next/router";
 import AccountDropdownManager from "./managers/AccountDropdownManager";
 import Dropdown from "./Dropdown";
 import { useLoggedInStore } from "../stores/storeLogin";
-import { FaUser, FaTrophy, FaBug, FaDoorOpen } from "react-icons/fa";
 import { BsFilePost, BsFillGearFill } from "react-icons/bs";
 import { MdVideogameAsset } from "react-icons/md";
 import CreatePostCardManager from "./managers/CreatePostCardManager";
+import {
+  BiBell,
+  BiBug,
+  BiLogOut,
+  BiPaperPlane,
+  BiPlus,
+  BiSearch,
+  BiSun,
+  BiTrophy,
+  BiUser,
+} from "react-icons/bi";
 
 export type logoTuple = {
   darkLogo: string;
@@ -74,12 +83,12 @@ const Navbar: React.FC<navProps> = ({
             <Dropdown
               items={[
                 {
-                  icon: <FaUser />,
+                  icon: <BiUser />,
                   name: `Profile`,
                   onClick: () => router.push(`/profile`),
                 },
                 {
-                  icon: <FaTrophy />,
+                  icon: <BiTrophy />,
                   name: `My Lobbies`,
                   onClick: () => router.push(`/profile/lobbies`),
                 },
@@ -89,12 +98,12 @@ const Navbar: React.FC<navProps> = ({
                   onClick: () => router.push(`/settings`),
                 },
                 {
-                  icon: <FaBug />,
+                  icon: <BiBug />,
                   name: `Report a bug`,
                   onClick: () => router.push(`/bugReport`),
                 },
                 {
-                  icon: <FaDoorOpen />,
+                  icon: <BiLogOut />,
                   name: `Logout`,
                   isAction: true,
                   onClick: onLogout,
@@ -107,7 +116,7 @@ const Navbar: React.FC<navProps> = ({
             <Dropdown
               items={[
                 {
-                  icon: <BsFilePost />,
+                  icon: <BiPaperPlane />,
                   name: `Create Post`,
                   onClick: () => openDialog(),
                 },
@@ -121,7 +130,7 @@ const Navbar: React.FC<navProps> = ({
                 <Button
                   variant={"primary"}
                   size={"small"}
-                  iconRight={<FaPlus />}
+                  iconRight={<BiPlus />}
                 >
                   Create
                 </Button>
@@ -130,14 +139,14 @@ const Navbar: React.FC<navProps> = ({
             <Dropdown
               items={[
                 {
-                  icon: <FaSun />,
+                  icon: <BiSun />,
                   name: `A Notification`,
                   onClick: () => console.log(`Notification`),
                 },
               ]}
               anchor={
                 <Button variant={"icon"}>
-                  <FaBell />
+                  <BiBell />
                 </Button>
               }
             />
@@ -186,7 +195,7 @@ const Navbar: React.FC<navProps> = ({
       >
         <Input
           autoComplete={`off`}
-          iconLeft={<FaSearch />}
+          iconLeft={<BiSearch />}
           placeholder={`Tournament Search`}
           stretch={true}
         ></Input>

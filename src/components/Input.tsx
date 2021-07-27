@@ -82,7 +82,7 @@ const Input: React.FC<inputProps> = ({
         <span className={`flex items-center`}>
           {iconLeft ? (
             <span
-              className={`mr-2 items-center text-tny text-${theme}-disabled`}
+              className={`mr-2 items-center text-sm text-${theme}-disabled`}
             >
               {iconLeft}
             </span>
@@ -95,7 +95,7 @@ const Input: React.FC<inputProps> = ({
         <span className={`flex items-center`}>
           {iconRight ? (
             <span
-              className={`ml-2 items-center text-tny text-${theme}-disabled`}
+              className={`ml-2 items-center text-sm text-${theme}-disabled`}
             >
               {iconRight}
             </span>

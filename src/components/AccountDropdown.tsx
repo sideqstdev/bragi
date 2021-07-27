@@ -2,7 +2,6 @@ import React, { ReactElement, ReactNode } from "react";
 import { useTheme } from "../theme/theme.provider";
 import { Paragraph } from "./Typography";
 import { useRouter } from "next/router";
-import { FaCircle } from "react-icons/fa";
 import PlayerStatus, { status } from "./PlayerStatus";
 
 type dropdownItem = {

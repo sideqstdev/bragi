@@ -7,9 +7,9 @@ import {
   AWS_SECRET,
 } from "../constants";
 import Button from "../../components/Button";
-import { BsImage, BsImages } from "react-icons/bs";
+import { BiImageAlt } from "react-icons/bi";
 import { useFilePicker } from "use-file-picker";
-import { FaTimes } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
 import { SMParagraph } from "../../components/Typography";
 import { useEffect } from "react";
 
@@ -97,7 +97,7 @@ const UploadImageS3: React.FC<uploadImageS3Interface> = ({
           }}
           className={`mr-1 cursor-pointer`}
         >
-          <FaTimes size={15} className={`text-dark-danger-hover`} />
+          <IoMdClose className={`text-dark-danger-hover`} />
         </span>
       )}
 
@@ -108,7 +108,7 @@ const UploadImageS3: React.FC<uploadImageS3Interface> = ({
         loading={loading}
         variant={`icon`}
       >
-        <BsImages size={20} />
+        <BiImageAlt size={20} />
       </Button>
     </div>
   );

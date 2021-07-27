@@ -7,6 +7,7 @@ import ErrorToastManager from "../src/components/managers/ErrorToastManager";
 import AuthManager from "../src/components/managers/AuthManager";
 import { isServer } from "../src/lib/util/is-server";
 import { useLoggedInStore } from "../src/stores/storeLogin";
+import { IconContext } from "react-icons";
 
 function App({ Component, pageProps }: AppProps) {
   let token: string;
@@ -18,9 +19,11 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client.apolloClient}>
       <ThemeProvider>
-        <AuthManager />
-        <Component {...pageProps} />
-        <ErrorToastManager />
+        <IconContext.Provider value={{}}>
+          <AuthManager />
+          <Component {...pageProps} />
+          <ErrorToastManager />
+        </IconContext.Provider>
       </ThemeProvider>
     </ApolloProvider>
   );

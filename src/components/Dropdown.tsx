@@ -65,7 +65,7 @@ const Dropdown: React.FC<dropdownProps> = ({ items, anchor }) => {
           ${item.isAction && `bg-${theme}-box-box3`}`}
         >
           <span className={`flex items-center`}>
-            <span className={`mr-2 items-center text-tny text-${theme}-text`}>
+            <span className={`mr-2 items-center text-xs text-${theme}-text`}>
               {item.icon}
             </span>
           </span>
