@@ -57,7 +57,7 @@ export interface lobbyCardProps {
   title: string;
   description?: string;
   date: Date;
-  tags: [string, string, string];
+  tags: string[];
   prize: number;
   prizeUnit?: "USD" | "RP" | "Other";
   region?: regions;

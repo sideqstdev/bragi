@@ -22,6 +22,8 @@ export type Mutation = {
   register: User;
   login: Login_Response;
   logout: Scalars['Boolean'];
+  createPost: Post;
+  deletePost: Scalars['Boolean'];
 };
 
 
@@ -34,17 +36,44 @@ export type MutationLoginArgs = {
   input: Login_Input;
 };
 
+
+export type MutationCreatePostArgs = {
+  input: Post_Input;
+};
+
+
+export type MutationDeletePostArgs = {
+  input: Post_Delete_Input;
+};
+
 export type Query = {
   __typename?: 'Query';
   refreshToken: Refresh_Token_Response;
   user: User;
   currUser: User;
+  posts: Array<Post>;
   status: Scalars['String'];
 };
 
 
 export type QueryUserArgs = {
   input: User_Input;
+};
+
+
+export type QueryPostsArgs = {
+  page: Pagination_Input;
+};
+
+export type Comment = {
+  __typename?: 'comment';
+  id: Scalars['ID'];
+  create?: Maybe<Scalars['DateTime']>;
+  updated?: Maybe<Scalars['DateTime']>;
+  content: Scalars['String'];
+  post?: Maybe<Post>;
+  user?: Maybe<User>;
+  likes?: Maybe<Scalars['Float']>;
 };
 
 export type Login_Input = {
@@ -58,6 +87,37 @@ export type Login_Response = {
   refreshToken?: Maybe<Scalars['String']>;
   success: Scalars['Boolean'];
   user?: Maybe<User>;
+};
+
+export type Pagination_Input = {
+  take?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+};
+
+export type Post = {
+  __typename?: 'post';
+  id: Scalars['ID'];
+  create?: Maybe<Scalars['DateTime']>;
+  updated?: Maybe<Scalars['DateTime']>;
+  title: Scalars['String'];
+  content?: Maybe<Scalars['String']>;
+  imageUrl?: Maybe<Scalars['String']>;
+  nsfw?: Maybe<Scalars['Boolean']>;
+  tags?: Maybe<Array<Scalars['String']>>;
+  comments?: Maybe<Array<Comment>>;
+  user?: Maybe<User>;
+  likes?: Maybe<Scalars['Float']>;
+};
+
+export type Post_Delete_Input = {
+  id: Scalars['String'];
+};
+
+export type Post_Input = {
+  title: Scalars['String'];
+  content?: Maybe<Scalars['String']>;
+  imageUrl?: Maybe<Scalars['String']>;
+  nsfw?: Maybe<Scalars['Boolean']>;
 };
 
 export type Profile = {
@@ -101,6 +161,7 @@ export type User = {
   email: Scalars['String'];
   suspended?: Maybe<Scalars['Boolean']>;
   profile?: Maybe<Profile>;
+  posts?: Maybe<Array<Post>>;
 };
 
 export type User_Input = {
@@ -160,6 +221,27 @@ export type CurrUserQuery = (
       & Pick<Profile, 'id' | 'bio' | 'tags' | 'lolName' | 'avatarUrl'>
     )> }
   ) }
+);
+
+export type PostsQueryVariables = Exact<{
+  page: Pagination_Input;
+}>;
+
+
+export type PostsQuery = (
+  { __typename?: 'Query' }
+  & { posts: Array<(
+    { __typename?: 'post' }
+    & Pick<Post, 'id' | 'title' | 'content' | 'imageUrl' | 'nsfw' | 'likes' | 'tags'>
+    & { user?: Maybe<(
+      { __typename?: 'user' }
+      & Pick<User, 'id' | 'name' | 'gamerTag'>
+      & { profile?: Maybe<(
+        { __typename?: 'profile' }
+        & Pick<Profile, 'avatarUrl'>
+      )> }
+    )> }
+  )> }
 );
 
 export type RefreshTokenQueryVariables = Exact<{ [key: string]: never; }>;
@@ -321,6 +403,55 @@ export function useCurrUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<C
 export type CurrUserQueryHookResult = ReturnType<typeof useCurrUserQuery>;
 export type CurrUserLazyQueryHookResult = ReturnType<typeof useCurrUserLazyQuery>;
 export type CurrUserQueryResult = Apollo.QueryResult<CurrUserQuery, CurrUserQueryVariables>;
+export const PostsDocument = gql`
+    query posts($page: pagination_input!) {
+  posts(page: $page) {
+    id
+    title
+    content
+    imageUrl
+    nsfw
+    likes
+    tags
+    user {
+      id
+      name
+      gamerTag
+      profile {
+        avatarUrl
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __usePostsQuery__
+ *
+ * To run a query within a React component, call `usePostsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePostsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePostsQuery({
+ *   variables: {
+ *      page: // value for 'page'
+ *   },
+ * });
+ */
+export function usePostsQuery(baseOptions: Apollo.QueryHookOptions<PostsQuery, PostsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PostsQuery, PostsQueryVariables>(PostsDocument, options);
+      }
+export function usePostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PostsQuery, PostsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PostsQuery, PostsQueryVariables>(PostsDocument, options);
+        }
+export type PostsQueryHookResult = ReturnType<typeof usePostsQuery>;
+export type PostsLazyQueryHookResult = ReturnType<typeof usePostsLazyQuery>;
+export type PostsQueryResult = Apollo.QueryResult<PostsQuery, PostsQueryVariables>;
 export const RefreshTokenDocument = gql`
     query refreshToken {
   refreshToken {

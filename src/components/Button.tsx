@@ -53,7 +53,7 @@ const Button: React.FC<buttonProps> = ({
   const variantClass = {
     default: `text-${theme}-text bg-${theme}-default hover:bg-${theme}-default-hover`,
     primary: `text-dark-text bg-${theme}-primary hover:bg-${theme}-primary-hover`,
-    confirm: `text-dark-background bg-${theme}-confirm hover:bg-${theme}-confirm-hover`,
+    confirm: `text-light-text bg-${theme}-confirm hover:bg-${theme}-confirm-hover`,
     danger: `text-dark-text bg-${theme}-danger hover:bg-${theme}-danger-hover`,
     text: `text-${theme}-text bg-transparent hover:text-${theme}-disabled`,
     icon: `text-${theme}-text bg-transparent hover:text-${theme}-disabled`,
@@ -102,9 +102,15 @@ const Button: React.FC<buttonProps> = ({
       {...props}
       disabled={disabled || loading}
       style={{ backgroundColor: backgroundColor }}
-      className={`${props.className} ${variantObj} ${buttonSize[size]} ${stretched} font-bold flex items-center justify-center rounded-md focus:outline-none`}
+      className={`${props.className ? props.className : ``} ${variantObj} ${
+        buttonSize[size]
+      } ${stretched} font-bold flex items-center justify-center rounded-md focus:outline-none`}
     >
-      <span className={loading ? `opacity-0` : `flex items-center`}>
+      <span
+        className={
+          loading ? `opacity-0 flex items-center` : `flex items-center`
+        }
+      >
         <span className={`flex items-center`}>
           {iconLeft ? (
             <span className={`mr-2 items-center ${iconSize[size]}`}>
@@ -123,7 +129,10 @@ const Button: React.FC<buttonProps> = ({
       </span>
       {loading ? (
         <span className={`absolute`}>
-          <Spinner size={size === `small` ? `2` : `4`} />
+          <Spinner
+            className={`${variantObj}`}
+            size={size === `small` ? `2` : `4`}
+          />
         </span>
       ) : null}
     </button>

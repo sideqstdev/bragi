@@ -1,18 +1,24 @@
 import React from "react";
+import { useTheme } from "../theme/theme.provider";
 
 // I'm not doing string interpolation so tailwind can purge the css
 const sizes = {
   "2": `h-2 w-2`,
   "4": `h-4 w-4`,
-  "6": `h-6 w-6`
+  "6": `h-6 w-6`,
 };
 
-export const Spinner: React.FC<{ size?: keyof typeof sizes }> = ({
-  size = "4",
-}) => {
+export const Spinner: React.FC<{
+  size?: keyof typeof sizes;
+  className?: any;
+}> = ({ size = "4", className }) => {
+  const themeCtx = useTheme();
+  const theme = themeCtx.theme;
   return (
     <svg
-      className={`animate-spin text-button ${sizes[size]}`}
+      className={`animate-spin text-button ${
+        className ? `` : `text-${theme}-text`
+      } ${sizes[size]} ${className ? className : ``}`}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

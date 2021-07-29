@@ -17,7 +17,7 @@ const ListHeader: React.FC<listHeaderProps> = ({
   const themeCtx = useTheme();
   const theme = themeCtx.theme;
   return (
-    <div className={`my-2`}>
+    <div className={`my-2 border-b-2 border-${theme}-disabled`}>
       <div className={`flex-row flex justify-start`}>
         <Paragraph isBold={true}>{title}</Paragraph>
         <Paragraph
@@ -27,8 +27,6 @@ const ListHeader: React.FC<listHeaderProps> = ({
           ({length})
         </Paragraph>
       </div>
-
-      <hr />
     </div>
   );
 };

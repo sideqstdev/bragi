@@ -5,6 +5,7 @@ import LobbyCard, { regions, ranks } from "../LobbyCard";
 import { useMainTabStore } from "../../stores/storeMainTab";
 import PostCard from "../PostCard";
 import { Paragraph } from "../Typography";
+import PostCardManager from "./PostCardManager";
 
 const MainManager: React.FC = () => {
   const themeCtx = useTheme();
@@ -71,18 +72,7 @@ const MainManager: React.FC = () => {
     if (tab.tab === 1) {
       return (
         <div className={`mb-6 mt-4`}>
-          <PostCard
-            user={{
-              username: "Milo",
-              gamertag: `milo`,
-              avatar: `/mismatchedsocks.jpg`,
-            }}
-            image={`/common_banner.jpeg`}
-            postDate={new Date()}
-            liked={true}
-            title={`Common.gg Collaboration`}
-            content={`We are happy to announce that we are collaborating with common.gg to bring you some amazing community tournaments and events.`}
-          />
+          <PostCardManager />
         </div>
       );
     } else {

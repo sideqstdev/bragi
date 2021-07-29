@@ -5,7 +5,7 @@ import Card from "../containers/Card";
 import PlayerCard from "../PlayerCard";
 import { Spinner } from "../Spinner";
 
-interface playerCardManagerProps {}
+export interface playerCardManagerProps {}
 
 const PlayerCardManager: React.FC = () => {
   const { user, setUser, accessToken } = useLoggedInStore();
