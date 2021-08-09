@@ -70,6 +70,7 @@ const CreatePostCard: React.FC<createPostCardInterface> = ({
       } else {
         if (createPostSuccess) {
           createPostForm.errors = {};
+          onCancel();
           return;
         } else {
           // clear errors

@@ -193,6 +193,49 @@ html *:not(head *):not(script):not(style) {
   display: flex;
 }
 
+.image-modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin-right: -50%;
+  width: 60%;
+  max-width: 800px;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  border-width: 0px;
+  outline: none;
+  background-color: transparent;
+}
+
+.image-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgb(33, 38, 43, 0.5);
+  padding: 0px;
+  z-index: 100;
+}
+
+@media only screen and (max-width: 640px) {
+  .image-modal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    border-width: 0px;
+    outline: none;
+    background-color: transparent;
+  }
+}
+
 .create-post-content {
   position: absolute;
   left: 50%;

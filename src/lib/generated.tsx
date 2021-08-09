@@ -170,6 +170,19 @@ export type User_Input = {
   userId?: Maybe<Scalars['String']>;
 };
 
+export type CreatePostMutationVariables = Exact<{
+  input: Post_Input;
+}>;
+
+
+export type CreatePostMutation = (
+  { __typename?: 'Mutation' }
+  & { createPost: (
+    { __typename?: 'post' }
+    & Pick<Post, 'id' | 'title'>
+  ) }
+);
+
 export type LoginMutationVariables = Exact<{
   input: Login_Input;
 }>;
@@ -256,6 +269,40 @@ export type RefreshTokenQuery = (
 );
 
 
+export const CreatePostDocument = gql`
+    mutation createPost($input: post_input!) {
+  createPost(input: $input) {
+    id
+    title
+  }
+}
+    `;
+export type CreatePostMutationFn = Apollo.MutationFunction<CreatePostMutation, CreatePostMutationVariables>;
+
+/**
+ * __useCreatePostMutation__
+ *
+ * To run a mutation, you first call `useCreatePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPostMutation, { data, loading, error }] = useCreatePostMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreatePostMutation(baseOptions?: Apollo.MutationHookOptions<CreatePostMutation, CreatePostMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreatePostMutation, CreatePostMutationVariables>(CreatePostDocument, options);
+      }
+export type CreatePostMutationHookResult = ReturnType<typeof useCreatePostMutation>;
+export type CreatePostMutationResult = Apollo.MutationResult<CreatePostMutation>;
+export type CreatePostMutationOptions = Apollo.BaseMutationOptions<CreatePostMutation, CreatePostMutationVariables>;
 export const LoginDocument = gql`
     mutation login($input: login_input!) {
   login(input: $input) {
@@ -403,6 +450,9 @@ export function useCurrUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<C
 export type CurrUserQueryHookResult = ReturnType<typeof useCurrUserQuery>;
 export type CurrUserLazyQueryHookResult = ReturnType<typeof useCurrUserLazyQuery>;
 export type CurrUserQueryResult = Apollo.QueryResult<CurrUserQuery, CurrUserQueryVariables>;
+export function refetchCurrUserQuery(variables?: CurrUserQueryVariables) {
+      return { query: CurrUserDocument, variables: variables }
+    }
 export const PostsDocument = gql`
     query posts($page: pagination_input!) {
   posts(page: $page) {
@@ -452,6 +502,9 @@ export function usePostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Post
 export type PostsQueryHookResult = ReturnType<typeof usePostsQuery>;
 export type PostsLazyQueryHookResult = ReturnType<typeof usePostsLazyQuery>;
 export type PostsQueryResult = Apollo.QueryResult<PostsQuery, PostsQueryVariables>;
+export function refetchPostsQuery(variables?: PostsQueryVariables) {
+      return { query: PostsDocument, variables: variables }
+    }
 export const RefreshTokenDocument = gql`
     query refreshToken {
   refreshToken {
@@ -487,3 +540,6 @@ export function useRefreshTokenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type RefreshTokenQueryHookResult = ReturnType<typeof useRefreshTokenQuery>;
 export type RefreshTokenLazyQueryHookResult = ReturnType<typeof useRefreshTokenLazyQuery>;
 export type RefreshTokenQueryResult = Apollo.QueryResult<RefreshTokenQuery, RefreshTokenQueryVariables>;
+export function refetchRefreshTokenQuery(variables?: RefreshTokenQueryVariables) {
+      return { query: RefreshTokenDocument, variables: variables }
+    }

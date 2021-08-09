@@ -1,9 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { BiHourglass } from "react-icons/bi";
 import { usePostsQuery } from "../../lib/generated";
 import { useTheme } from "../../theme/theme.provider";
 import Button from "../Button";
 import Emoji from "../Emoji";
+import ImageModal from "../ImageModal";
 import Input from "../Input";
 import PostCard from "../PostCard";
 import { Spinner } from "../Spinner";
@@ -15,6 +16,21 @@ const PostCardManager: React.FC = () => {
   const themeCtx = useTheme();
   const theme = themeCtx.theme;
   const [page, setPage] = useState(0);
+  const [imageOpen, setImageOpen] = useState(false);
+  const [imageToDisplay, setImageToDisplay] = useState(null);
+
+  const openImage = (imageUrl: string, title: string) => {
+    setImageOpen(true);
+    setImageToDisplay({
+      imageUrl,
+      title,
+    });
+  };
+
+  const closeImage = () => {
+    setImageOpen(false);
+    setImageToDisplay(null);
+  };
 
   const { data, error, loading, refetch } = usePostsQuery({
     variables: {
@@ -40,60 +56,69 @@ const PostCardManager: React.FC = () => {
   }
 
   return (
-    <div>
-      <div
-        className={`flex flex-row items-center justify-between pb-2 text-center`}
-      >
-        <Input scale={`small`} placeholder={`Search Posts`} />
-        <div className={`items-center`}>
-          <Button
-            loading={loading}
-            onClick={() => refetch()}
-            iconLeft={<BiHourglass />}
-            variant={`confirm`}
-            size={`small`}
-          >
-            Refresh Posts
-          </Button>
+    <>
+      <div>
+        <div
+          className={`flex flex-row items-center justify-between pb-2 text-center`}
+        >
+          <Input scale={`small`} placeholder={`Search Posts`} />
+          <div className={`items-center`}>
+            <Button
+              loading={loading}
+              onClick={() => refetch()}
+              iconLeft={<BiHourglass />}
+              variant={`confirm`}
+              size={`small`}
+            >
+              Refresh
+            </Button>
+          </div>
         </div>
+        {loading && (
+          <div className={`p-4 flex items-center justify-center h-32`}>
+            <Spinner size={`6`} />
+          </div>
+        )}
+        {posts && !loading && (
+          <div className={`flex flex-col pt-4`}>
+            {posts.length > 0 ? (
+              posts.map((post, i) => {
+                return (
+                  <div key={post?.id} className={`mb-4`}>
+                    <PostCard
+                      user={{
+                        username: post?.user?.name,
+                        gamertag: post?.user?.gamerTag,
+                        avatar: post?.user?.profile?.avatarUrl,
+                      }}
+                      onImageClick={openImage}
+                      tags={post?.tags}
+                      image={post?.imageUrl}
+                      postDate={new Date()}
+                      liked={false}
+                      title={post?.title}
+                      content={post?.content}
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              <div className={`p-4 flex items-center justify-center h-32`}>
+                <Paragraph>
+                  No Posts Yet... <Emoji label={`sleepFace`} symbol={`😴`} />
+                </Paragraph>
+              </div>
+            )}
+          </div>
+        )}
       </div>
-      {loading && (
-        <div className={`p-4 flex items-center justify-center h-32`}>
-          <Spinner size={`6`} />
-        </div>
-      )}
-      {posts && !loading && (
-        <div className={`flex flex-col pt-4`}>
-          {posts.length > 0 ? (
-            posts.map((post, i) => {
-              return (
-                <div key={post?.id} className={`mb-4`}>
-                  <PostCard
-                    user={{
-                      username: post?.user?.name,
-                      gamertag: post?.user?.gamerTag,
-                      avatar: post?.user?.profile?.avatarUrl,
-                    }}
-                    tags={post?.tags}
-                    image={post?.imageUrl}
-                    postDate={new Date()}
-                    liked={false}
-                    title={post?.title}
-                    content={post?.content}
-                  />
-                </div>
-              );
-            })
-          ) : (
-            <div className={`p-4 flex items-center justify-center h-32`}>
-              <Paragraph>
-                No Posts Yet... <Emoji label={`sleepFace`} symbol={`😴`} />
-              </Paragraph>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
+      <ImageModal
+        isOpen={imageOpen}
+        imageUrl={imageToDisplay?.imageUrl}
+        onClose={closeImage}
+        title={imageToDisplay?.title}
+      />
+    </>
   );
 };
 

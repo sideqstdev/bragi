@@ -23,6 +23,7 @@ export interface postCardProps {
   image?: string;
   postDate: Date;
   tags?: string[];
+  onImageClick?: (imageUrl: string, title: string) => void;
 }
 
 const PostCard: React.FC<postCardProps> = ({
@@ -34,6 +35,7 @@ const PostCard: React.FC<postCardProps> = ({
   image,
   postDate,
   tags = [],
+  onImageClick,
 }) => {
   const themeCtx = useTheme();
   const theme = themeCtx.theme;
@@ -54,13 +56,15 @@ const PostCard: React.FC<postCardProps> = ({
             <Button variant={`icon`}>
               <BiDotsHorizontalRounded />
             </Button>
-            <Button variant={`icon`}>
-              <BiHeart
-                className={`${
-                  liked ? `text-${theme}-danger hover:text-${theme}-text` : ``
-                }`}
-              />
-            </Button>
+            <span className={`flex flex-col items-center`}>
+              <Button variant={`icon`}>
+                <BiHeart
+                  className={`${
+                    liked ? `text-${theme}-danger hover:text-${theme}-text` : ``
+                  }`}
+                />
+              </Button>
+            </span>
           </div>
         </div>
         {tags.length > 0 ? <TagGroup className={`mt-3`} tags={tags} /> : null}
@@ -72,7 +76,10 @@ const PostCard: React.FC<postCardProps> = ({
           className={`flex bg-dark-box-box2 w-full h-auto mt-2 relative justify-center rounded-md`}
         >
           <img
-            className={`w-full rounded-md object-cover max-h-72`}
+            onClick={() => onImageClick(image, title)}
+            className={`w-full rounded-md object-cover max-h-72 ${
+              onImageClick ? `cursor-pointer` : null
+            }`}
             src={image}
           />
         </div>

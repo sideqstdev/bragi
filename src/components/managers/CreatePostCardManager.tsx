@@ -1,6 +1,6 @@
-import React, { ReactNode } from "react";
-import { useState } from "react";
+import React from "react";
 import Modal from "react-modal";
+import { refetchPostsQuery, useCreatePostMutation } from "../../lib/generated";
 import CreatePostCard from "../CreatePostCard";
 
 interface createPostCardManagerProps {
@@ -13,10 +13,32 @@ const CreatePostCardManager: React.FC<createPostCardManagerProps> = ({
   dialogOpen,
 }) => {
   Modal.setAppElement(`body`);
+  const [createPostMutation, { data, loading, error }] = useCreatePostMutation({
+    refetchQueries: [
+      refetchPostsQuery({
+        page: {
+          take: 15,
+          skip: 0,
+        },
+      }),
+    ],
+  });
 
   const onCreate = async (title: string, body?: string, imageUrl?: string) => {
-    console.log(title, body, imageUrl);
-    return true;
+    try {
+      await createPostMutation({
+        variables: {
+          input: {
+            title: title,
+            content: body,
+            imageUrl: imageUrl,
+          },
+        },
+      });
+      return true;
+    } catch (err) {
+      return false;
+    }
   };
 
   return (
