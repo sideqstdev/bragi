@@ -84,7 +84,7 @@ const PostCardManager: React.FC = () => {
             {posts.length > 0 ? (
               posts.map((post, i) => {
                 return (
-                  <div key={post?.id} className={`mb-4`}>
+                  <div key={post?.id} className={`pb-4`}>
                     <PostCard
                       id={post?.id}
                       user={{

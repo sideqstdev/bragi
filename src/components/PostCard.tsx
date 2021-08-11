@@ -51,7 +51,7 @@ const PostCard: React.FC<postCardProps> = ({
       <div
         className={`flex flex-col border-b-2 border-${theme}-disabled px-4 py-4`}
       >
-        <div className={`flex-row flex justify-between `}>
+        <div className={`flex flex-row justify-between `}>
           <PlayerTag
             username={user.username}
             gamertag={user.gamertag}

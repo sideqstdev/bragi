@@ -178,7 +178,7 @@ const Navbar: React.FC<navProps> = ({
 
   return (
     <div
-      className={`bg-${theme}-altbackground text-${theme}-text w-screen px-6 lg:px-6 pb-3 pt-3 inline-grid grid-cols-10`}
+      className={`bg-${theme}-altbackground text-${theme}-text w-full px-6 lg:px-6 pb-3 pt-3 inline-grid grid-cols-10`}
     >
       <div
         className={`flex items-center order-1 flex-row md:order-1 col-span-4 sm:col-span-4 lg:col-span-3 mr-4`}
