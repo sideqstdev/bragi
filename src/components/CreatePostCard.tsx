@@ -153,7 +153,7 @@ const CreatePostCard: React.FC<createPostCardInterface> = ({
           placeholder={`Post Body`}
         />
         {createPostForm.values.imageUrl && (
-          <div className={`w-full mt-2 relative rounded-md`}>
+          <div className={`w-full mt-2 relative rounded-md flex flex-col`}>
             <XSHeader>Preview</XSHeader>
             <div className={`w-full relative`}>
               <img
