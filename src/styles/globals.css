@@ -185,14 +185,6 @@ p.small {
   background-color: #667283;
 }
 
-body {
-  margin: 0;
-}
-
-html *:not(head *):not(script):not(style) {
-  display: flex;
-}
-
 .image-modal {
   position: absolute;
   left: 50%;
@@ -282,7 +274,8 @@ input[type="file"] {
   display: none;
 }
 
-html,
 body {
   min-height: 100%;
+  margin: 0;
+  width: 100%;
 }

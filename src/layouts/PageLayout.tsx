@@ -17,9 +17,7 @@ const PageLayout: React.FC<pageLayoutProps> = ({
   const theme = themeCtx.theme;
 
   return (
-    <div
-      className={`bg-${theme}-background min-h-screen flex flex-col overflow-y-auto overflow-x-hidden`}
-    >
+    <div className={`bg-${theme}-background min-h-screen flex flex-col`}>
       <Head>
         <title>{name}</title>
       </Head>
