@@ -92,7 +92,7 @@ const LoginCard: React.FC<loginCardProps> = ({
         <>
           <form
             onSubmit={loginForm.handleSubmit}
-            className={`w-full border-b-2 pb-6 border-dark-box-box4 md:pr-3 md:border-b-0 md:border-r-2 md:border-dark-box-box4 md:w-2/3`}
+            className={`w-full flex flex-col border-b-2 pb-6 border-dark-box-box4 md:pr-3 md:border-b-0 md:border-r-2 md:border-dark-box-box4 md:w-2/3`}
           >
             <MDHeader>Login</MDHeader>
             <Input
@@ -148,7 +148,7 @@ const LoginCard: React.FC<loginCardProps> = ({
               </span>
             </Paragraph>
           </form>
-          <div className={`mt-3 w-full md:ml-3 md:w-1/3`}>
+          <div className={`flex flex-col mt-3 w-full md:ml-3 md:w-1/3`}>
             <MDHeader className={`mb-2`}>or login with</MDHeader>
             <Button
               onClick={onDiscordLogin}

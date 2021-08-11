@@ -32,7 +32,7 @@ const PlayerList: React.FC<playerListProps> = ({
   const themeCtx = useTheme();
   const theme = themeCtx.theme;
   return (
-    <Card className={`p-3`}>
+    <Card className={`flex flex-col p-3`}>
       <MDHeader className={`mb-2`}>Players</MDHeader>
       <Input
         iconLeft={<BiSearch />}
@@ -45,7 +45,7 @@ const PlayerList: React.FC<playerListProps> = ({
           <Spinner size={`4`} />
         </div>
       ) : (
-        <div>
+        <div className={`flex flex-col`}>
           {friends.length < 1 ? (
             <div
               className={`p-4 flex justify-center bg-${theme}-box-box2 rounded-md`}
@@ -88,7 +88,7 @@ const PlayerList: React.FC<playerListProps> = ({
           <Spinner size={`4`} />
         </div>
       ) : (
-        <div>
+        <div className={`flex flex-col`}>
           {players.length < 1 ? (
             <div
               className={`p-4 flex justify-center bg-${theme}-box-box2 rounded-md`}
@@ -110,7 +110,7 @@ const PlayerList: React.FC<playerListProps> = ({
                       <Button
                         variant={`primary`}
                         size={`small`}
-                        onClick={addFriend}
+                        onClick={() => addFriend(player.gamerTag)}
                       >
                         Add Friend
                       </Button>

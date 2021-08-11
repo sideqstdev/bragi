@@ -28,7 +28,7 @@ const FeaturedLobbyCard: React.FC<featuredLobbyCardProps> = ({
   const theme = themeCtx.theme;
 
   return (
-    <Card className={`w-full relative`}>
+    <Card className={`flex flex-col w-full relative`}>
       {banner ? (
         <div className={`w-full relative`}>
           <img
@@ -45,7 +45,7 @@ const FeaturedLobbyCard: React.FC<featuredLobbyCardProps> = ({
       <div
         className={`flex flex-col md:flex-row justify-between p-4 text-left`}
       >
-        <div className={`mb-4 md:mb-0`}>
+        <div className={`flex flex-col mb-4 md:mb-0`}>
           <MDHeader>{title}</MDHeader>
           <Paragraph isBold={true} className={`text-${theme}-confirm mt-1`}>
             {formatDate(date)}

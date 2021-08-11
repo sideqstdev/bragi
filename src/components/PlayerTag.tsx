@@ -24,7 +24,7 @@ const PlayerTag: React.FC<playerTagProps> = ({
   const theme = themeCtx.theme;
 
   return (
-    <div className={`flex flex-row justify-between items-center`}>
+    <div className={`flex flex-row w-full justify-between items-center`}>
       <div className={`flex flex-row`}>
         <Avatar src={avatar} size={"default"} />
         <div className={`flex flex-col ml-2 text-left`}>

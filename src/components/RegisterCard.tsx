@@ -113,7 +113,7 @@ const RegisterCard: React.FC<registerCardProps> = ({
           <form
             autoComplete={"off"}
             onSubmit={registerForm.handleSubmit}
-            className={`w-full border-b-2 pb-6 border-dark-box-box4 md:pr-3 md:border-b-0 md:border-r-2 md:border-dark-box-box4 md:w-2/3`}
+            className={`flex flex-col w-full border-b-2 pb-6 border-dark-box-box4 md:pr-3 md:border-b-0 md:border-r-2 md:border-dark-box-box4 md:w-2/3`}
           >
             <MDHeader>Create Account</MDHeader>
             <Input
@@ -185,7 +185,7 @@ const RegisterCard: React.FC<registerCardProps> = ({
               </span>
             </Paragraph>
           </form>
-          <div className={`mt-3 w-full md:ml-3 md:w-1/3`}>
+          <div className={`flex flex-col mt-3 w-full md:ml-3 md:w-1/3`}>
             <MDHeader className={`mb-2`}>or register with</MDHeader>
             <Button
               onClick={onDiscordRegister}
