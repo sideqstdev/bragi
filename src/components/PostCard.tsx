@@ -47,7 +47,7 @@ const PostCard: React.FC<postCardProps> = ({
   const theme = themeCtx.theme;
 
   return (
-    <Card className={`flex flex-col`}>
+    <Card className={`flex flex-col w-full`}>
       <div
         className={`flex flex-col border-b-2 border-${theme}-disabled px-4 py-4`}
       >

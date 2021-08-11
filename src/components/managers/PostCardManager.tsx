@@ -57,7 +57,7 @@ const PostCardManager: React.FC = () => {
 
   return (
     <>
-      <div>
+      <div className={`flex flex-col w-full`}>
         <div
           className={`flex flex-row items-center justify-between pb-2 text-center`}
         >

@@ -108,7 +108,10 @@ const CreatePostCard: React.FC<createPostCardInterface> = ({
 
   return (
     <Card className={`flex flex-col w-full md:flex-row px-3 py-3 shadow-2xl`}>
-      <form onSubmit={createPostForm.handleSubmit} className={`w-full`}>
+      <form
+        onSubmit={createPostForm.handleSubmit}
+        className={`w-full flex flex-col`}
+      >
         <div className={`flex flex-row justify-between items-center`}>
           <MDHeader>Create Post</MDHeader>
           <div className={`flex flex-row`}>

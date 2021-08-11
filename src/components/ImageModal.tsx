@@ -37,7 +37,7 @@ const ImageModal: React.FC<imageModalProps> = ({
       className={`image-modal`}
       overlayClassName={`image-modal-overlay`}
     >
-      <Card className={`p-4`}>
+      <Card className={`p-4 flex flex-col`}>
         <div className={`flex flex-row justify-between items-center mb-2`}>
           <SMHeader>{title}</SMHeader>
           <Button

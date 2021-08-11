@@ -19,7 +19,7 @@ const MainManager: React.FC = () => {
   const tabRender = () => {
     if (tab.tab === 0) {
       return (
-        <div className={`mb-6 mt-4`}>
+        <div className={`flex flex-col mb-6 mt-4`}>
           <div className={`pb-4`}>
             <LobbyCard
               title={"Weekly TFT Roundup"}
@@ -71,7 +71,7 @@ const MainManager: React.FC = () => {
     }
     if (tab.tab === 1) {
       return (
-        <div className={`mb-6 mt-4`}>
+        <div className={`flex flex-col mb-6 mt-4 w-full`}>
           <PostCardManager />
         </div>
       );
@@ -81,7 +81,7 @@ const MainManager: React.FC = () => {
   };
 
   return (
-    <>
+    <div className={`flex flex-col w-full`}>
       <LinkButtonGroup
         links={[
           { link: `lobbies`, title: `Lobbies` },
@@ -91,7 +91,7 @@ const MainManager: React.FC = () => {
         selectionCallback={selectionCallback}
       />
       {tabRender()}
-    </>
+    </div>
   );
 };
 

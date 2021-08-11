@@ -144,7 +144,7 @@ const LobbyCard: React.FC<lobbyCardProps> = ({
                 </div>
               </div>
             ) : null}
-            <div className={`px-4`}>
+            <div className={`flex flex-col px-4`}>
               {featured && !banner ? (
                 <MDHeader className={`mt-1`}>{title}</MDHeader>
               ) : (
