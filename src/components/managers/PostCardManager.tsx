@@ -86,6 +86,7 @@ const PostCardManager: React.FC = () => {
                 return (
                   <div key={post?.id} className={`mb-4`}>
                     <PostCard
+                      id={post?.id}
                       user={{
                         username: post?.user?.name,
                         gamertag: post?.user?.gamerTag,

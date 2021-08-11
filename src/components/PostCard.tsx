@@ -15,6 +15,7 @@ export type postUser = {
 };
 
 export interface postCardProps {
+  id: string;
   user: postUser;
   likes?: number;
   liked?: boolean;
@@ -24,10 +25,13 @@ export interface postCardProps {
   postDate: Date;
   tags?: string[];
   onImageClick?: (imageUrl: string, title: string) => void;
+  onLike?: (id: string) => void;
+  onUnlike?: (id: string) => void;
 }
 
 const PostCard: React.FC<postCardProps> = ({
   user,
+  id,
   likes = 0,
   liked = false,
   content,
@@ -36,6 +40,8 @@ const PostCard: React.FC<postCardProps> = ({
   postDate,
   tags = [],
   onImageClick,
+  onLike,
+  onUnlike,
 }) => {
   const themeCtx = useTheme();
   const theme = themeCtx.theme;
@@ -57,7 +63,10 @@ const PostCard: React.FC<postCardProps> = ({
               <BiDotsHorizontalRounded />
             </Button>
             <span className={`flex flex-col items-center`}>
-              <Button variant={`icon`}>
+              <Button
+                onClick={liked ? () => onUnlike(id) : () => onLike(id)}
+                variant={`icon`}
+              >
                 <BiHeart
                   className={`${
                     liked ? `text-${theme}-danger hover:text-${theme}-text` : ``
