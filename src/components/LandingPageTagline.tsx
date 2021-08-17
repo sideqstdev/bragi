@@ -18,8 +18,11 @@ const LandingPageTagline: React.FC<landingPageTaglineProps> = ({
       <Card
         className={`flex flex-col md:flex-row bg-${theme}-altbackground p-4 rounded-md h-full`}
       >
-        <div className={`flex pr-4 rounded-md`}>
-          <img className={`rounded-md object-cover`} src={`./lobbycover.jpg`} />
+        <div className={`flex pb-2 md:pb-0 md:pr-4 rounded-md`}>
+          <img
+            className={`rounded-md object-cover w-full`}
+            src={`./lobbycover.jpg`}
+          />
         </div>
         <div className={`flex flex-col`}>
           <XLHeader

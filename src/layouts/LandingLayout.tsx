@@ -15,7 +15,9 @@ const LandingLayout: React.FC<landingLayoutProps> = ({
 
   return (
     <>
-      <div className={`flex flex-col mt-4 md:mx-6 lg:mx-12 xl:mx-14 2xl:mx-96`}>
+      <div
+        className={`flex flex-col mx-6 mt-4 md:mx-6 lg:mx-12 xl:mx-14 2xl:mx-96`}
+      >
         {children}
       </div>
     </>
