@@ -13,6 +13,7 @@ import PlayerList from "../src/components/PlayerList";
 import { players } from "../src/lib/placeholder/users";
 import Dropdown from "../src/components/Dropdown";
 import Button from "../src/components/Button";
+import router from "next/router";
 
 export default function Home() {
   const themeCtx = useTheme();
@@ -39,31 +40,13 @@ export default function Home() {
   ) : (
     <PageLayout name={`Sideqst | TFT`}>
       <FirstVisit />
-      <LandingLayout
-        welcome={<LandingPageTagline onGetStarted={() => {}} />}
-        featured={
-          <>
-            <div className={`mb-4`}>
-              <MDHeader
-                className={`border-b-2 border-${theme}-danger text-${theme}-text`}
-              >
-                Featured Lobbies
-              </MDHeader>
-            </div>
-            <FeaturedLobbyCard
-              banner={`./lobbycover.jpg`}
-              user={{
-                username: "MismatchedSocks",
-                gamertag: `MismatchedSocks0`,
-                avatar: `/mismatchedsocks.jpg`,
-                verified: true,
-              }}
-              onClick={() => console.log(`featured click`)}
-              title={"Weekly TFT Roundup by Sideqst"}
-            />
-          </>
-        }
-      />
+      <LandingLayout>
+        <LandingPageTagline
+          onGetStarted={() => {
+            router.push(`/register`);
+          }}
+        />
+      </LandingLayout>
     </PageLayout>
   );
 }
