@@ -1,10 +1,8 @@
-import { useRouter } from "next/router";
 import React, { ReactNode, ReactElement } from "react";
 import { useState } from "react";
 import {} from "react";
 import { useLayer, UseLayerProps } from "react-laag";
 import { useTheme } from "../theme/theme.provider";
-import Button, { buttonProps } from "./Button";
 import { Paragraph } from "./Typography";
 
 export type dropdownItem = {
@@ -16,8 +14,9 @@ export type dropdownItem = {
 };
 
 export interface dropdownProps {
-  items: dropdownItem[];
+  items?: dropdownItem[];
   anchor: ReactNode;
+  children: ReactElement | Element | Element[] | ReactElement[];
 }
 
 export interface dropdownBoxProps {
@@ -36,18 +35,14 @@ export const DropdownBox: React.FC<dropdownBoxProps> = ({ children }) => {
   );
 };
 
-const Dropdown: React.FC<dropdownProps> = ({ items, anchor }) => {
+const Dropdown: React.FC<dropdownProps> = ({ items, anchor, children }) => {
   const [open, setOpen] = useState(false);
-  const { push } = useRouter();
+
   const themeCtx = useTheme();
   const theme = themeCtx.theme;
 
   const onClose = () => {
     setOpen(false);
-  };
-
-  const routeLink = (link: string) => {
-    push(link);
   };
 
   const renderItems = (items: dropdownItem[]) => {
@@ -97,7 +92,7 @@ const Dropdown: React.FC<dropdownProps> = ({ items, anchor }) => {
       {open &&
         renderLayer(
           <div ref={layerProps.ref} style={layerProps.style} className={`z-50`}>
-            <DropdownBox>{renderItems(items)}</DropdownBox>
+            <DropdownBox>{items ? renderItems(items) : children}</DropdownBox>
           </div>
         )}
     </>

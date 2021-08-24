@@ -64,7 +64,7 @@ const Input: React.FC<inputProps> = ({
         props.className ? props.className : ``
       } flex flex-col ${stretched}`}
     >
-      <div className={`flex flex-row justify-between`}>
+      <label className={`flex flex-row justify-between`}>
         {label ? (
           <XSHeader className={`text-${theme}-text w-max`}>{label}</XSHeader>
         ) : null}
@@ -73,7 +73,7 @@ const Input: React.FC<inputProps> = ({
             {error}
           </XSHeader>
         ) : null}
-      </div>
+      </label>
       <div
         className={`${inputScale[scale]} ${
           error ? `ring-1 ring-dark-danger` : ``

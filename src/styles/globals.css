@@ -34,6 +34,38 @@ p.bold {
   font-weight: bold;
 }
 
+/* Webkit */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 2px;
+  opacity: 0.6;
+  filter: invert(0.5);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+input[type="time"]::-webkit-time-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 2px;
+  opacity: 0.6;
+  filter: invert(0.5);
+}
+
+input[type="time"]::-webkit-time-picker-indicator:hover {
+  opacity: 1;
+}
+
 :root {
   font-size: 16px;
 

@@ -11,8 +11,6 @@ import PlayerCardManager from "../src/components/managers/PlayerCardManager";
 import FirstVisit from "../src/components/browser/FirstVisit";
 import PlayerList from "../src/components/PlayerList";
 import { players } from "../src/lib/placeholder/users";
-import Dropdown from "../src/components/Dropdown";
-import Button from "../src/components/Button";
 import router from "next/router";
 
 export default function Home() {
