@@ -142,6 +142,7 @@ const CreatePostCard: React.FC<createPostCardInterface> = ({
           placeholder={`Post Title`}
         />
         <InputArea
+          style={{ whiteSpace: `pre-wrap`, overflowWrap: `break-word` }}
           rows={6}
           id={`body`}
           onChange={createPostForm.handleChange}

@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import AccountDropdownManager from "./managers/AccountDropdownManager";
 import Dropdown from "./Dropdown";
 import { useLoggedInStore } from "../stores/storeLogin";
-import { BsFilePost, BsFillGearFill } from "react-icons/bs";
+import { BsFillGearFill } from "react-icons/bs";
 import { MdVideogameAsset } from "react-icons/md";
 import CreatePostCardManager from "./managers/CreatePostCardManager";
 import {
@@ -123,7 +123,7 @@ const Navbar: React.FC<navProps> = ({
                 {
                   icon: <MdVideogameAsset />,
                   name: `Create Lobby`,
-                  onClick: () => console.log(`Create Lobby`),
+                  onClick: () => router.push(`/create/lobby`),
                 },
               ]}
               anchor={

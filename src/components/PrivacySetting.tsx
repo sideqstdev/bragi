@@ -10,7 +10,7 @@ export interface privacySettingInterface {
   level?: levels;
   label: string;
   iconRight?: ReactNode;
-  onClick?: (level: levels) => void;
+  onClick?: ({ level: levels, label: string }) => void;
   className?: string;
 }
 
@@ -41,7 +41,7 @@ const PrivacySetting: React.FC<privacySettingInterface> = ({
   return (
     <div
       className={`flex flex-row justify-between bg-${theme}-box-box2 p-2 rounded-md cursor-pointer hover:bg-${theme}-box-box1 ${className}`}
-      onClick={() => onClick(level)}
+      onClick={() => onClick({ level, label })}
     >
       <div className={`flex flex-row justify-start items-center`}>
         <span className={`text-tny items-center ${settingColor(level)} mr-2`}>

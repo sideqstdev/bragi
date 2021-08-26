@@ -47,22 +47,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-radius: 4px;
   margin-right: 2px;
   opacity: 0.6;
-  filter: invert(0.5);
+  filter: invert(0.8);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
   opacity: 1;
 }
 
-input[type="time"]::-webkit-time-picker-indicator {
+input[type="time"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   border-radius: 4px;
   margin-right: 2px;
   opacity: 0.6;
-  filter: invert(0.5);
+  filter: invert(0.8);
 }
 
-input[type="time"]::-webkit-time-picker-indicator:hover {
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
   opacity: 1;
 }
 

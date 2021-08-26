@@ -56,10 +56,14 @@ const InputArea: React.FC<inputAreaProps> = ({
     >
       <div className={`flex flex-row justify-between`}>
         {label ? (
-          <XSHeader className={`text-${theme}-text`}>{label}</XSHeader>
+          <XSHeader className={`text-${theme}-disabled text-xxs`}>
+            {label}
+          </XSHeader>
         ) : null}
         {error ? (
-          <XSHeader className={`text-${theme}-danger text-right w-full`}>
+          <XSHeader
+            className={`text-${theme}-danger text-xxs text-right w-full`}
+          >
             {error}
           </XSHeader>
         ) : null}

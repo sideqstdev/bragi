@@ -80,7 +80,7 @@ const PostCard: React.FC<postCardProps> = ({
       </div>
       <div className={`flex flex-col px-4 py-4`}>
         <SMHeader className={`mb-1`}>{title}</SMHeader>
-        <Paragraph>{content}</Paragraph>
+        <Paragraph style={{ whiteSpace: `pre-wrap` }}>{content}</Paragraph>
         <div
           className={`flex bg-dark-box-box2 w-full h-auto mt-2 relative justify-center rounded-md`}
         >

@@ -16,7 +16,7 @@ export type dropdownItem = {
 export interface dropdownProps {
   items?: dropdownItem[];
   anchor: ReactNode;
-  children: ReactElement | Element | Element[] | ReactElement[];
+  children?: ReactElement | Element | Element[] | ReactElement[];
 }
 
 export interface dropdownBoxProps {

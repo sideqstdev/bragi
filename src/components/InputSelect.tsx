@@ -1,23 +1,16 @@
 import React, {
   DetailedHTMLProps,
-  InputHTMLAttributes,
+  SelectHTMLAttributes,
   ReactNode,
-  ChangeEventHandler,
-  ChangeEvent,
 } from "react";
 import { useTheme } from "../theme/theme.provider";
-import { SMParagraph, XSHeader } from "./Typography";
+import { inputScale } from "./InputArea";
+import { XSHeader } from "./Typography";
 
-export const inputScale = {
-  default: `py-2 px-5 text-base`,
-  small: `py-1 px-3 text-xxs`,
-  large: `py-2 px-7 text-md`,
-};
-
-export interface inputProps
+export interface inputSelectProps
   extends DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
+    SelectHTMLAttributes<HTMLSelectElement>,
+    HTMLSelectElement
   > {
   scale?: keyof typeof inputScale;
   stretch?: boolean;
@@ -28,26 +21,26 @@ export interface inputProps
   error?: string;
 }
 
-const Input: React.FC<inputProps> = ({
+const InputSelect: React.FC<inputSelectProps> = ({
   stretch = false,
-  scale = "default",
+  scale = `default`,
   variant,
   iconRight,
   iconLeft,
   label,
   error,
   ...props
-}: inputProps) => {
+}) => {
   const themeCtx = useTheme();
   const theme = themeCtx.theme;
+
+  let variantObj;
+  let stretched = stretch ? `w-full` : `w-max`;
 
   const inputVariant = {
     default: `bg-${theme}-box-box2 focus:bg-${theme}-box-box2`,
     alt: `bg-${theme}-box-box1 focus:bg-${theme}-box-box1`,
   };
-
-  let variantObj;
-  let stretched = stretch ? `w-full` : `w-max`;
 
   switch (variant) {
     case "alt":
@@ -92,10 +85,12 @@ const Input: React.FC<inputProps> = ({
             </span>
           ) : null}
         </span>
-        <input
+        <select
           {...props}
           className={`${variantObj} w-full flex items-center outline-none text-${theme}-text`}
-        />
+        >
+          {props.children}
+        </select>
         <span className={`flex items-center`}>
           {iconRight ? (
             <span
@@ -110,4 +105,4 @@ const Input: React.FC<inputProps> = ({
   );
 };
 
-export default Input;
+export default InputSelect;
