@@ -31,9 +31,13 @@ export interface onCreateInputs {
 
 export interface createLobbyCardInterface {
   onCreate: (data: onCreateInputs) => Promise<boolean> | Promise<null>;
+  onCancel: () => void;
 }
 
-const CreateLobbyCard: React.FC<createLobbyCardInterface> = ({ onCreate }) => {
+const CreateLobbyCard: React.FC<createLobbyCardInterface> = ({
+  onCreate,
+  onCancel,
+}) => {
   const themeCtx = useTheme();
   const theme = themeCtx.theme;
 
@@ -186,27 +190,7 @@ const CreateLobbyCard: React.FC<createLobbyCardInterface> = ({ onCreate }) => {
                 type={`time`}
               />
             </div>
-            <div className={`col-span-8 md:col-span-4 xl:col-span-2`}>
-              <Input
-                type={`date`}
-                id={`endDate`}
-                name={`endDate`}
-                label={`End Date`}
-                stretch={true}
-                iconLeft={<BiCalendar />}
-              />
-            </div>
 
-            <div className={`col-span-8 md:col-span-4 xl:col-span-2`}>
-              <Input
-                iconLeft={<BiTime />}
-                id={`endTime`}
-                name={`endTime`}
-                label={`End Time`}
-                stretch={true}
-                type={`time`}
-              />
-            </div>
             <div className={`col-span-8 sm:col-span-4`}>
               <Input
                 iconLeft={<BiUser />}
@@ -406,6 +390,19 @@ const CreateLobbyCard: React.FC<createLobbyCardInterface> = ({ onCreate }) => {
               />
             </div>
           </div>
+        </div>
+        <div className={`mt-4 flex flex-row justify-end`}>
+          <Button
+            type={`button`}
+            onClick={onCancel}
+            variant={`text`}
+            className={`mr-2`}
+          >
+            Cancel
+          </Button>
+          <Button type={`submit`} variant={`primary`}>
+            Create
+          </Button>
         </div>
       </form>
     </Card>

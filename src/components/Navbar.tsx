@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTheme } from "../theme/theme.provider";
 import Button from "./Button";
 import { Avatar } from "./Avatar";
-import { FiSun } from "react-icons/fi";
+import { FiMoon, FiSun } from "react-icons/fi";
 import Input from "./Input";
 import LogoBlock from "./LogoBlock";
 import { useRouter } from "next/router";
@@ -152,7 +152,13 @@ const Navbar: React.FC<navProps> = ({
             />
 
             <Button onClick={themeCtx.toggleTheme} variant={"icon"}>
-              <FiSun className={`text-dark-danger-hover`} />
+              {themeCtx.theme === `dark` ? (
+                <FiSun
+                  className={`text-dark-danger hover:text-dark-danger-hover`}
+                />
+              ) : (
+                <FiMoon className={`text-accent hover:text-accent-hover`} />
+              )}
             </Button>
           </div>
         </>

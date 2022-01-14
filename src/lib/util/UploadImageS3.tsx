@@ -39,7 +39,7 @@ const UploadImageS3: React.FC<uploadImageS3Interface> = ({
     { filesContent, plainFiles, loading, clear },
   ] = useFilePicker({
     multiple: false,
-    accept: `.jpg,.gif,.png`,
+    accept: `.jpg,.gif,.png,.jpeg`,
   });
   const hasFiles: boolean = plainFiles.length > 0;
   const [s3FileName, setS3FileName] = useState(`${createPostId}.jpg`);

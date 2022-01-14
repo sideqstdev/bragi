@@ -1,7 +1,8 @@
 import React, { ReactNode, ReactElement } from "react";
 import { useState } from "react";
 import {} from "react";
-import { useLayer, UseLayerProps } from "react-laag";
+import { PLACEMENT_TYPES, useLayer, UseLayerProps } from "react-laag";
+import { PlacementType } from "react-laag/dist/PlacementType";
 import { useTheme } from "../theme/theme.provider";
 import { Paragraph } from "./Typography";
 
@@ -17,6 +18,7 @@ export interface dropdownProps {
   items?: dropdownItem[];
   anchor: ReactNode;
   children?: ReactElement | Element | Element[] | ReactElement[];
+  placement?: PlacementType;
 }
 
 export interface dropdownBoxProps {
@@ -35,7 +37,12 @@ export const DropdownBox: React.FC<dropdownBoxProps> = ({ children }) => {
   );
 };
 
-const Dropdown: React.FC<dropdownProps> = ({ items, anchor, children }) => {
+const Dropdown: React.FC<dropdownProps> = ({
+  items,
+  anchor,
+  children,
+  placement = `bottom-end`,
+}) => {
   const [open, setOpen] = useState(false);
 
   const themeCtx = useTheme();
@@ -75,7 +82,7 @@ const Dropdown: React.FC<dropdownProps> = ({ items, anchor, children }) => {
     onOutsideClick: onClose,
     onDisappear: onClose,
     overflowContainer: false,
-    placement: `bottom-end`,
+    placement: placement,
     triggerOffset: 15,
     containerOffset: 100,
   });

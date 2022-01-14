@@ -4,8 +4,16 @@ import Card from "./containers/Card";
 import PlayerTag from "./PlayerTag";
 import Button from "./Button";
 import { Paragraph, SMHeader } from "./Typography";
-import { BiDotsHorizontalRounded, BiHeart } from "react-icons/bi";
+import {
+  BiDotsHorizontalRounded,
+  BiHeart,
+  BiHeartCircle,
+  BiTrash,
+} from "react-icons/bi";
 import TagGroup from "./TagGroup";
+import { useLoggedInStore } from "../stores/storeLogin";
+import Dropdown from "./Dropdown";
+import { IoMdHeart } from "react-icons/io";
 
 export type postUser = {
   avatar: string;
@@ -27,6 +35,7 @@ export interface postCardProps {
   onImageClick?: (imageUrl: string, title: string) => void;
   onLike?: (id: string) => void;
   onUnlike?: (id: string) => void;
+  onDelete?: (id: string) => void;
 }
 
 const PostCard: React.FC<postCardProps> = ({
@@ -42,9 +51,21 @@ const PostCard: React.FC<postCardProps> = ({
   onImageClick,
   onLike,
   onUnlike,
+  onDelete,
 }) => {
   const themeCtx = useTheme();
   const theme = themeCtx.theme;
+  const [likedPost, setLikedPost] = React.useState(liked);
+  const handleLike = (id: string) => {
+    setLikedPost(true);
+    onUnlike(id);
+  };
+  const handleUnlike = (id: string) => {
+    setLikedPost(false);
+    onLike(id);
+  };
+
+  const { user: currUser } = useLoggedInStore();
 
   return (
     <Card className={`flex flex-col w-full`}>
@@ -59,19 +80,45 @@ const PostCard: React.FC<postCardProps> = ({
             avatar={user.avatar}
           />
           <div className={`flex flex-row items-center`}>
-            <Button variant={`icon`}>
-              <BiDotsHorizontalRounded />
-            </Button>
+            <Dropdown
+              items={[
+                {
+                  icon: <BiTrash />,
+                  name: `Delete`,
+                  onClick: () => onDelete(id),
+                },
+              ]}
+              anchor={
+                <Button variant={`icon`}>
+                  <BiDotsHorizontalRounded />
+                </Button>
+              }
+            />
+
             <span className={`flex flex-col items-center`}>
               <Button
-                onClick={liked ? () => onUnlike(id) : () => onLike(id)}
+                onClick={
+                  likedPost ? () => handleUnlike(id) : () => handleLike(id)
+                }
                 variant={`icon`}
               >
-                <BiHeart
-                  className={`${
-                    liked ? `text-${theme}-danger hover:text-${theme}-text` : ``
-                  }`}
-                />
+                {likedPost ? (
+                  <IoMdHeart
+                    className={`${
+                      likedPost
+                        ? `text-${theme}-danger hover:text-${theme}-text`
+                        : ``
+                    }`}
+                  />
+                ) : (
+                  <BiHeart
+                    className={`${
+                      likedPost
+                        ? `text-${theme}-danger hover:text-${theme}-text`
+                        : ``
+                    }`}
+                  />
+                )}
               </Button>
             </span>
           </div>

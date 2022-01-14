@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { BiHourglass } from "react-icons/bi";
-import { usePostsQuery } from "../../lib/generated";
+import {
+  usePostsQuery,
+  useLikePostMutation,
+  refetchPostsQuery,
+  useDeletePostMutation,
+} from "../../lib/generated";
 import { useTheme } from "../../theme/theme.provider";
 import Button from "../Button";
 import Emoji from "../Emoji";
@@ -9,6 +14,8 @@ import Input from "../Input";
 import PostCard from "../PostCard";
 import { Spinner } from "../Spinner";
 import { Paragraph, SMParagraph } from "../Typography";
+import { isPostLikedByUser } from "../../lib/util/posts/util";
+import { useLoggedInStore } from "../../stores/storeLogin";
 
 export interface postCardManagerProps {}
 
@@ -32,6 +39,8 @@ const PostCardManager: React.FC = () => {
     setImageToDisplay(null);
   };
 
+  const { user } = useLoggedInStore();
+
   const { data, error, loading, refetch } = usePostsQuery({
     variables: {
       page: {
@@ -42,7 +51,46 @@ const PostCardManager: React.FC = () => {
     fetchPolicy: `cache-and-network`,
   });
 
+  const [likePostMutation] = useLikePostMutation();
+
+  const [deletePostMutation] = useDeletePostMutation({
+    refetchQueries: [
+      refetchPostsQuery({
+        page: {
+          take: 15,
+          skip: 0,
+        },
+      }),
+    ],
+  });
+
   const posts = data?.posts;
+
+  const handlePostLike = async (id) => {
+    try {
+      const response = await likePostMutation({
+        variables: {
+          id: id,
+        },
+      });
+      return response.data.likePost;
+    } catch (err) {
+      return false;
+    }
+  };
+
+  const handlePostDelete = async (id) => {
+    try {
+      const response = await deletePostMutation({
+        variables: {
+          id: id,
+        },
+      });
+      return response.data.deletePost;
+    } catch (err) {
+      return false;
+    }
+  };
 
   if (error) {
     return (
@@ -86,6 +134,9 @@ const PostCardManager: React.FC = () => {
                 return (
                   <div key={post?.id} className={`pb-4`}>
                     <PostCard
+                      onDelete={handlePostDelete}
+                      onLike={handlePostLike}
+                      onUnlike={handlePostLike}
                       id={post?.id}
                       user={{
                         username: post?.user?.name,
@@ -96,7 +147,7 @@ const PostCardManager: React.FC = () => {
                       tags={post?.tags}
                       image={post?.imageUrl}
                       postDate={new Date()}
-                      liked={false}
+                      liked={isPostLikedByUser(post?.likedByIds, user?.id)}
                       title={post?.title}
                       content={post?.content}
                     />

@@ -10,6 +10,7 @@ export const postsQuery = gql`
       nsfw
       likes
       tags
+      likedByIds
       user {
         id
         name
